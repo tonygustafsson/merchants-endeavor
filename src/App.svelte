@@ -19,7 +19,7 @@
 
 <div class="app">
     <div class="container">
-        <h1>Tick Game</h1>
+        <h1>Merchant Simulator</h1>
 
         <p>Tick: {$ticker}</p>
 

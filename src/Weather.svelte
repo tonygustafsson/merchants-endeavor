@@ -9,6 +9,7 @@
         right: 0;
         opacity: 0.7;
         font-size: 1000%;
+        user-select: none;
     }
 </style>
 
