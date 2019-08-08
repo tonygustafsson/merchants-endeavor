@@ -1,5 +1,6 @@
 <script>
     import { ticker } from './stores/ticker.js';
+    import { time } from './stores/time.js';
 
     import Inventory from './Inventory.svelte';
     import Crew from './Crew.svelte';
@@ -15,17 +16,26 @@
         padding: 1em;
         position: relative;
     }
+
+    h1 {
+        width: 80%;
+        margin: 0.5em 10%;
+        text-shadow: 0px 0 20px #fff;
+    }
 </style>
 
 <div class="app">
-    <div class="container">
-        <h1>Merchant Simulator</h1>
+    <h1>Merchant Simulator</h1>
 
-        <p>Tick: {$ticker}</p>
+    <div class="container">
+
+        <h2>{$time}</h2>
 
         <Weather />
 
         <Inventory />
+
+        <h3>Actions</h3>
 
         <Crew />
 

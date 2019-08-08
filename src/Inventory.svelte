@@ -6,7 +6,7 @@
 <style>
     table {
         width: 25%;
-        background: #f2f2ff;
+        background: #faebff;
         margin: 1em 0;
     }
 
@@ -15,7 +15,11 @@
     }
 
     tr:nth-child(2n + 1) {
-        background: #dbdbff;
+        background: #ffc8c8;
+    }
+
+    td {
+        padding: 0.5em;
     }
 
     td:last-child {
@@ -23,7 +27,7 @@
     }
 </style>
 
-<h2>Inventory</h2>
+<h3>Inventory</h3>
 
 <table>
     <tr>
