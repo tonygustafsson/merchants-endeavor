@@ -1,6 +1,7 @@
 <script>
     import { ticker } from './stores/ticker.js';
 
+    import Inventory from './Inventory.svelte';
     import Crew from './Crew.svelte';
     import Ships from './Ships.svelte';
     import Weather from './Weather.svelte';
@@ -9,18 +10,25 @@
 <style>
     .container {
         width: 80%;
-        margin: 0 10%;
+        margin: 1em 10%;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 1em;
+        position: relative;
     }
 </style>
 
-<div class="container">
-    <h1>Tick Game</h1>
+<div class="app">
+    <div class="container">
+        <h1>Tick Game</h1>
 
-    <p>Tick: {$ticker}</p>
+        <p>Tick: {$ticker}</p>
 
-    <Weather />
+        <Weather />
 
-    <Crew />
+        <Inventory />
 
-    <Ships />
+        <Crew />
+
+        <Ships />
+    </div>
 </div>
