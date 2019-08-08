@@ -1,17 +1,9 @@
 <script>
-    import { onMount } from 'svelte';
-    import { time as sTime } from './stores/time.js';
+    import { ticker } from './stores/ticker.js';
     import { crew } from './stores/crew.js';
     import { ships } from './stores/ships.js';
 
-    const timeFormatter = new Intl.DateTimeFormat('en', {
-        hour12: false,
-        hour: 'numeric',
-        minute: '2-digit',
-        second: '2-digit'
-    });
-
-    onMount(async () => {});
+    import Weather from './Weather.svelte';
 </script>
 
 <style>
@@ -22,7 +14,9 @@
 
 <h1>Tick Game</h1>
 
-<p>Time: {timeFormatter.format($sTime)}</p>
+<p>Tick: {$ticker}</p>
+
+<Weather />
 
 <pre>Crew members: {$crew}</pre>
 
