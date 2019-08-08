@@ -4,7 +4,11 @@
 
 <style>
     .weather-symbol {
-        font-size: 300%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0.7;
+        font-size: 1000%;
     }
 </style>
 

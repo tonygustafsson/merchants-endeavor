@@ -1,29 +1,26 @@
 <script>
     import { ticker } from './stores/ticker.js';
-    import { crew } from './stores/crew.js';
-    import { ships } from './stores/ships.js';
 
+    import Crew from './Crew.svelte';
+    import Ships from './Ships.svelte';
     import Weather from './Weather.svelte';
 </script>
 
 <style>
-    h1 {
-        color: purple;
+    .container {
+        width: 80%;
+        margin: 0 10%;
     }
 </style>
 
-<h1>Tick Game</h1>
+<div class="container">
+    <h1>Tick Game</h1>
 
-<p>Tick: {$ticker}</p>
+    <p>Tick: {$ticker}</p>
 
-<Weather />
+    <Weather />
 
-<pre>Crew members: {$crew}</pre>
+    <Crew />
 
-<button on:click={() => crew.addCrewMembers(3)}>Find crew members</button>
-<button on:click={() => crew.removeCrewMembers(1)}>Fire crew member</button>
-
-<pre>Ships: {$ships}</pre>
-
-<button on:click={() => ships.addShips(3)}>Buy ships</button>
-<button on:click={() => ships.removeShips(1)}>Sell ship</button>
+    <Ships />
+</div>
