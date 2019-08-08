@@ -6,8 +6,10 @@
 <style>
     table {
         width: 25%;
-        background: #faebff;
+        background: #d8dbde;
         margin: 1em 0;
+        text-transform: uppercase;
+        font-size: 90%;
     }
 
     tr {
@@ -15,7 +17,7 @@
     }
 
     tr:nth-child(2n + 1) {
-        background: #ffc8c8;
+        background: #c3c3bb;
     }
 
     td {
@@ -24,6 +26,7 @@
 
     td:last-child {
         text-align: right;
+        font-weight: bold;
     }
 </style>
 

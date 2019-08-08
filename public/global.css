@@ -59,6 +59,12 @@ button {
     color: #333;
     background-color: #f4f4f4;
     outline: none;
+    cursor: pointer;
+    padding: 0.5em 1em;
+}
+
+button:hover {
+    background-color: #d8dbde;
 }
 
 button:active {
