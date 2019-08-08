@@ -10,7 +10,7 @@ const getState = () => {
     let state = window.localStorage.getItem('game');
 
     if (!state) {
-        window.localStorage.setItem('game', encrypt(JSON.stringify(initStorage)));
+        window.localStorage.setItem('game', encrypt(JSON.stringify(initState)));
         return initState;
     }
 
@@ -29,7 +29,7 @@ export const getValue = (key, defaultValue) => {
     const numberRegex = new RegExp('^\\d+$');
     const state = getState();
 
-    let value = state[key] ? state[key] : defaultValue;
+    let value = typeof state[key] !== 'undefined' ? state[key] : defaultValue;
 
     // Return a number if its a number
     value = numberRegex.test(value) ? parseInt(value, 10) : value;
