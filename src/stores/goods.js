@@ -10,6 +10,17 @@ const initValue = {
     porcelain: 0
 };
 
+const pricing = {
+    food: {
+        buy: 15,
+        sell: 10
+    },
+    water: {
+        buy: 10,
+        sell: 7
+    }
+};
+
 function goodsStore() {
     const storageValue = getValue(persistantStoreName, initValue);
 
@@ -19,6 +30,16 @@ function goodsStore() {
         subscribe,
         add: (item, quantity) => {
             update(n => {
+                if (Object.hasOwnProperty.call(pricing, item)) {
+                    let cost = pricing[item].buy;
+
+                    if (cost > n.doubloons) {
+                        return alert('Not enough money!');
+                    }
+
+                    n.doubloons -= cost;
+                }
+
                 n[item] = n[item] + quantity;
                 setValue(persistantStoreName, n);
                 return n;
@@ -26,7 +47,16 @@ function goodsStore() {
         },
         remove: (item, quantity) => {
             update(n => {
-                n[item] = n[item] - quantity > 0 ? n[item] - quantity : 0;
+                if (quantity > n[item]) {
+                    return alert('Not enough ' + item);
+                }
+
+                if (Object.hasOwnProperty.call(pricing, item)) {
+                    let profit = pricing[item].sell;
+                    n.doubloons += profit;
+                }
+
+                n[item] -= quantity;
                 setValue(persistantStoreName, n);
                 return n;
             });
