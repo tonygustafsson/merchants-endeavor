@@ -1,8 +1,33 @@
 <script>
     import { ships } from './stores/ships.js';
+
+    let noOfShips = 0;
+
+    ships.subscribe(value => {
+        noOfShips = value.ships.length;
+    });
 </script>
 
-<div>
-    <button on:click={() => ships.addShips(1)}>Buy ships</button>
-    <button on:click={() => ships.removeShips(1)}>Sell ship</button>
-</div>
+<h3>Ships</h3>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Health</th>
+        <th>Remove</th>
+    </tr>
+
+    {#each $ships.ships as ship, i}
+        <tr>
+            <td>{ship.name}</td>
+            <td>{ship.type}</td>
+            <td>{ship.health}</td>
+            <td>
+                <a href="removeShip/{ship.id}" on:click|preventDefault={() => ships.removeShip(ship.id)}>x</a>
+            </td>
+        </tr>
+    {/each}
+</table>
+
+<button disabled={noOfShips >= 10} on:click={ships.addShip}>Buy ships</button>
