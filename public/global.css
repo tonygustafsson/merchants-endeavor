@@ -71,6 +71,15 @@ button:focus {
     border-color: #666;
 }
 
+button:disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+
+button:disabled:hover {
+    background-color: #f4f4f4;
+}
+
 h1,
 h2,
 h3,
@@ -88,4 +97,35 @@ h2 {
 
 h3 {
     font-size: 170%;
+}
+
+table {
+    width: 50%;
+    background: #d8dbde;
+    margin: 1em 0;
+    text-transform: uppercase;
+    font-size: 90%;
+}
+
+tr {
+    padding: 0.25em 1em;
+}
+
+th {
+    text-align: left;
+}
+
+tr:nth-child(2n + 1) {
+    background: #c3c3bb;
+}
+
+th,
+td {
+    padding: 0.5em;
+}
+
+th:last-child,
+td:last-child {
+    text-align: right;
+    font-weight: bold;
 }
