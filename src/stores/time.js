@@ -2,7 +2,7 @@ import { readable, derived } from 'svelte/store';
 import { ticker } from './ticker.js';
 import moment from 'moment';
 
-const startDate = '1721-01-01';
+const startDate = '1660-01-01';
 
 export const time = derived(ticker, $time => {
     // Calculate time where one hour is six seconds after the first date
