@@ -6,7 +6,7 @@
     let noOfShips = 0;
 
     ships.subscribe(value => {
-        noOfShips = value.ships.length;
+        noOfShips = value.length;
     });
 </script>
 

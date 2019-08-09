@@ -34,7 +34,8 @@ function goodsStore() {
                     let cost = pricing[item].buy;
 
                     if (cost > n.doubloons) {
-                        return alert('Not enough money!');
+                        alert('Not enough money!');
+                        return n;
                     }
 
                     n.doubloons -= cost;
@@ -48,7 +49,8 @@ function goodsStore() {
         remove: (item, quantity) => {
             update(n => {
                 if (quantity > n[item]) {
-                    return alert('Not enough ' + item);
+                    return n;
+                    alert('Not enough ' + item);
                 }
 
                 if (Object.hasOwnProperty.call(pricing, item)) {
