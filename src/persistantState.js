@@ -1,10 +1,22 @@
-const initState = {
-    crew: 4,
-    ships: 1
+const encryptionMode = false;
+
+const initState = {};
+
+const encrypt = value => {
+    if (encryptionMode) {
+        return window.btoa(value);
+    }
+
+    return value;
 };
 
-const encrypt = value => window.btoa(value);
-const decrypt = value => window.atob(value);
+const decrypt = value => {
+    if (encryptionMode) {
+        window.atob(value);
+    }
+
+    return value;
+};
 
 const getState = () => {
     let state = window.localStorage.getItem('game');
@@ -29,10 +41,14 @@ export const getValue = (key, defaultValue) => {
     const numberRegex = new RegExp('^\\d+$');
     const state = getState();
 
-    let value = typeof state[key] !== 'undefined' ? state[key] : defaultValue;
+    if (typeof state[key] === 'undefined') {
+        // The value does not yet exist, let's create it
+        state[key] = defaultValue;
+        setValue(key, defaultValue);
+    }
 
     // Return a number if its a number
-    value = numberRegex.test(value) ? parseInt(value, 10) : value;
+    let value = numberRegex.test(state[key]) ? parseInt(state[key], 10) : state[key];
 
     return value;
 };
