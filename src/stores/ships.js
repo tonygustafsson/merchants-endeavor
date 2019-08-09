@@ -91,11 +91,12 @@ function shipsStore() {
         },
         checkMissions: () => {
             update(n => {
-                n.ships.forEach(ship => {
+                n.ships.map(ship => {
                     if (ship.onMission !== false && ship.onMission < currentTick) {
                         // Back from mission
                         ship.onMission = false;
                         goods.add('doubloons', 100);
+                        setValue(persistantStoreName, n);
                     }
                 });
 

@@ -20,7 +20,7 @@
 
     {#each $ships.ships as ship, i}
         <tr>
-            <td>{ship.name}</td>
+            <td>⛵ {ship.name}</td>
             <td>{ship.type}</td>
             <td>{ship.health}</td>
             <td>
