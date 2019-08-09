@@ -103,7 +103,6 @@ table {
     width: 50%;
     background: #d8dbde;
     margin: 1em 0;
-    text-transform: uppercase;
     font-size: 90%;
 }
 
@@ -127,5 +126,4 @@ td {
 th:last-child,
 td:last-child {
     text-align: right;
-    font-weight: bold;
 }

@@ -2,11 +2,11 @@
     import { ticker } from './stores/ticker.js';
     import { time } from './stores/time.js';
 
-    import Time from './Time.svelte';
-    import Inventory from './Inventory.svelte';
-    import Crew from './Crew.svelte';
-    import Ships from './Ships.svelte';
-    import Weather from './Weather.svelte';
+    import Time from './components/Time.svelte';
+    import Inventory from './components/Inventory.svelte';
+    import Actions from './components/Actions.svelte';
+    import Ships from './components/Ships.svelte';
+    import Weather from './components/Weather.svelte';
 </script>
 
 <style>
@@ -34,7 +34,8 @@
         <Inventory />
 
         <h3>Actions</h3>
-        <Crew />
+        <Actions />
+
         <Ships />
     </div>
 </div>
