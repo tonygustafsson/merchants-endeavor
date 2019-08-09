@@ -44,9 +44,7 @@ const getRandomShip = () => {
 };
 
 const persistantStoreName = 'ships';
-const initValue = {
-    ships: [getRandomShip()]
-};
+const initValue = [getRandomShip()];
 const minValue = 0;
 const maxValue = 10;
 
@@ -59,10 +57,10 @@ function shipsStore() {
         subscribe,
         addShip: () => {
             update(n => {
-                if (n.ships.length + 1 > maxValue) return n;
+                if (n.length + 1 > maxValue) return n;
 
                 const newShip = getRandomShip();
-                n.ships.push(newShip);
+                n.push(newShip);
 
                 setValue(persistantStoreName, n);
 
@@ -71,8 +69,8 @@ function shipsStore() {
         },
         removeShip: id => {
             update(n => {
-                if (n.ships.length - 1 < minValue) return n;
-                n.ships = n.ships.filter(ship => ship.id !== id);
+                if (n.length - 1 < minValue) return n;
+                n = n.filter(ship => ship.id !== id);
 
                 setValue(persistantStoreName, n);
 
@@ -81,7 +79,7 @@ function shipsStore() {
         },
         sendOnMission: id => {
             update(n => {
-                let ship = n.ships.find(ship => ship.id === id);
+                let ship = n.find(ship => ship.id === id);
                 ship.onMission = currentTick + missionLength;
 
                 setValue(persistantStoreName, n);
@@ -91,7 +89,7 @@ function shipsStore() {
         },
         checkMissions: () => {
             update(n => {
-                n.ships.map(ship => {
+                n.map(ship => {
                     if (ship.onMission !== false && ship.onMission < currentTick) {
                         // Back from mission
                         ship.onMission = false;

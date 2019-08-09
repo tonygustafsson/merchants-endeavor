@@ -4,7 +4,7 @@
     let noOfShips = 0;
 
     ships.subscribe(value => {
-        noOfShips = value.ships.length;
+        noOfShips = value.length;
     });
 </script>
 
@@ -18,7 +18,7 @@
         <th>Actions</th>
     </tr>
 
-    {#each $ships.ships as ship, i}
+    {#each $ships as ship, i}
         <tr>
             <td>⛵ {ship.name}</td>
             <td>{ship.type}</td>
