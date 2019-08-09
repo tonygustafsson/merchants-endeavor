@@ -1,5 +1,5 @@
 <script>
-    import { ships } from './stores/ships.js';
+    import { ships } from '../stores/ships.js';
 
     let noOfShips = 0;
 
@@ -15,7 +15,7 @@
         <th>Name</th>
         <th>Type</th>
         <th>Health</th>
-        <th>Remove</th>
+        <th>Actions</th>
     </tr>
 
     {#each $ships.ships as ship, i}
@@ -24,6 +24,11 @@
             <td>{ship.type}</td>
             <td>{ship.health}</td>
             <td>
+                {#if !ship.onMission}
+                    <a href="sendOnMission/{ship.id}" on:click|preventDefault={() => ships.sendOnMission(ship.id)}>
+                        Send on mission
+                    </a>
+                {:else}On mission{/if}
                 <a href="removeShip/{ship.id}" on:click|preventDefault={() => ships.removeShip(ship.id)}>x</a>
             </td>
         </tr>

@@ -1,5 +1,10 @@
 import { writable } from 'svelte/store';
+import { ticker } from './ticker';
+import { goods } from './goods';
 import { getValue, setValue } from '../persistantState';
+
+let currentTick = 0;
+const missionLength = 10;
 
 const shipNames = [
     'Horrid Rift',
@@ -33,7 +38,8 @@ const getRandomShip = () => {
         id: getRandomShipId(32),
         name: getRandomShipName(),
         type: getRandomShipType(),
-        health: 100
+        health: 100,
+        onMission: false
     };
 };
 
@@ -72,8 +78,36 @@ function shipsStore() {
 
                 return n;
             });
+        },
+        sendOnMission: id => {
+            update(n => {
+                let ship = n.ships.find(ship => ship.id === id);
+                ship.onMission = currentTick + missionLength;
+
+                setValue(persistantStoreName, n);
+
+                return n;
+            });
+        },
+        checkMissions: () => {
+            update(n => {
+                n.ships.forEach(ship => {
+                    if (ship.onMission !== false && ship.onMission < currentTick) {
+                        // Back from mission
+                        ship.onMission = false;
+                        goods.add('doubloons', 100);
+                    }
+                });
+
+                return n;
+            });
         }
     };
 }
 
 export const ships = shipsStore();
+
+ticker.subscribe(value => {
+    currentTick = value;
+    ships.checkMissions();
+});

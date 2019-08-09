@@ -1,7 +1,7 @@
 <script>
-    import { ticker } from './stores/ticker.js';
-    import { tickerSpeed } from './stores/tickerSpeed.js';
-    import { time } from './stores/time.js';
+    import { ticker } from '../stores/ticker.js';
+    import { tickerSpeed } from '../stores/tickerSpeed.js';
+    import { time } from '../stores/time.js';
 </script>
 
 <style>

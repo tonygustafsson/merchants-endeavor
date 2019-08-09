@@ -1,7 +1,7 @@
 <script>
-    import { ships } from './stores/ships.js';
-    import { crew } from './stores/crew.js';
-    import { goods } from './stores/goods.js';
+    import { ships } from '../stores/ships.js';
+    import { crew } from '../stores/crew.js';
+    import { goods } from '../stores/goods.js';
 
     let noOfShips = 0;
 

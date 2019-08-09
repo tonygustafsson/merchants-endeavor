@@ -1,6 +1,6 @@
 <script>
-    import { crew } from './stores/crew.js';
-    import { goods } from './stores/goods.js';
+    import { crew } from '../stores/crew.js';
+    import { goods } from '../stores/goods.js';
 </script>
 
 <div>

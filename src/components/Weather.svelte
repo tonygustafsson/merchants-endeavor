@@ -1,5 +1,5 @@
 <script>
-    import { weather } from './stores/weather.js';
+    import { weather } from '../stores/weather.js';
 </script>
 
 <style>
