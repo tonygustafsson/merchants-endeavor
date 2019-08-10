@@ -26,6 +26,10 @@
         <td>{noOfShips}</td>
     </tr>
     <tr>
+        <td>Cannons</td>
+        <td>{$goods.cannons}</td>
+    </tr>
+    <tr>
         <td>Doubloons</td>
         <td>{$goods.doubloons}</td>
     </tr>
@@ -44,5 +48,13 @@
     <tr>
         <td>Porcelain</td>
         <td>{$goods.porcelain} cartons</td>
+    </tr>
+    <tr>
+        <td>Tobacco</td>
+        <td>{$goods.tobacco} cartons</td>
+    </tr>
+    <tr>
+        <td>Rum</td>
+        <td>{$goods.rum} barrels</td>
     </tr>
 </table>

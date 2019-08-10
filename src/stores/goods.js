@@ -4,10 +4,13 @@ import { getValue, setValue } from '../utils/persistantState';
 const persistantStoreName = 'goods';
 const initValue = {
     doubloons: 100,
+    cannons: 4,
     food: 50,
     water: 100,
     spices: 0,
-    porcelain: 0
+    porcelain: 0,
+    tobacco: 0,
+    rum: 0
 };
 
 const pricing = {
