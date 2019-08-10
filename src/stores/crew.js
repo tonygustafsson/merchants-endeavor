@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { getValue, setValue } from '../persistantState';
+import { getValue, setValue } from '../utils/persistantState';
 
 const persistantStoreName = 'crew';
 const initValue = 4;

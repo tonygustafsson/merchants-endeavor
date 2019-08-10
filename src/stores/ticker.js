@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { getValue, setValue } from '../persistantState';
+import { getValue, setValue } from '../utils/persistantState';
 import { tickerSpeed } from './tickerSpeed';
 
 const defaultTickerSpeed = 1000;

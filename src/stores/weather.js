@@ -1,6 +1,6 @@
 import { readable, writable } from 'svelte/store';
 import { ticker } from './ticker.js';
-import { getValue, setValue } from '../persistantState';
+import { getValue, setValue } from '../utils/persistantState';
 
 const max = 5;
 const changeability = 0.1;
