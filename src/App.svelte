@@ -4,7 +4,7 @@
 
     import Time from './components/Time.svelte';
     import Inventory from './components/Inventory.svelte';
-    import Actions from './components/Actions.svelte';
+    import Crew from './components/Crew.svelte';
     import Ships from './components/Ships.svelte';
     import Weather from './components/Weather.svelte';
 </script>
@@ -32,10 +32,7 @@
         <Time />
         <Weather />
         <Inventory />
-
-        <h3>Actions</h3>
-        <Actions />
-
+        <Crew />
         <Ships />
     </div>
 </div>

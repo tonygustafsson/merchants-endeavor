@@ -2,7 +2,11 @@ import { writable } from 'svelte/store';
 import { getValue, setValue } from '../utils/persistantState';
 
 const persistantStoreName = 'crew';
-const initValue = 4;
+const initValue = {
+    members: 4,
+    health: 100,
+    mood: 100
+};
 const minValue = 0;
 const maxValue = 20;
 
@@ -15,16 +19,20 @@ function crewStore() {
         subscribe,
         addCrewMembers: additionalCrewMembers => {
             update(n => {
-                let newValue = n + additionalCrewMembers <= maxValue ? n + additionalCrewMembers : maxValue;
-                setValue(persistantStoreName, newValue);
-                return newValue;
+                if (n.members + additionalCrewMembers > maxValue) return n;
+
+                n.members += additionalCrewMembers;
+                setValue(persistantStoreName, n);
+                return n;
             });
         },
         removeCrewMembers: removedCrewMembers => {
             update(n => {
-                let newValue = n - removedCrewMembers > minValue ? n - removedCrewMembers : minValue;
-                setValue(persistantStoreName, newValue);
-                return newValue;
+                if (n.members - removedCrewMembers < minValue) return n;
+
+                n.members -= removedCrewMembers;
+                setValue(persistantStoreName, n);
+                return n;
             });
         }
     };
