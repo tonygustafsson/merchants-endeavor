@@ -41,10 +41,17 @@ export const getValue = (key, defaultValue) => {
     const numberRegex = new RegExp('^\\d+$');
     const state = getState();
 
+    // The value does not yet exist, let's create it
     if (typeof state[key] === 'undefined') {
-        // The value does not yet exist, let's create it
         state[key] = defaultValue;
         setValue(key, defaultValue);
+    }
+
+    // If not all properties exist in the value, create them
+    for (var prop in defaultValue) {
+        if (typeof state[key][prop] === 'undefined') {
+            state[key][prop] = defaultValue[prop];
+        }
     }
 
     // Return a number if its a number
