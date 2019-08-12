@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
-import { getValue, setValue } from '../utils/persistantState';
+import { getStateFromDb, saveStateToDb } from '../utils/db';
 
-const persistantStoreName = 'goods';
+const tableName = 'goods';
 const initValue = {
     doubloons: 100,
     cannons: 4,
@@ -25,48 +25,60 @@ const pricing = {
 };
 
 function goodsStore() {
-    const storageValue = getValue(persistantStoreName, initValue);
-
-    const { subscribe, set, update } = writable(storageValue);
+    const { subscribe, set, update } = writable({});
 
     return {
         subscribe,
+        updateAll: data => {
+            update(goods => data);
+        },
         add: (item, quantity) => {
-            update(n => {
+            update(goods => {
                 if (Object.hasOwnProperty.call(pricing, item)) {
                     let cost = pricing[item].buy;
 
-                    if (cost > n.doubloons) {
+                    if (cost > goods.doubloons) {
                         alert('Not enough money!');
-                        return n;
+                        return goods;
                     }
 
-                    n.doubloons -= cost;
+                    goods.doubloons -= cost;
                 }
 
-                n[item] = n[item] + quantity;
-                setValue(persistantStoreName, n);
-                return n;
+                goods[item] = goods[item] + quantity;
+                return goods;
             });
         },
         remove: (item, quantity) => {
-            update(n => {
-                if (quantity > n[item]) {
-                    return n;
+            update(goods => {
+                if (quantity > goods[item]) {
+                    return goods;
                     alert('Not enough ' + item);
                 }
 
                 if (Object.hasOwnProperty.call(pricing, item)) {
                     let profit = pricing[item].sell;
-                    n.doubloons += profit;
+                    goods.doubloons += profit;
                 }
 
-                n[item] -= quantity;
-                setValue(persistantStoreName, n);
-                return n;
+                goods[item] -= quantity;
+                return goods;
             });
         }
     };
 }
 
 export const goods = goodsStore();
+
+getStateFromDb(tableName)
+    .then(value => {
+        goods.updateAll(value);
+    })
+    .catch(err => {
+        goods.updateAll(initValue);
+    })
+    .finally(() => {
+        goods.subscribe(value => {
+            saveStateToDb(tableName, value);
+        });
+    });

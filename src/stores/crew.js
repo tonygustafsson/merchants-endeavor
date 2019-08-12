@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
-import { getValue, setValue } from '../utils/persistantState';
+import { getStateFromDb, saveStateToDb } from '../utils/db';
 
-const persistantStoreName = 'crew';
+const tableName = 'crew';
 const initValue = {
     members: 4,
     health: 100,
@@ -11,31 +11,43 @@ const minValue = 0;
 const maxValue = 20;
 
 function crewStore() {
-    const storageValue = getValue(persistantStoreName, initValue);
-
-    const { subscribe, set, update } = writable(storageValue);
+    const { subscribe, set, update } = writable({});
 
     return {
         subscribe,
+        updateAll: data => {
+            update(crew => data);
+        },
         addCrewMembers: additionalCrewMembers => {
-            update(n => {
-                if (n.members + additionalCrewMembers > maxValue) return n;
+            update(crew => {
+                if (crew.members + additionalCrewMembers > maxValue) return crew;
 
-                n.members += additionalCrewMembers;
-                setValue(persistantStoreName, n);
-                return n;
+                crew.members += additionalCrewMembers;
+                return crew;
             });
         },
         removeCrewMembers: removedCrewMembers => {
-            update(n => {
-                if (n.members - removedCrewMembers < minValue) return n;
+            update(crew => {
+                if (crew.members - removedCrewMembers < minValue) return crew;
 
-                n.members -= removedCrewMembers;
-                setValue(persistantStoreName, n);
-                return n;
+                crew.members -= removedCrewMembers;
+                return crew;
             });
         }
     };
 }
 
 export const crew = crewStore();
+
+getStateFromDb(tableName)
+    .then(value => {
+        crew.updateAll(value);
+    })
+    .catch(err => {
+        crew.updateAll(initValue);
+    })
+    .finally(() => {
+        crew.subscribe(value => {
+            saveStateToDb(tableName, value);
+        });
+    });

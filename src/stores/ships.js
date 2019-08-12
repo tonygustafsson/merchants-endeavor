@@ -1,74 +1,82 @@
 import { writable } from 'svelte/store';
 import { ticker } from './ticker';
 import { goods } from './goods';
-import { getValue, setValue } from '../utils/persistantState';
 import { getRandomShip } from '../utils/ship';
+import { getStateFromDb, saveStateToDb } from '../utils/db';
 
 let currentTick = 0;
 const missionLength = 10;
 
-const persistantStoreName = 'ships';
-const initValue = [getRandomShip()];
+const tableName = 'ships';
 const minValue = 0;
 const maxValue = 10;
 
 function shipsStore() {
-    const storageValue = getValue(persistantStoreName, initValue);
-
-    const { subscribe, set, update } = writable(storageValue);
+    const { subscribe, set, update } = writable([]);
 
     return {
         subscribe,
+        updateAll: data => {
+            update(ships => ships.concat(data));
+        },
         addShip: () => {
-            update(n => {
-                if (n.length + 1 > maxValue) return n;
+            update(ships => {
+                if (ships.length + 1 > maxValue) return ships;
 
                 const newShip = getRandomShip();
-                n.push(newShip);
+                ships.push(newShip);
 
-                setValue(persistantStoreName, n);
-
-                return n;
+                return ships;
             });
         },
         removeShip: id => {
-            update(n => {
-                if (n.length - 1 < minValue) return n;
-                n = n.filter(ship => ship.id !== id);
+            update(ships => {
+                if (ships.length - 1 < minValue) return ships;
+                ships = ships.filter(ship => ship.id !== id);
 
-                setValue(persistantStoreName, n);
-
-                return n;
+                return ships;
             });
         },
         sendOnMission: id => {
-            update(n => {
-                let ship = n.find(ship => ship.id === id);
+            update(ships => {
+                let ship = ships.find(ship => ship.id === id);
                 ship.onMission = currentTick + missionLength;
 
-                setValue(persistantStoreName, n);
-
-                return n;
+                return ships;
             });
         },
         checkMissions: () => {
-            update(n => {
-                n.map(ship => {
+            update(ships => {
+                if (ships.length < 1) return [];
+
+                ships.map(ship => {
                     if (ship.onMission !== false && ship.onMission < currentTick) {
                         // Back from mission
                         ship.onMission = false;
                         goods.add('doubloons', 100);
-                        setValue(persistantStoreName, n);
                     }
                 });
 
-                return n;
+                return ships;
             });
         }
     };
 }
 
 export const ships = shipsStore();
+
+getStateFromDb(tableName)
+    .then(value => {
+        ships.updateAll(value);
+    })
+    .catch(err => {
+        ships.updateAll([getRandomShip()]);
+    })
+    .finally(() => {
+        ships.subscribe(value => {
+            saveStateToDb(tableName, value);
+        });
+    });
 
 ticker.subscribe(value => {
     currentTick = value;

@@ -1,12 +1,12 @@
 import { writable } from 'svelte/store';
-import { getValue, setValue } from '../utils/persistantState';
+import { getStateFromDb, saveStateToDb } from '../utils/db';
 import { tickerSpeed } from './tickerSpeed';
 
+const tableName = 'tick';
 const defaultTickerSpeed = 1000;
-const startTick = getValue('tick', 0);
 
 const createTicker = speed => {
-    const { subscribe, update } = writable(startTick);
+    const { subscribe, update } = writable(0);
 
     let counter = 0;
     let tickerInterval;
@@ -15,16 +15,13 @@ const createTicker = speed => {
         counter = 0;
 
         tickerInterval = setInterval(() => {
-            update(n => {
-                let newValue = n + 1;
-
+            update(tick => {
                 if (counter === 10) {
                     // Save ticker every tenth second to localStorage
-                    setValue('tick', newValue);
                     counter = 0;
                 }
 
-                return newValue;
+                return tick + 1;
             });
 
             counter++;
@@ -35,6 +32,9 @@ const createTicker = speed => {
 
     return {
         subscribe,
+        setTick: newTick => {
+            update(tick => newTick);
+        },
         updateSpeed: speed => {
             clearInterval(tickerInterval);
 
@@ -48,6 +48,19 @@ const createTicker = speed => {
 };
 
 export let ticker = createTicker(defaultTickerSpeed);
+
+getStateFromDb(tableName)
+    .then(value => {
+        ticker.setTick(value);
+    })
+    .catch(err => {
+        ticker.setTick(0);
+    })
+    .finally(() => {
+        ticker.subscribe(value => {
+            saveStateToDb(tableName, value);
+        });
+    });
 
 tickerSpeed.subscribe(value => {
     ticker.updateSpeed(value);
