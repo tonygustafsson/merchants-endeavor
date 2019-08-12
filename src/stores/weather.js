@@ -10,7 +10,7 @@ const getRandomWeather = () => {
     return Math.floor(Math.random() * Math.floor(max));
 };
 
-const createWeather = () => {
+const weatherStore = () => {
     const { subscribe, set } = writable(5);
 
     return {
@@ -22,7 +22,7 @@ const createWeather = () => {
     };
 };
 
-export const weather = createWeather();
+export const weather = weatherStore();
 
 getStateFromDb(tableName)
     .then(value => {

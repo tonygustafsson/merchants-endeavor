@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 const defaultTickerSpeed = 1000;
 
-const createTickerSpeed = () => {
+const tickerSpeedStore = () => {
     const { subscribe, update } = writable(defaultTickerSpeed);
 
     return {
@@ -22,4 +22,4 @@ const createTickerSpeed = () => {
     };
 };
 
-export const tickerSpeed = createTickerSpeed();
+export const tickerSpeed = tickerSpeedStore();

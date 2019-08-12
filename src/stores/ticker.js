@@ -5,7 +5,7 @@ import { tickerSpeed } from './tickerSpeed';
 const tableName = 'tick';
 const defaultTickerSpeed = 1000;
 
-const createTicker = speed => {
+const tickerStore = speed => {
     const { subscribe, update } = writable(0);
 
     let counter = 0;
@@ -47,7 +47,7 @@ const createTicker = speed => {
     };
 };
 
-export let ticker = createTicker(defaultTickerSpeed);
+export const ticker = tickerStore(defaultTickerSpeed);
 
 getStateFromDb(tableName)
     .then(value => {

@@ -24,7 +24,7 @@ const pricing = {
     }
 };
 
-function goodsStore() {
+const goodsStore = () => {
     const { subscribe, set, update } = writable({});
 
     return {
@@ -66,7 +66,7 @@ function goodsStore() {
             });
         }
     };
-}
+};
 
 export const goods = goodsStore();
 

@@ -11,7 +11,7 @@ const tableName = 'ships';
 const minValue = 0;
 const maxValue = 10;
 
-function shipsStore() {
+const shipsStore = () => {
     const { subscribe, set, update } = writable([]);
 
     return {
@@ -61,7 +61,7 @@ function shipsStore() {
             });
         }
     };
-}
+};
 
 export const ships = shipsStore();
 

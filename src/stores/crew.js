@@ -10,7 +10,7 @@ const initValue = {
 const minValue = 0;
 const maxValue = 20;
 
-function crewStore() {
+const crewStore = () => {
     const { subscribe, set, update } = writable({});
 
     return {
@@ -35,7 +35,7 @@ function crewStore() {
             });
         }
     };
-}
+};
 
 export const crew = crewStore();
 
