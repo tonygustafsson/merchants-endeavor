@@ -4,10 +4,10 @@ import { getStateFromDb, saveStateToDb } from '../utils/db';
 
 const tableName = 'weather';
 const max = 5;
-const changeability = 0.1;
+const changeability = 0.02;
 
 const getRandomWeather = () => {
-    return Math.floor(Math.random() * Math.floor(max));
+    return Math.floor(Math.random() * Math.floor(max)) + 1;
 };
 
 const weatherStore = () => {
