@@ -1,17 +1,3 @@
-const shipNames = [
-    'Horrid Rift',
-    'Howling Serpent',
-    'Captains Tortuga',
-    'Evil Rambler',
-    'Howl of the Buccaneers',
-    'The Sea Doubloon',
-    'Murderous Storm',
-    'Howling Plunderer',
-    'Rude James',
-    'Angry Night'
-];
-const getRandomShipName = () => shipNames[Math.floor(Math.random() * shipNames.length)];
-
 const shipTypes = ['Sloop', 'Brig', 'Merchantman', 'Galleon', 'Frigate'];
 const getRandomShipType = () => shipTypes[Math.floor(Math.random() * shipTypes.length)];
 
@@ -26,11 +12,27 @@ const getRandomShipId = length => {
 };
 
 export const getRandomShip = () => {
-    return {
-        id: getRandomShipId(32),
-        name: getRandomShipName(),
-        type: getRandomShipType(),
-        health: 100,
-        onMission: false
-    };
+    return new Promise((resolve, reject) => {
+        fetch('../lists/shipnames.txt')
+            .then(data => {
+                return data.text();
+            })
+            .then(shipList => {
+                const shipNames = shipList.split('\n');
+                const chosenShipName = shipNames[Math.floor(Math.random() * Math.floor(shipNames.length))];
+
+                const ship = {
+                    id: getRandomShipId(32),
+                    name: chosenShipName,
+                    type: getRandomShipType(),
+                    health: 100,
+                    onMission: false
+                };
+
+                resolve(ship);
+            })
+            .catch(err => {
+                alert('Could not create ship...');
+            });
+    });
 };

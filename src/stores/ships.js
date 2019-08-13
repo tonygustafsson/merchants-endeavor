@@ -19,11 +19,10 @@ const shipsStore = () => {
         updateAll: data => {
             update(ships => ships.concat(data));
         },
-        addShip: () => {
+        addShip: newShip => {
             update(ships => {
                 if (ships.length + 1 > maxValue) return ships;
 
-                const newShip = getRandomShip();
                 ships.push(newShip);
 
                 return ships;
@@ -70,7 +69,9 @@ getStateFromDb(tableName)
         ships.updateAll(value);
     })
     .catch(err => {
-        ships.updateAll([getRandomShip()]);
+        getRandomShip().then(newShip => {
+            ships.updateAll([newShip]);
+        });
     })
     .finally(() => {
         ships.subscribe(value => {

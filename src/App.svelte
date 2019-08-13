@@ -2,6 +2,7 @@
     import { ticker } from './stores/ticker.js';
     import { time } from './stores/time.js';
 
+    import Loader from './components/Loader.svelte';
     import Time from './components/Time.svelte';
     import Inventory from './components/Inventory.svelte';
     import Crew from './components/Crew.svelte';
@@ -29,6 +30,7 @@
     <h1>Merchant Simulator</h1>
 
     <div class="container">
+        <Loader />
         <Time />
         <Weather />
         <Inventory />

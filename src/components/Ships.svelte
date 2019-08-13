@@ -1,11 +1,18 @@
 <script>
     import { ships } from '../stores/ships.js';
+    import { getRandomShip } from '../utils/ship';
 
     let noOfShips = 0;
 
     ships.subscribe(value => {
         noOfShips = value.length;
     });
+
+    const addNewShip = () => {
+        getRandomShip().then(newShip => {
+            ships.addShip(newShip);
+        });
+    };
 </script>
 
 <h3>Ships</h3>
@@ -35,4 +42,4 @@
     {/each}
 </table>
 
-<button disabled={noOfShips >= 10} on:click={ships.addShip}>Buy ships</button>
+<button disabled={noOfShips >= 10} on:click={addNewShip}>Buy ships</button>
