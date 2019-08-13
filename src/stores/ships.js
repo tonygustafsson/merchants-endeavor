@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { ticker } from './ticker';
 import { goods } from './goods';
+import { merchant } from './merchant';
 import { getRandomShip } from '../utils/ship';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 
@@ -68,7 +69,7 @@ const shipsStore = () => {
                     if (ship.onMission !== false && ship.onMission < currentTick) {
                         // Back from mission
                         ship.onMission = false;
-                        goods.add('doubloons', 100);
+                        merchant.addDoubloons(1000);
                     }
                 });
 

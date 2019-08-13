@@ -3,6 +3,7 @@
     import { time } from './stores/time.js';
 
     import Loader from './components/Loader.svelte';
+    import Merchant from './components/Merchant.svelte';
     import Time from './components/Time.svelte';
     import Inventory from './components/Inventory.svelte';
     import Crew from './components/Crew.svelte';
@@ -36,6 +37,7 @@
     <div class="container white-panel">
         <Time />
         <Weather />
+        <Merchant />
         <Inventory />
         <Crew />
         <Ships />
