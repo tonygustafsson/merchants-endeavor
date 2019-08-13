@@ -72,17 +72,14 @@ Azur Olage
 Azurefire
 Baba Rum
 Baby Nate
-Baby W/t Bilgewater
 Baby's Playpen
 Bad Dog
 Bail Out
 Bait Bait Bait
 Balmy Steve
 Banana Cabana
-Barbie
 Bare Necessity
 Barnacle Choir
-Barney
 Barton Brigadier
 Bass-ilon
 Bay Voyage
@@ -94,10 +91,7 @@ Bearly Legal
 Bearly Satisfied
 Beauty Lady
 Bee Saw
-Beef Storm
 Beeragra
-Before Breakfast
-Beige And Briney
 Being Thar
 Bella Luna
 Bella Vita
@@ -106,8 +100,6 @@ Belljar
 Beluga Belt
 Ben Ann A Boat
 Bermuda Triangle
-Berth Control
-Between You And Me Bewitched
 Bid And Ask
 Bier Man
 Billable
@@ -130,7 +122,6 @@ Blue Horizon
 Blue Sea
 Blue Sky
 Blueberry Hill
-Bluewater Hwy
 Boat Ox
 Boat Papel
 Boat Pope
@@ -159,13 +150,11 @@ British Miss
 Broke But Afloat
 Bronco
 BronteSaurus
-Brothers-in-Lo$$
 Brown Nose Derby
 Brunchilli
 Buddha Bitch
 Budget Buster
 Bug Eyes
-Bugabug
 Bull Fish
 Bum Bait
 Buoy Crazy
@@ -208,7 +197,6 @@ Carpjackers
 Carrasco's Melody
 Carrusell
 Casa Aqua
-Cash Cow
 Cast Away
 Casuwalt
 Cat Chum
@@ -253,7 +241,6 @@ Cold Behind
 College Fun'd
 Colony Clutch
 Comdo
-Come Fly With Me
 Come With Me
 Comquer
 Comquest
@@ -275,7 +262,6 @@ Copabull
 Coral Fixation
 Coral Reef
 Coral Sea
-Coral Sex
 Coral Snake
 Cordialy Yours
 Cordless Phoney
@@ -291,7 +277,6 @@ Crack Of Dawn
 Crassabout
 Crave-a-Wave
 Crazy Cat
-Crazy Girl
 Crescendo
 Crew Goo Goo
 Crew Lounge
@@ -312,7 +297,6 @@ Current Affair
 Current Obsession
 Current One
 Cut-Out
-Czech Mate
 Daly Devotion
 Dance With Me
 Dancing Girl
@@ -352,16 +336,12 @@ Dinging Girl
 Direct Deposit
 Dirty Harry
 Disc Jokey Me
-Dixie Girl
 Dobie's Dinghy
 Doc Mantra
 Dog Philosophy
 Dom Perignon
 Don Juan
 Don Quixote
-Don Quixote Del Mar
-Dorothy My Girl
-Dorothy My Love
 Dos Winos
 Dot Calm
 Dot Compost
@@ -371,10 +351,8 @@ Down Jones
 Downtown
 Doña Flor
 Dr. D And Lucy
-Dr. Dog's Cat
 Dr. Prudent
 Dr. Successor
-Dr. Vegan
 Drag Racy
 Dragbot
 Dream Boat
@@ -460,7 +438,6 @@ Fat Baby
 Fat Boy
 Fat Chance
 Fatbelly
-Fatima
 Faulkner Islands
 Faux Phox
 Fear Foil
@@ -543,7 +520,6 @@ Friendly Fire
 Frog Jerkey
 Frolique
 Fruit Solid
-Fu$$Budget
 Fuelin' Around
 Fuelish Pleasure
 Full Fathom Five
@@ -600,12 +576,7 @@ Greenspan
 Grounds For Divorce
 Gull Oriented
 Gum Runner
-H20 Lovers
-H20 Nutz
-H20 Office
 Hagen Daze
-Hairplane
-Hairport
 Half Mine
 Half-A-Wake
 Hana-Hana
@@ -822,7 +793,6 @@ Legal Tender
 Les Caraibes
 Les Delices
 Les Passions
-Let's Get Naughty-Cal
 Lexass
 Li'L Boogr
 Libido
@@ -1011,42 +981,6 @@ Muse Lee
 Mustang
 Mutton Chops
 Muñeca Brava
-My Assets
-My Bad
-My Best Investment
-My Best Sason
-My Buddy
-My Delirious
-My Easy Chair
-My Fantasy
-My Favorite
-My Fourth Problem
-My Heat Couple
-My Hide Away
-My Jeannie Too
-My Last Boat IV
-My Little Girl
-My Little Problem
-My Little Relax
-My Lolita
-My Lovely Diva
-My Lucky One
-My Missed Stress
-My Opportunity
-My Pain Killer
-My Playoff
-My Possible Dream
-My Pride And Toy
-My Princess
-My Refuge
-My Second Problem
-My Summer Snowmobile
-My Three Suns
-My Trophy
-My Way
-My Wife's Relax
-My Working Money
-My Lucky Boat
 Myopic
 Mystique
 Ninja
@@ -1195,7 +1129,6 @@ Pawn Storm
 Payne Relief
 Peace Of Mind
 Peaceful Infinity
-Pearlesex
 Peek-A-Boo
 Peek-A-Buddha
 Peeve

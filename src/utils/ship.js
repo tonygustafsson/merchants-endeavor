@@ -1,3 +1,5 @@
+import { getRandomLineFromFile } from './fileReader';
+
 const shipTypes = ['Sloop', 'Brig', 'Merchantman', 'Galleon', 'Frigate'];
 const getRandomShipType = () => shipTypes[Math.floor(Math.random() * shipTypes.length)];
 
@@ -12,27 +14,19 @@ const getRandomShipId = length => {
 };
 
 export const getRandomShip = () => {
-    return new Promise((resolve, reject) => {
-        fetch('../lists/shipnames.txt')
-            .then(data => {
-                return data.text();
-            })
-            .then(shipList => {
-                const shipNames = shipList.split('\n');
-                const chosenShipName = shipNames[Math.floor(Math.random() * Math.floor(shipNames.length))];
+    return getRandomLineFromFile('../lists/shipNames.txt')
+        .then(shipName => {
+            const ship = {
+                id: getRandomShipId(32),
+                name: shipName,
+                type: getRandomShipType(),
+                health: 100,
+                onMission: false
+            };
 
-                const ship = {
-                    id: getRandomShipId(32),
-                    name: chosenShipName,
-                    type: getRandomShipType(),
-                    health: 100,
-                    onMission: false
-                };
-
-                resolve(ship);
-            })
-            .catch(err => {
-                alert('Could not create ship...');
-            });
-    });
+            return ship;
+        })
+        .catch(err => {
+            alert('Could not create ship...');
+        });
 };
