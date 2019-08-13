@@ -1,6 +1,7 @@
 <script>
     import { ships } from '../stores/ships.js';
     import { getRandomShip } from '../utils/ship';
+    import { loader } from '../stores/loader';
 
     let noOfShips = 0;
 
@@ -9,8 +10,11 @@
     });
 
     const addNewShip = () => {
+        loader.setLoading(true);
+
         getRandomShip().then(newShip => {
             ships.addShip(newShip);
+            loader.setLoading(false);
         });
     };
 </script>

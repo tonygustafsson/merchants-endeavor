@@ -13,24 +13,26 @@
 <style>
     .container {
         width: 80%;
-        margin: 1em 10%;
-        background: rgba(255, 255, 255, 0.8);
-        padding: 1em;
-        position: relative;
+        margin: 1rem auto;
+        padding: 1rem;
     }
-
+    .white-panel {
+        background: rgba(255, 255, 255, 0.8);
+    }
     h1 {
-        width: 80%;
-        margin: 0.5em 10%;
         text-shadow: 0px 0 20px #fff;
+        margin: 0;
     }
 </style>
 
 <div class="app">
-    <h1>Merchant Simulator</h1>
+    <Loader />
 
     <div class="container">
-        <Loader />
+        <h1>Merchant Simulator</h1>
+    </div>
+
+    <div class="container white-panel">
         <Time />
         <Weather />
         <Inventory />
