@@ -1,5 +1,9 @@
 <script>
     import { goods } from '../stores/goods.js';
+    import Modal from './Modal.svelte';
+    import { goodsInfo } from '../utils/goods';
+
+    let showModal = false;
 </script>
 
 <h3>Inventory</h3>
@@ -10,42 +14,51 @@
         <th>Quantity</th>
     </tr>
     <tr>
-        <td>Cannons</td>
-        <td>{$goods.cannons}</td>
-    </tr>
-    <tr>
         <td>Doubloons</td>
         <td>{$goods.doubloons}</td>
     </tr>
-    <tr>
-        <td>Food</td>
-        <td>{$goods.food} cartons</td>
-    </tr>
-    <tr>
-        <td>Water</td>
-        <td>{$goods.water} barrels</td>
-    </tr>
-    <tr>
-        <td>Spices</td>
-        <td>{$goods.spices} cartons</td>
-    </tr>
-    <tr>
-        <td>Porcelain</td>
-        <td>{$goods.porcelain} cartons</td>
-    </tr>
-    <tr>
-        <td>Tobacco</td>
-        <td>{$goods.tobacco} cartons</td>
-    </tr>
-    <tr>
-        <td>Rum</td>
-        <td>{$goods.rum} barrels</td>
-    </tr>
+    {#each Object.keys(goodsInfo) as item}
+        <tr>
+            <td>{goodsInfo[item].name}</td>
+            <td>{$goods[item]} {goodsInfo[item].suffix}</td>
+        </tr>
+    {/each}
 </table>
 
 <div>
-    <button on:click={() => goods.add('food', 10)}>Buy food</button>
-    <button disabled={$goods.food <= 0} on:click={() => goods.remove('food', 10)}>Sell food</button>
-    <button on:click={() => goods.add('water', 10)}>Buy water</button>
-    <button disabled={$goods.water <= 0} on:click={() => goods.remove('water', 10)}>Sell water</button>
+    <button on:click={() => (showModal = true)}>Buy and sell goods</button>
 </div>
+
+{#if showModal}
+    <Modal on:close={() => (showModal = false)}>
+        <h3>Buy and sell goods</h3>
+
+        <p>Doubloons: {$goods.doubloons}</p>
+
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Worth</th>
+                <th>Actions</th>
+            </tr>
+
+            {#each Object.keys(goodsInfo) as item}
+                <tr>
+                    <td>{goodsInfo[item].name}</td>
+                    <td>{$goods[item]} {goodsInfo[item].suffix}</td>
+                    <td>{goodsInfo[item].price}</td>
+                    <td>{goodsInfo[item].worth}</td>
+                    <td>
+                        <button disabled={goodsInfo[item].price > $goods.doubloons} on:click={() => goods.add(item, 1)}>
+                            +
+                        </button>
+                        <button disabled={$goods[item] <= 0} on:click={() => goods.remove(item, 1)}>-</button>
+                    </td>
+                </tr>
+            {/each}
+        </table>
+
+    </Modal>
+{/if}

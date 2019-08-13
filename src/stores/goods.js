@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { goodsInfo } from '../utils/goods';
 
 const tableName = 'goods';
 const initValue = {
@@ -13,17 +14,6 @@ const initValue = {
     rum: 0
 };
 
-const pricing = {
-    food: {
-        buy: 15,
-        sell: 10
-    },
-    water: {
-        buy: 10,
-        sell: 7
-    }
-};
-
 const goodsStore = () => {
     const { subscribe, set, update } = writable({});
 
@@ -34,15 +24,15 @@ const goodsStore = () => {
         },
         add: (item, quantity) => {
             update(goods => {
-                if (Object.hasOwnProperty.call(pricing, item)) {
-                    let cost = pricing[item].buy;
+                if (Object.hasOwnProperty.call(goodsInfo, item)) {
+                    let price = goodsInfo[item].price;
 
-                    if (cost > goods.doubloons) {
+                    if (price > goods.doubloons) {
                         alert('Not enough money!');
                         return goods;
                     }
 
-                    goods.doubloons -= cost;
+                    goods.doubloons -= price;
                 }
 
                 goods[item] = goods[item] + quantity;
@@ -56,9 +46,9 @@ const goodsStore = () => {
                     alert('Not enough ' + item);
                 }
 
-                if (Object.hasOwnProperty.call(pricing, item)) {
-                    let profit = pricing[item].sell;
-                    goods.doubloons += profit;
+                if (Object.hasOwnProperty.call(goodsInfo, item)) {
+                    let worth = goodsInfo[item].worth;
+                    goods.doubloons += worth;
                 }
 
                 goods[item] -= quantity;
