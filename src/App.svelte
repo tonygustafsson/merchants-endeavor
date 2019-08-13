@@ -8,6 +8,7 @@
     import Crew from './components/Crew.svelte';
     import Ships from './components/Ships.svelte';
     import Weather from './components/Weather.svelte';
+    import Settings from './components/Settings.svelte';
 </script>
 
 <style>
@@ -38,5 +39,6 @@
         <Inventory />
         <Crew />
         <Ships />
+        <Settings />
     </div>
 </div>

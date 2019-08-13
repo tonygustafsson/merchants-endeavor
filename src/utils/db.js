@@ -25,3 +25,14 @@ export const getStateFromDb = table => {
             });
     });
 };
+
+export const clearDatabase = () => {
+    localforage
+        .clear()
+        .then(() => {
+            console.log('Cleared database');
+        })
+        .catch(err => {
+            console.error(err);
+        });
+};
