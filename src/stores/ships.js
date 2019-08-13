@@ -36,6 +36,22 @@ const shipsStore = () => {
                 return ships;
             });
         },
+        toggleModal: id => {
+            update(ships => {
+                let ship = ships.find(ship => ship.id === id);
+                ship.showModal = !ship.showModal;
+
+                return ships;
+            });
+        },
+        setName: (id, newName) => {
+            update(ships => {
+                let ship = ships.find(ship => ship.id === id);
+                ship.name = newName;
+
+                return ships;
+            });
+        },
         sendOnMission: id => {
             update(ships => {
                 let ship = ships.find(ship => ship.id === id);

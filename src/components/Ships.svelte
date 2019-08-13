@@ -2,6 +2,7 @@
     import { ships } from '../stores/ships.js';
     import { getRandomShip } from '../utils/ship';
     import { loader } from '../stores/loader';
+    import Modal from './Modal.svelte';
 
     let noOfShips = 0;
 
@@ -26,24 +27,37 @@
         <th>Name</th>
         <th>Type</th>
         <th>Health</th>
-        <th>Actions</th>
+        <th>On mission</th>
     </tr>
 
     {#each $ships as ship, i}
         <tr>
-            <td>⛵ {ship.name}</td>
+            <td>
+                <a href="showship" on:click|preventDefault={() => ships.toggleModal(ship.id)}>⛵ {ship.name}</a>
+            </td>
             <td>{ship.type}</td>
             <td>{ship.health}</td>
-            <td>
-                {#if !ship.onMission}
-                    <a href="sendOnMission/{ship.id}" on:click|preventDefault={() => ships.sendOnMission(ship.id)}>
-                        Send on mission
-                    </a>
-                {:else}On mission{/if}
-                <a href="removeShip/{ship.id}" on:click|preventDefault={() => ships.removeShip(ship.id)}>x</a>
-            </td>
+            <td>{ship.onMission ? 'Yes' : 'No'}</td>
         </tr>
     {/each}
 </table>
+
+{#each $ships as ship, i}
+    {#if ship.showModal}
+        <Modal on:close={() => ships.toggleModal(ship.id)}>
+            <h3>{ship.name}</h3>
+
+            <input type="text" value={ship.name} on:change={e => ships.setName(ship.id, e.target.value)} />
+            <button>Save name</button>
+
+            <p>Type: {ship.type}</p>
+            <p>Health: {ship.health}</p>
+            <p>On mission: {ship.onMission ? 'Yes' : 'No'}</p>
+
+            <button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>Send on mission</button>
+            <button on:click={() => ships.removeShip(ship.id)}>Remove ship</button>
+        </Modal>
+    {/if}
+{/each}
 
 <button disabled={noOfShips >= 10} on:click={addNewShip}>Buy ships</button>

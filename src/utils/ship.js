@@ -21,7 +21,8 @@ export const getRandomShip = () => {
                 name: shipName,
                 type: getRandomShipType(),
                 health: 100,
-                onMission: false
+                onMission: false,
+                showModal: false
             };
 
             return ship;
