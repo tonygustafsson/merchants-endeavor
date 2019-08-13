@@ -2,11 +2,11 @@
     import { merchant } from '../stores/merchant';
 </script>
 
-<h3>About you</h3>
+<h2>{$merchant.name}</h2>
 
 <p>
-    <strong>Name:</strong>
-    {$merchant.name}
+    <strong>Gender:</strong>
+    {$merchant.gender}
     <br />
     <strong>Nationality:</strong>
     {$merchant.nationality}

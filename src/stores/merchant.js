@@ -1,13 +1,8 @@
 import { writable } from 'svelte/store';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
-import { getRandomMerchantName, getRandomNationality } from '../utils/merchant';
+import { getRandomMerchant } from '../utils/merchant';
 
 const tableName = 'merchant';
-const initValue = {
-    name: '',
-    nationality: 'England',
-    doubloons: 1000
-};
 
 const merchantStore = () => {
     const { subscribe, update } = writable({});
@@ -47,15 +42,8 @@ getStateFromDb(tableName)
         merchant.updateAll(value);
     })
     .catch(err => {
-        getRandomMerchantName()
-            .then(name => {
-                initValue.name = name;
-                initValue.nationality = getRandomNationality();
-                merchant.updateAll(initValue);
-            })
-            .catch(err => {
-                alert('Could not create ship...');
-            });
+        const randomMerchant = getRandomMerchant();
+        merchant.updateAll(randomMerchant);
     })
     .finally(() => {
         merchant.subscribe(value => {
