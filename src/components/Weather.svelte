@@ -4,10 +4,10 @@
 
 <style>
     .weather-symbol {
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
-        opacity: 0.7;
+        opacity: 0.9;
         font-size: 1000%;
         user-select: none;
     }
