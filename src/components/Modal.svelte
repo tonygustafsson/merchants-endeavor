@@ -15,7 +15,7 @@
     }
 
     .modal {
-        position: absolute;
+        position: fixed;
         left: 50%;
         top: 50%;
         width: calc(100vw - 4em);
@@ -24,7 +24,6 @@
         overflow: auto;
         transform: translate(-50%, -50%);
         padding: 1em;
-        border-radius: 0.2em;
         background: white;
     }
 
