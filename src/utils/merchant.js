@@ -60,7 +60,7 @@ const names = {
         }
     },
     surnames: {
-        england: [
+        english: [
             'Addison',
             'Bawden',
             'Clapham',
