@@ -86,7 +86,7 @@ getStateFromDb(tableName)
         ships.updateAll(value);
     })
     .catch(err => {
-        getRandomShip().then(newShip => {
+        getRandomShip('brig').then(newShip => {
             ships.updateAll([newShip]);
         });
     })

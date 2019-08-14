@@ -39,13 +39,6 @@ export const shipTypes = {
     }
 };
 
-const getRandomShipType = () => {
-    const shipKeys = Object.keys(shipTypes);
-    const randomShipKey = shipKeys[Math.floor(Math.random() * shipKeys.length)];
-
-    return randomShipKey;
-};
-
 const getRandomShipId = length => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -56,13 +49,13 @@ const getRandomShipId = length => {
     return result;
 };
 
-export const getRandomShip = () => {
+export const getRandomShip = shipType => {
     return getRandomLineFromFile('../lists/shipNames.txt')
         .then(shipName => {
             const ship = {
                 id: getRandomShipId(32),
                 name: shipName,
-                type: getRandomShipType(),
+                type: shipType,
                 health: 100,
                 onMission: false,
                 showModal: false
