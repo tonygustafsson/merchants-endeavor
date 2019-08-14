@@ -1,8 +1,9 @@
 <script>
     import { ships } from '../stores/ships.js';
-    import { getRandomShip } from '../utils/ship';
+    import { shipTypes, getRandomShip } from '../utils/ship';
     import { loader } from '../stores/loader';
     import Modal from './Modal.svelte';
+    import { ucFirst } from '../utils/string';
 
     let noOfShips = 0;
 
@@ -27,6 +28,9 @@
         <th>Name</th>
         <th>Type</th>
         <th>Health</th>
+        <th>Min/Max Crew</th>
+        <th>Max cannons</th>
+        <th>Max load</th>
         <th>On mission</th>
     </tr>
 
@@ -35,8 +39,11 @@
             <td>
                 <a href="showship" on:click|preventDefault={() => ships.toggleModal(ship.id)}>⛵ {ship.name}</a>
             </td>
-            <td>{ship.type}</td>
+            <td>{ucFirst(ship.type)}</td>
             <td>{ship.health}</td>
+            <td>{shipTypes[ship.type].crewMin}/{shipTypes[ship.type].crewMax}</td>
+            <td>{shipTypes[ship.type].cannonsMax}</td>
+            <td>{shipTypes[ship.type].loadCapacity}</td>
             <td>{ship.onMission ? 'Yes' : 'No'}</td>
         </tr>
     {/each}

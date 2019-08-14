@@ -1,7 +1,50 @@
 import { getRandomLineFromFile } from './fileReader';
 
-const shipTypes = ['Sloop', 'Brig', 'Merchantman', 'Galleon', 'Frigate'];
-const getRandomShipType = () => shipTypes[Math.floor(Math.random() * shipTypes.length)];
+export const shipTypes = {
+    brig: {
+        name: 'Brig',
+        loadCapacity: 500,
+        crewMin: 2,
+        crewMax: 20,
+        cannonsMax: 10,
+        price: 1500,
+        worth: 750
+    },
+    merchantman: {
+        name: 'Merchantman',
+        loadCapacity: 1000,
+        crewMin: 1,
+        crewMax: 10,
+        cannonsMax: 0,
+        price: 1000,
+        worth: 500
+    },
+    galleon: {
+        name: 'Galleon',
+        loadCapacity: 300,
+        crewMin: 4,
+        crewMax: 50,
+        cannonsMax: 25,
+        price: 4000,
+        worth: 2000
+    },
+    frigate: {
+        name: 'Frigate',
+        loadCapacity: 600,
+        crewMin: 8,
+        crewMax: 50,
+        cannonsMax: 50,
+        price: 10000,
+        worth: 5000
+    }
+};
+
+const getRandomShipType = () => {
+    const shipKeys = Object.keys(shipTypes);
+    const randomShipKey = shipKeys[Math.floor(Math.random() * shipKeys.length)];
+
+    return randomShipKey;
+};
 
 const getRandomShipId = length => {
     var result = '';
