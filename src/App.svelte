@@ -1,8 +1,10 @@
 <script>
-    import { ticker } from './stores/ticker.js';
-    import { time } from './stores/time.js';
+    import { ticker } from './stores/ticker';
+    import { time } from './stores/time';
+    import { merchant } from './stores/merchant';
 
     import Loader from './components/Loader.svelte';
+    import Start from './components/Start.svelte';
     import Merchant from './components/Merchant.svelte';
     import Time from './components/Time.svelte';
     import Inventory from './components/Inventory.svelte';
@@ -35,12 +37,16 @@
     </div>
 
     <div class="container white-panel">
-        <Time />
-        <Weather />
-        <Merchant />
-        <Inventory />
-        <Crew />
-        <Ships />
-        <Settings />
+        {#if !$merchant.startedPlaying}
+            <Start />
+        {:else}
+            <Time />
+            <Weather />
+            <Merchant />
+            <Inventory />
+            <Crew />
+            <Ships />
+            <Settings />
+        {/if}
     </div>
 </div>

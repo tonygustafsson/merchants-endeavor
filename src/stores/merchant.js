@@ -18,6 +18,24 @@ const merchantStore = () => {
                 return merchant;
             });
         },
+        changeGender: newGender => {
+            update(merchant => {
+                merchant.gender = newGender;
+                return merchant;
+            });
+        },
+        changeNationality: newNationality => {
+            update(merchant => {
+                merchant.nationality = newNationality;
+                return merchant;
+            });
+        },
+        changeStartedPlaying: startedPlaying => {
+            update(merchant => {
+                merchant.startedPlaying = startedPlaying;
+                return merchant;
+            });
+        },
         addDoubloons: doubloons => {
             update(merchant => {
                 merchant.doubloons += doubloons;
@@ -43,7 +61,16 @@ getStateFromDb(tableName)
     })
     .catch(err => {
         const randomMerchant = getRandomMerchant();
-        merchant.updateAll(randomMerchant);
+
+        const initValue = {
+            name: '',
+            gender: '',
+            nationality: '',
+            doubloons: 1000,
+            startedPlaying: false
+        };
+
+        merchant.updateAll(Object.assign(initValue, randomMerchant));
     })
     .finally(() => {
         merchant.subscribe(value => {

@@ -2,7 +2,7 @@ import { getRandomLineFromFile } from './fileReader';
 
 const names = {
     firstNames: {
-        men: {
+        man: {
             english: ['Herman', 'Alan', 'Howard', 'Carter', 'Dalton', 'Edward', 'Egbert', 'Jarvis', 'Norman', 'Owen'],
             french: [
                 'Antoine',
@@ -19,7 +19,7 @@ const names = {
             dutch: ['Anouk', 'Bram', 'Dirk', 'Flemming', 'Henrick', 'Jaap', 'Klaas', 'Pieter', 'Rutger', 'Wouter'],
             spanish: ['Alberto', 'Andres', 'Carlos', 'Diego', 'Emilio', 'Fabio', 'Franco', 'Ismael', 'Jose', 'Ronaldo']
         },
-        women: {
+        woman: {
             english: [
                 'Adrienne',
                 'Agnes',
@@ -104,11 +104,7 @@ const nationalities = ['english', 'french', 'dutch', 'spanish'];
 
 export const getRandomNationality = () => nationalities[Math.floor(Math.random() * nationalities.length)];
 
-const firstCharUppercase = string => string.charAt(0).toUpperCase() + string.slice(1);
-
 const getRandomFirstName = (nationality, gender) => {
-    gender = gender === 'Woman' ? 'women' : 'men';
-
     let firstNameArray = names.firstNames[gender][nationality];
     let firstName = firstNameArray[Math.floor(Math.random() * firstNameArray.length)];
     return firstName;
@@ -122,13 +118,12 @@ const getRandomSurname = nationality => {
 
 export const getRandomMerchant = () => {
     let nationality = getRandomNationality();
-    let gender = Math.random() > 0.5 ? 'Woman' : 'Man';
+    let gender = Math.random() > 0.5 ? 'woman' : 'man';
 
     let merchant = {
         name: `${getRandomFirstName(nationality, gender)} ${getRandomSurname(nationality)}`,
         gender: gender,
-        nationality: firstCharUppercase(nationality),
-        doubloons: 1000
+        nationality: nationality
     };
 
     return merchant;
