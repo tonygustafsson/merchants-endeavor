@@ -24,7 +24,7 @@
     }
 </style>
 
-<h2>{$time}</h2>
+<h2>{$time.now}</h2>
 
 <ul>
     <li>

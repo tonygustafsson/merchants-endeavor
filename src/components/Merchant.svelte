@@ -1,4 +1,5 @@
 <script>
+    import { time } from '../stores/time.js';
     import { merchant } from '../stores/merchant';
     import { ucFirst } from '../utils/string';
 </script>
@@ -19,4 +20,7 @@
     <br />
     <strong>Doubloons:</strong>
     {$merchant.doubloons}
+    <br />
+    <strong>Started out:</strong>
+    {$time.sinceStart}
 </p>
