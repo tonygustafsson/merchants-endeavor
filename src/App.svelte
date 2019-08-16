@@ -40,13 +40,13 @@
 
 <div class="app">
     <Loader />
-    <Weather />
 
     <div class="container">
         <h1>Merchant Simulator</h1>
 
         {#if $game.route !== 'start'}
             <Time />
+            <Weather />
             <Navigation />
             <Settings />
         {/if}
