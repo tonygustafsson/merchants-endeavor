@@ -2,6 +2,7 @@
     import { ticker } from './stores/ticker';
     import { time } from './stores/time';
     import { merchant } from './stores/merchant';
+    import { game } from './stores/game';
 
     import Loader from './components/Loader.svelte';
     import Start from './components/Start.svelte';
@@ -46,7 +47,7 @@
 
     <div class="container white-panel">
         {#if merchantLoadedFromStore}
-            {#if !$merchant.startedPlaying}
+            {#if $game.route === 'start'}
                 <Start />
             {:else}
                 <Time />

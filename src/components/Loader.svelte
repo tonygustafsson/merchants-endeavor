@@ -1,11 +1,11 @@
 <script>
     import { fade } from 'svelte/transition';
-    import { loader } from '../stores/loader';
+    import { game } from '../stores/game';
 
     let loading = false;
 
-    loader.subscribe(isLoading => {
-        loading = isLoading;
+    game.subscribe(game => {
+        loading = game.loading;
     });
 </script>
 

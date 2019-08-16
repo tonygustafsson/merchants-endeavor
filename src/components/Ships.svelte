@@ -2,7 +2,7 @@
     import { ships } from '../stores/ships.js';
     import { merchant } from '../stores/merchant.js';
     import { shipTypes, getRandomShip } from '../utils/ship';
-    import { loader } from '../stores/loader';
+    import { game } from '../stores/game';
     import Modal from './Modal.svelte';
     import { ucFirst } from '../utils/string';
 
@@ -14,14 +14,14 @@
     });
 
     const buyShip = shipType => {
-        loader.setLoading(true);
+        game.setLoading(true);
 
         getRandomShip(shipType).then(newShip => {
             const price = shipTypes[shipType].price;
 
             ships.addShip(newShip);
             merchant.subtractDoubloons(price);
-            loader.setLoading(false);
+            game.setLoading(false);
         });
     };
 

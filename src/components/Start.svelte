@@ -1,5 +1,6 @@
 <script>
     import { merchant } from '../stores/merchant';
+    import { game } from '../stores/game';
 
     const changeName = name => {
         merchant.changeName(name);
@@ -14,7 +15,7 @@
     };
 
     const startPlaying = () => {
-        merchant.changeStartedPlaying(true);
+        game.changeRoute('stats');
     };
 </script>
 

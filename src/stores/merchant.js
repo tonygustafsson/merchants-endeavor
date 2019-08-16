@@ -30,12 +30,6 @@ const merchantStore = () => {
                 return merchant;
             });
         },
-        changeStartedPlaying: startedPlaying => {
-            update(merchant => {
-                merchant.startedPlaying = startedPlaying;
-                return merchant;
-            });
-        },
         addDoubloons: doubloons => {
             update(merchant => {
                 merchant.doubloons += doubloons;
@@ -66,8 +60,7 @@ getStateFromDb(tableName)
             name: '',
             gender: '',
             nationality: '',
-            doubloons: 1000,
-            startedPlaying: false
+            doubloons: 1000
         };
 
         merchant.updateAll(Object.assign(initValue, randomMerchant));
