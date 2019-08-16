@@ -7,8 +7,9 @@
 <style>
     .time {
         display: inline-block;
-        font-size: 175%;
+        font-size: 200%;
         margin: 0.25em 0 0.5em 0;
+        font-family: 'Redressed', cursive;
     }
 
     ul {
