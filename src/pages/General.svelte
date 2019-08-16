@@ -19,7 +19,14 @@
 </script>
 
 <div class="page-stats">
-    <h2>{$merchant.name}</h2>
+    <h2>General</h2>
+
+    <p>
+        Here you can see general information about you and how things are going. It will also be a place to view recent
+        events.
+    </p>
+
+    <h3>{$merchant.name}</h3>
 
     <p>
         <strong>Gender:</strong>
