@@ -101,7 +101,6 @@ table {
     width: 100%;
     background: #d8dbde;
     margin: 1em 0;
-    font-size: 90%;
 }
 
 tr {
@@ -124,4 +123,8 @@ td {
 th:last-child,
 td:last-child {
     text-align: right;
+}
+
+p {
+    font-size: 18px;
 }

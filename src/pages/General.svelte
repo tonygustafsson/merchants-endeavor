@@ -51,19 +51,19 @@
     <table>
         <tr>
             <td>Doubloons</td>
-            <td>{$merchant.doubloons}</td>
+            <td>{$merchant.doubloons} dbl</td>
         </tr>
         <tr>
             <td>Ships</td>
-            <td>{noOfShips}</td>
+            <td>{noOfShips} ships</td>
         </tr>
         <tr>
             <td>Cannons</td>
-            <td>{$goods.cannons}</td>
+            <td>{$goods.cannons} pcs</td>
         </tr>
         <tr>
             <td>Staff</td>
-            <td>{noOfStaff}</td>
+            <td>{noOfStaff} members</td>
         </tr>
         <tr>
             <td>Food</td>
@@ -73,10 +73,5 @@
             <td>Water</td>
             <td>{$goods.water} barrels</td>
         </tr>
-        <tr>
-            <td>Ships</td>
-            <td>{noOfShips}</td>
-        </tr>
-
     </table>
 </div>
