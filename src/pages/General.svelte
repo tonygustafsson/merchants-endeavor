@@ -18,6 +18,15 @@
     });
 </script>
 
+<style>
+    td:first-child {
+        width: 25%;
+    }
+    td:last-child {
+        text-align: left;
+    }
+</style>
+
 <div class="page-stats">
     <h2>General</h2>
 
@@ -29,36 +38,45 @@
     <h3>{$merchant.name}</h3>
 
     <p>
-        <strong>Gender:</strong>
-        {ucFirst($merchant.gender)}
-        <br />
-        <strong>Nationality:</strong>
         {#if $merchant.nationality === 'english'}
             🇬🇧
         {:else if $merchant.nationality === 'french'}
             🇫🇷
         {:else if $merchant.nationality === 'spanish'}🇪🇸{:else if $merchant.nationality === 'dutch'}🇧🇶{/if}
-        {ucFirst($merchant.nationality)}
-        <br />
-        <strong>Doubloons:</strong>
-        {$merchant.doubloons}
-        <br />
-        <strong>Ships:</strong>
-        {noOfShips}
-        <br />
-        <strong>Cannons:</strong>
-        {$goods.cannons}
-        <br />
-        <strong>Staff:</strong>
-        {noOfStaff}
-        <br />
-        <strong>Food:</strong>
-        {$goods.food} cartons
-        <br />
-        <strong>Water:</strong>
-        {$goods.water} barrels
-        <br />
-        <strong>Started out:</strong>
-        {$time.sinceStart}
+        You are trying to tame the carribean as a {ucFirst($merchant.nationality)} {$merchant.gender}. You started out {$time.sinceStart}.
     </p>
+
+    <h3>Possessions</h3>
+
+    <table>
+        <tr>
+            <td>Doubloons</td>
+            <td>{$merchant.doubloons}</td>
+        </tr>
+        <tr>
+            <td>Ships</td>
+            <td>{noOfShips}</td>
+        </tr>
+        <tr>
+            <td>Cannons</td>
+            <td>{$goods.cannons}</td>
+        </tr>
+        <tr>
+            <td>Staff</td>
+            <td>{noOfStaff}</td>
+        </tr>
+        <tr>
+            <td>Food</td>
+            <td>{$goods.food} cartons</td>
+        </tr>
+        <tr>
+            <td>Water</td>
+            <td>{$goods.water} barrels</td>
+        </tr>
+        <tr>
+            <td>Ships</td>
+            <td>{noOfShips}</td>
+        </tr>
+
+    </table>
 </div>
