@@ -6,25 +6,13 @@ const tableName = 'tick';
 const defaultTickerSpeed = 1000;
 
 const tickerStore = speed => {
-    const { subscribe, update } = writable(0);
+    const { subscribe, set, update } = writable(0);
 
-    let counter = 0;
     let tickerInterval;
 
     const setTickerInterval = speed => {
-        counter = 0;
-
         tickerInterval = setInterval(() => {
-            update(tick => {
-                if (counter === 10) {
-                    // Save ticker every tenth second to localStorage
-                    counter = 0;
-                }
-
-                return tick + 1;
-            });
-
-            counter++;
+            update(tick => tick + 1);
         }, speed);
     };
 
@@ -33,7 +21,7 @@ const tickerStore = speed => {
     return {
         subscribe,
         setTick: newTick => {
-            update(tick => newTick);
+            set(newTick);
         },
         updateSpeed: speed => {
             clearInterval(tickerInterval);
@@ -54,7 +42,7 @@ getStateFromDb(tableName)
         ticker.setTick(value);
     })
     .catch(err => {
-        ticker.setTick(0);
+        console.log(err);
     })
     .finally(() => {
         ticker.subscribe(value => {

@@ -3,21 +3,21 @@ import { writable } from 'svelte/store';
 const defaultTickerSpeed = 1000;
 
 const tickerSpeedStore = () => {
-    const { subscribe, update } = writable(defaultTickerSpeed);
+    const { subscribe, set, update } = writable(defaultTickerSpeed);
 
     return {
         subscribe,
         pause: () => {
-            update(n => 0);
+            set(0);
         },
         normal: () => {
-            update(n => 1000);
+            set(1000);
         },
         fast: () => {
-            update(n => 300);
+            set(300);
         },
         rapid: () => {
-            update(n => 100);
+            set(100);
         }
     };
 };

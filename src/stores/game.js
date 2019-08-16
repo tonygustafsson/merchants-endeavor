@@ -11,25 +11,23 @@ const initValue = {
 const acceptedRoutes = ['stats', 'properties', 'goods'];
 
 const gameStore = () => {
-    const { subscribe, update } = writable(initValue);
+    const { subscribe, set, update } = writable(initValue);
 
     return {
         subscribe,
         updateAll: data => {
-            update(game => data);
+            set(data);
         },
         setLoading: isLoading => {
             update(game => {
-                game.loading = isLoading;
-                return game;
+                return { ...game, loading: isLoading };
             });
         },
         changeRoute: route => {
             if (!acceptedRoutes.includes(route)) return game;
 
             update(game => {
-                game.route = route;
-                return game;
+                return { ...game, route: route };
             });
         }
     };

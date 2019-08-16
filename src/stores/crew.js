@@ -16,22 +16,18 @@ const crewStore = () => {
     return {
         subscribe,
         updateAll: data => {
-            update(crew => data);
+            set(data);
         },
         addCrewMembers: additionalCrewMembers => {
             update(crew => {
                 if (crew.members + additionalCrewMembers > maxValue) return crew;
-
-                crew.members += additionalCrewMembers;
-                return crew;
+                return { ...crew, members: crew.members + additionalCrewMembers };
             });
         },
         removeCrewMembers: removedCrewMembers => {
             update(crew => {
                 if (crew.members - removedCrewMembers < minValue) return crew;
-
-                crew.members -= removedCrewMembers;
-                return crew;
+                return { ...crew, members: crew.members - removedCrewMembers };
             });
         }
     };

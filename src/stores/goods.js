@@ -20,7 +20,7 @@ const goodsStore = () => {
     return {
         subscribe,
         updateAll: data => {
-            update(goods => data);
+            set(data);
         },
         add: (item, quantity) => {
             update(goods => {
@@ -33,10 +33,10 @@ const goodsStore = () => {
                     }
 
                     merchant.subtractDoubloons(price);
+                    return { ...goods, [item]: goods[item] + quantity };
                 }
 
-                goods[item] = goods[item] + quantity;
-                return goods;
+                return { ...goods };
             });
         },
         remove: (item, quantity) => {
@@ -49,10 +49,10 @@ const goodsStore = () => {
                 if (Object.hasOwnProperty.call(goodsInfo, item)) {
                     let worth = goodsInfo[item].worth;
                     merchant.addDoubloons(worth);
+                    return { ...goods, [item]: goods[item] - quantity };
                 }
 
-                goods[item] -= quantity;
-                return goods;
+                return { ...goods };
             });
         }
     };

@@ -5,43 +5,30 @@ import { getRandomMerchant } from '../utils/merchant';
 const tableName = 'merchant';
 
 const merchantStore = () => {
-    const { subscribe, update } = writable({});
+    const { subscribe, set, update } = writable({});
 
     return {
         subscribe,
         updateAll: data => {
-            update(merchant => data);
+            set(data);
         },
         changeName: newName => {
-            update(merchant => {
-                merchant.name = newName;
-                return merchant;
-            });
+            update(merchant => ({ ...merchant, name: newName }));
         },
         changeGender: newGender => {
-            update(merchant => {
-                merchant.gender = newGender;
-                return merchant;
-            });
+            update(merchant => ({ ...merchant, gender: newGender }));
         },
         changeNationality: newNationality => {
-            update(merchant => {
-                merchant.nationality = newNationality;
-                return merchant;
-            });
+            update(merchant => ({ ...merchant, nationality: newNationality }));
         },
         addDoubloons: doubloons => {
-            update(merchant => {
-                merchant.doubloons += doubloons;
-                return merchant;
-            });
+            update(merchant => ({ ...merchant, doubloons: merchant.doubloons + doubloons }));
         },
         subtractDoubloons: doubloons => {
             update(merchant => {
-                if (merchant.doubloons - doubloons < 0) return merchant;
+                if (merchant.doubloons - doubloons < 0) return { ...merchant };
 
-                merchant.doubloons -= doubloons;
-                return merchant;
+                return { ...merchant, doubloons: merchant.doubloons - doubloons };
             });
         }
     };

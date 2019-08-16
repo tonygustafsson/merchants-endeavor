@@ -18,54 +18,65 @@ const shipsStore = () => {
     return {
         subscribe,
         updateAll: data => {
-            update(ships => ships.concat(data));
+            set(data);
         },
         addShip: newShip => {
             update(ships => {
                 if (ships.length + 1 > maxValue) return ships;
 
-                ships.push(newShip);
+                let newShips = [...ships];
+                newShips.push(newShip);
 
-                return ships;
+                return newShips;
             });
         },
         removeShip: id => {
             update(ships => {
                 if (ships.length - 1 < minValue) return ships;
-                ships = ships.filter(ship => ship.id !== id);
 
-                return ships;
+                let newShips = [...ships];
+                newShips = newShips.filter(ship => ship.id !== id);
+
+                return newShips;
             });
         },
         toggleModal: id => {
             update(ships => {
-                let ship = ships.find(ship => ship.id === id);
+                let newShips = [...ships];
+
+                let ship = newShips.find(ship => ship.id === id);
                 ship.showModal = !ship.showModal;
 
-                return ships;
+                return newShips;
             });
         },
         setName: (id, newName) => {
             update(ships => {
-                let ship = ships.find(ship => ship.id === id);
+                let newShips = [...ships];
+
+                let ship = newShips.find(ship => ship.id === id);
                 ship.name = newName;
 
-                return ships;
+                return newShips;
             });
         },
         sendOnMission: id => {
             update(ships => {
-                let ship = ships.find(ship => ship.id === id);
+                let newShips = [...ships];
+
+                let ship = newShips.find(ship => ship.id === id);
                 ship.onMission = currentTick + missionLength;
 
-                return ships;
+                return newShips;
             });
         },
         checkMissions: () => {
             update(ships => {
-                if (ships.length < 1) return [];
+                if (ships.length < 1) return [...ships];
 
-                ships.map(ship => {
+                let newShips = [...ships];
+
+                newShips.map(ship => {
                     if (ship.onMission !== false && ship.onMission < currentTick) {
                         // Back from mission
                         ship.onMission = false;
@@ -73,7 +84,7 @@ const shipsStore = () => {
                     }
                 });
 
-                return ships;
+                return newShips;
             });
         }
     };
