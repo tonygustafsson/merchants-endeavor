@@ -24,7 +24,7 @@
 
     <p>To start playing, you can edit your profile or just press Play.</p>
 
-    <form on:submit={startPlaying}>
+    <form on:submit|preventDefault={startPlaying}>
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value={$merchant.name} on:change={e => changeName(e.target.value)} />
 
