@@ -10,6 +10,11 @@
 <div class="app-goods">
     <h2>Goods</h2>
 
+    <p>
+        Your total supply of goods. Some of these are needed to send ships on missions, and some are just for trading
+        and making a profit from.
+    </p>
+
     <table>
         <tr>
             <th>Item</th>

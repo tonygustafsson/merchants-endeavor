@@ -31,6 +31,8 @@
 <div class="app-properties">
     <h2>Properties</h2>
 
+    <p>Here you will see a list of things you own, like ships, buildings, corporations and stocks.</p>
+
     <h3>Ships</h3>
 
     <table>

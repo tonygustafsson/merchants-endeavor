@@ -6,6 +6,11 @@
 <div class="page-staff">
     <h2>Staff</h2>
 
+    <p>
+        You need staff to be able to populate ship crew and give them tasks. It's important to keep your staff healthy
+        and happy.
+    </p>
+
     <table>
         <tr>
             <th>Item</th>
