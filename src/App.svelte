@@ -7,6 +7,7 @@
     import Staff from './pages/Staff.svelte';
     import Goods from './pages/Goods.svelte';
     import Time from './components/Time.svelte';
+    import Settings from './components/Settings.svelte';
 
     import Weather from './components/Weather.svelte';
     import Navigation from './components/Navigation.svelte';
@@ -47,6 +48,7 @@
         {#if $game.route !== 'start'}
             <Time />
             <Navigation />
+            <Settings />
         {/if}
     </div>
 

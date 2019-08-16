@@ -1,5 +1,4 @@
 <script>
-    import Settings from '../components/Settings.svelte';
     import { time } from '../stores/time.js';
     import { merchant } from '../stores/merchant';
     import { ships } from '../stores/ships';
@@ -55,6 +54,4 @@
         <strong>Started out:</strong>
         {$time.sinceStart}
     </p>
-
-    <Settings />
 </div>

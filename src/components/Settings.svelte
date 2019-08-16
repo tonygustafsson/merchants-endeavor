@@ -9,6 +9,9 @@
 
 <style>
     .settings-panel {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
         text-align: right;
     }
 
