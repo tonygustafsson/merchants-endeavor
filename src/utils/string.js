@@ -1,1 +1,4 @@
-export const ucFirst = string => string.charAt(0).toUpperCase() + string.slice(1);
+export const ucFirst = string => {
+    if (!string || string === '') return '';
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
