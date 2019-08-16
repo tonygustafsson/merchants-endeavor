@@ -4,6 +4,13 @@ import { getRandomMerchant } from '../utils/merchant';
 
 const tableName = 'merchant';
 
+const initValue = {
+    name: '',
+    gender: '',
+    nationality: '',
+    doubloons: 1000
+};
+
 const merchantStore = () => {
     const { subscribe, set, update } = writable({});
 
@@ -42,15 +49,8 @@ getStateFromDb(tableName)
     })
     .catch(err => {
         const randomMerchant = getRandomMerchant();
-
-        const initValue = {
-            name: '',
-            gender: '',
-            nationality: '',
-            doubloons: 1000
-        };
-
-        merchant.updateAll(Object.assign(initValue, randomMerchant));
+        const newValue = Object.assign(initValue, randomMerchant);
+        merchant.updateAll(newValue);
     })
     .finally(() => {
         merchant.subscribe(value => {

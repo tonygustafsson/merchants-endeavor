@@ -1,7 +1,4 @@
 <script>
-    import { ticker } from './stores/ticker';
-    import { time } from './stores/time';
-    import { merchant } from './stores/merchant';
     import { game } from './stores/game';
 
     import Start from './pages/Start.svelte';
@@ -13,11 +10,12 @@
     import Navigation from './components/Navigation.svelte';
     import Loader from './components/Loader.svelte';
 
-    let merchantLoadedFromStore = false;
+    let gameLoaded = false;
 
-    merchant.subscribe(value => {
-        if (Object.hasOwnProperty.call(value, 'name')) {
-            merchantLoadedFromStore = true;
+    let unsubscribe = game.subscribe(value => {
+        if (value.loaded === true) {
+            gameLoaded = value.loaded;
+            unsubscribe();
         }
     });
 </script>
@@ -50,7 +48,7 @@
     </div>
 
     <div class="container white-panel">
-        {#if merchantLoadedFromStore}
+        {#if gameLoaded}
             {#if $game.route === 'start'}
                 <Start />
             {:else if $game.route === 'properties'}

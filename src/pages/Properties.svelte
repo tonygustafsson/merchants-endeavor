@@ -6,12 +6,7 @@
     import Modal from '../components/Modal.svelte';
     import { ucFirst } from '../utils/string';
 
-    let noOfShips = 0;
     let showBuyModal = false;
-
-    ships.subscribe(value => {
-        noOfShips = value.length;
-    });
 
     const buyShip = shipType => {
         game.setLoading(true);

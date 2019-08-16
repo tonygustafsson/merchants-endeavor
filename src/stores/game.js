@@ -5,7 +5,8 @@ const tableName = 'game';
 
 const initValue = {
     route: 'start',
-    loading: false
+    loading: false,
+    loaded: false
 };
 
 const acceptedRoutes = ['stats', 'properties', 'goods'];
@@ -37,10 +38,12 @@ export const game = gameStore();
 
 getStateFromDb(tableName)
     .then(value => {
-        game.updateAll(value);
+        let newValue = { ...value, loaded: true };
+        game.updateAll(newValue);
     })
     .catch(err => {
-        game.updateAll(initValue);
+        let newValue = { ...initValue, loaded: true };
+        game.updateAll(newValue);
     })
     .finally(() => {
         game.subscribe(value => {
