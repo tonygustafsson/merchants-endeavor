@@ -4,15 +4,13 @@
     import { merchant } from './stores/merchant';
     import { game } from './stores/game';
 
+    import Start from './pages/Start.svelte';
+    import Stats from './pages/Stats.svelte';
+    import Properties from './pages/Properties.svelte';
+    import Goods from './pages/Goods.svelte';
+
+    import Navigation from './components/Navigation.svelte';
     import Loader from './components/Loader.svelte';
-    import Start from './components/Start.svelte';
-    import Merchant from './components/Merchant.svelte';
-    import Time from './components/Time.svelte';
-    import Inventory from './components/Inventory.svelte';
-    import Crew from './components/Crew.svelte';
-    import Ships from './components/Ships.svelte';
-    import Weather from './components/Weather.svelte';
-    import Settings from './components/Settings.svelte';
 
     let merchantLoadedFromStore = false;
 
@@ -43,20 +41,20 @@
 
     <div class="container">
         <h1>Merchant Simulator</h1>
+
+        <Navigation />
     </div>
 
     <div class="container white-panel">
         {#if merchantLoadedFromStore}
             {#if $game.route === 'start'}
                 <Start />
+            {:else if $game.route === 'properties'}
+                <Properties />
+            {:else if $game.route === 'goods'}
+                <Goods />
             {:else}
-                <Time />
-                <Weather />
-                <Merchant />
-                <Inventory />
-                <Crew />
-                <Ships />
-                <Settings />
+                <Stats />
             {/if}
         {:else}
             <h2>Loading data...</h2>
