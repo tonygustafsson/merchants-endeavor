@@ -5,9 +5,19 @@
 </script>
 
 <style>
+    .time {
+        display: inline-block;
+        font-size: 175%;
+        margin: 0.25em 0 0.5em 0;
+    }
+
     ul {
         list-style: none;
         padding: 0;
+        margin: 0;
+        display: inline-block;
+        margin-left: 2em;
+        vertical-align: super;
     }
 
     li {
@@ -17,14 +27,15 @@
 
     a {
         text-decoration: none;
+        color: grey;
     }
 
     a.active {
-        color: red;
+        color: black;
     }
 </style>
 
-<h2>{$time.now}</h2>
+<p class="time">{$time.now}</p>
 
 <ul>
     <li>

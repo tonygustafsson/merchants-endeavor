@@ -1,5 +1,4 @@
 <script>
-    import Time from '../components/Time.svelte';
     import Settings from '../components/Settings.svelte';
     import { time } from '../stores/time.js';
     import { merchant } from '../stores/merchant';
@@ -21,8 +20,6 @@
 </script>
 
 <div class="page-stats">
-    <Time />
-
     <h2>{$merchant.name}</h2>
 
     <p>

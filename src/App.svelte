@@ -6,6 +6,7 @@
     import Properties from './pages/Properties.svelte';
     import Staff from './pages/Staff.svelte';
     import Goods from './pages/Goods.svelte';
+    import Time from './components/Time.svelte';
 
     import Weather from './components/Weather.svelte';
     import Navigation from './components/Navigation.svelte';
@@ -44,6 +45,7 @@
         <h1>Merchant Simulator</h1>
 
         {#if $game.route !== 'start'}
+            <Time />
             <Navigation />
         {/if}
     </div>
