@@ -9,6 +9,7 @@
     import Properties from './pages/Properties.svelte';
     import Goods from './pages/Goods.svelte';
 
+    import Weather from './components/Weather.svelte';
     import Navigation from './components/Navigation.svelte';
     import Loader from './components/Loader.svelte';
 
@@ -38,11 +39,14 @@
 
 <div class="app">
     <Loader />
+    <Weather />
 
     <div class="container">
         <h1>Merchant Simulator</h1>
 
-        <Navigation />
+        {#if $game.route !== 'start'}
+            <Navigation />
+        {/if}
     </div>
 
     <div class="container white-panel">
