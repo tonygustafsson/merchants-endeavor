@@ -2,8 +2,9 @@
     import { game } from './stores/game';
 
     import Start from './pages/Start.svelte';
-    import Stats from './pages/Stats.svelte';
+    import General from './pages/General.svelte';
     import Properties from './pages/Properties.svelte';
+    import Staff from './pages/Staff.svelte';
     import Goods from './pages/Goods.svelte';
 
     import Weather from './components/Weather.svelte';
@@ -53,10 +54,12 @@
                 <Start />
             {:else if $game.route === 'properties'}
                 <Properties />
+            {:else if $game.route === 'staff'}
+                <Staff />
             {:else if $game.route === 'goods'}
                 <Goods />
             {:else}
-                <Stats />
+                <General />
             {/if}
         {:else}
             <h2>Loading data...</h2>

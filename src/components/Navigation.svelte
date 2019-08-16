@@ -26,11 +26,14 @@
 </style>
 
 <ul>
-    <li class:active={currentRoute === 'stats'}>
-        <a href="/stats" on:click|preventDefault={() => game.changeRoute('stats')}>Stats</a>
+    <li class:active={currentRoute === 'general'}>
+        <a href="/general" on:click|preventDefault={() => game.changeRoute('general')}>General</a>
     </li>
     <li class:active={currentRoute === 'properties'}>
         <a href="/properties" on:click|preventDefault={() => game.changeRoute('properties')}>Properties</a>
+    </li>
+    <li class:active={currentRoute === 'staff'}>
+        <a href="/staff" on:click|preventDefault={() => game.changeRoute('staff')}>Staff</a>
     </li>
     <li class:active={currentRoute === 'goods'}>
         <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>Goods</a>

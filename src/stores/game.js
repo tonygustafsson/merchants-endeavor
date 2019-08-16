@@ -9,7 +9,7 @@ const initValue = {
     loaded: false
 };
 
-const acceptedRoutes = ['stats', 'properties', 'goods'];
+const acceptedRoutes = ['general', 'properties', 'staff', 'goods'];
 
 const gameStore = () => {
     const { subscribe, set, update } = writable(initValue);

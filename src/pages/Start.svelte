@@ -15,7 +15,7 @@
     };
 
     const startPlaying = () => {
-        game.changeRoute('stats');
+        game.changeRoute('general');
     };
 </script>
 
