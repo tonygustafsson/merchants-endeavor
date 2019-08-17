@@ -28,6 +28,12 @@
     };
 </script>
 
+<style>
+    .overview tr {
+        cursor: pointer;
+    }
+</style>
+
 <div class="app-properties">
     <h2>Properties</h2>
 
@@ -35,27 +41,19 @@
 
     <h3>Ships</h3>
 
-    <table>
+    <table class="overview">
         <tr>
             <th>Name</th>
             <th>Type</th>
             <th>Health</th>
-            <th>Min/Max Crew</th>
-            <th>Max cannons</th>
-            <th>Max load</th>
             <th>On mission</th>
         </tr>
 
         {#each $ships as ship, i}
-            <tr>
-                <td>
-                    <a href="showship" on:click|preventDefault={() => ships.toggleModal(ship.id)}>⛵ {ship.name}</a>
-                </td>
+            <tr on:click={() => ships.toggleModal(ship.id)}>
+                <td>⛵ {ship.name}</td>
                 <td>{ucFirst(ship.type)}</td>
                 <td>{ship.health}</td>
-                <td>{shipTypes[ship.type].crewMin}/{shipTypes[ship.type].crewMax}</td>
-                <td>{shipTypes[ship.type].cannonsMax}</td>
-                <td>{shipTypes[ship.type].loadCapacity}</td>
                 <td>{ship.onMission ? 'Yes' : 'No'}</td>
             </tr>
         {/each}
@@ -69,10 +67,38 @@
                 <input type="text" value={ship.name} on:change={e => ships.setName(ship.id, e.target.value)} />
                 <button>Save name</button>
 
-                <p>Type: {ship.type}</p>
-                <p>Health: {ship.health}</p>
-                <p>On mission: {ship.onMission ? 'Yes' : 'No'}</p>
+                <table>
+                    <tr>
+                        <td>Type</td>
+                        <td>{ucFirst(ship.type)}</td>
+                    </tr>
+                    <tr>
+                        <td>Health</td>
+                        <td>{ship.health}</td>
+                    </tr>
+                    <tr>
+                        <td>Min crew</td>
+                        <td>{shipTypes[ship.type].crewMin}</td>
+                    </tr>
+                    <tr>
+                        <td>Max crew</td>
+                        <td>{shipTypes[ship.type].crewMax}</td>
+                    </tr>
+                    <tr>
+                        <td>Cannons max</td>
+                        <td>{shipTypes[ship.type].cannonsMax}</td>
+                    </tr>
+                    <tr>
+                        <td>Max load</td>
+                        <td>{shipTypes[ship.type].loadCapacity}</td>
+                    </tr>
+                    <tr>
+                        <td>On mission</td>
+                        <td>{ship.onMission ? 'Yes' : 'No'}</td>
+                    </tr>
+                </table>
 
+                <h3>Actions</h3>
                 <button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>Send on mission</button>
                 <button on:click={() => sellShip(ship)}>Sell ship</button>
             </Modal>
@@ -102,4 +128,11 @@
         </Modal>
     {/if}
 
+    <h3>Corporations</h3>
+
+    <p>You do not control any corporations yet.</p>
+
+    <h3>Stocks</h3>
+
+    <p>You have no stocks or bonds yet.</p>
 </div>
