@@ -28,7 +28,7 @@ const gameStore = () => {
             });
         },
         changeRoute: (page, id = 0) => {
-            if (!acceptedRoutePages.includes(page)) return game;
+            if (!acceptedRoutePages.includes(page)) return { ...game };
 
             update(game => {
                 return {
