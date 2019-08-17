@@ -40,16 +40,6 @@ const shipsStore = () => {
                 return newShips;
             });
         },
-        toggleModal: id => {
-            update(ships => {
-                let newShips = [...ships];
-
-                let ship = newShips.find(ship => ship.id === id);
-                ship.showModal = !ship.showModal;
-
-                return newShips;
-            });
-        },
         setName: (id, newName) => {
             update(ships => {
                 let newShips = [...ships];
