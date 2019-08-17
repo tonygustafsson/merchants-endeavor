@@ -1,10 +1,10 @@
 <script>
     import { game } from '../stores/game';
 
-    let currentRoute = '';
+    let currentRoutePage = '';
 
     game.subscribe(value => {
-        currentRoute = value.route;
+        currentRoutePage = value.route.page;
     });
 </script>
 
@@ -27,16 +27,16 @@
 
 <nav>
     <ul>
-        <li class:active={currentRoute === 'general'}>
+        <li class:active={currentRoutePage === 'general'}>
             <a href="/general" on:click|preventDefault={() => game.changeRoute('general')}>General</a>
         </li>
-        <li class:active={currentRoute === 'properties'}>
+        <li class:active={currentRoutePage === 'properties'}>
             <a href="/properties" on:click|preventDefault={() => game.changeRoute('properties')}>Properties</a>
         </li>
-        <li class:active={currentRoute === 'staff'}>
+        <li class:active={currentRoutePage === 'staff'}>
             <a href="/staff" on:click|preventDefault={() => game.changeRoute('staff')}>Staff</a>
         </li>
-        <li class:active={currentRoute === 'goods'}>
+        <li class:active={currentRoutePage === 'goods'}>
             <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>Goods</a>
         </li>
     </ul>

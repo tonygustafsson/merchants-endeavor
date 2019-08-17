@@ -4,6 +4,7 @@
     import Start from './pages/Start.svelte';
     import General from './pages/General.svelte';
     import Properties from './pages/Properties.svelte';
+    import Ship from './pages/Ship.svelte';
     import Staff from './pages/Staff.svelte';
     import Goods from './pages/Goods.svelte';
     import Time from './components/Time.svelte';
@@ -44,7 +45,7 @@
     <div class="container">
         <h1>Merchant Simulator</h1>
 
-        {#if $game.route !== 'start'}
+        {#if $game.route.page !== 'start'}
             <Time />
             <Weather />
             <Navigation />
@@ -54,13 +55,15 @@
 
     <div class="container white-panel">
         {#if gameLoaded}
-            {#if $game.route === 'start'}
+            {#if $game.route.page === 'start'}
                 <Start />
-            {:else if $game.route === 'properties'}
+            {:else if $game.route.page === 'properties' && $game.route.id !== 0}
+                <Ship />
+            {:else if $game.route.page === 'properties'}
                 <Properties />
-            {:else if $game.route === 'staff'}
+            {:else if $game.route.page === 'staff'}
                 <Staff />
-            {:else if $game.route === 'goods'}
+            {:else if $game.route.page === 'goods'}
                 <Goods />
             {:else}
                 <General />

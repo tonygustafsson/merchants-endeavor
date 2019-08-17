@@ -4,12 +4,15 @@ import { getStateFromDb, saveStateToDb } from '../utils/db';
 const tableName = 'game';
 
 const initValue = {
-    route: 'start',
+    route: {
+        page: 'start',
+        id: 0
+    },
     loading: false,
     loaded: false
 };
 
-const acceptedRoutes = ['general', 'properties', 'staff', 'goods'];
+const acceptedRoutePages = ['general', 'properties', 'staff', 'goods'];
 
 const gameStore = () => {
     const { subscribe, set, update } = writable(initValue);
@@ -24,11 +27,17 @@ const gameStore = () => {
                 return { ...game, loading: isLoading };
             });
         },
-        changeRoute: route => {
-            if (!acceptedRoutes.includes(route)) return game;
+        changeRoute: (page, id = 0) => {
+            if (!acceptedRoutePages.includes(page)) return game;
 
             update(game => {
-                return { ...game, route: route };
+                return {
+                    ...game,
+                    route: {
+                        page: page,
+                        id: id
+                    }
+                };
             });
         }
     };

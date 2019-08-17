@@ -61,8 +61,7 @@ export const getRandomShip = shipType => {
                 cannons: 0,
                 food: 0,
                 water: 0,
-                onMission: false,
-                showModal: false
+                onMission: false
             };
 
             return ship;
