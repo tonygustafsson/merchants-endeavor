@@ -97,7 +97,15 @@ getStateFromDb(tableName)
         });
     });
 
+let checkMissionsCounter = 0;
+
 ticker.subscribe(value => {
-    currentTick = value;
-    ships.checkMissions();
+    checkMissionsCounter++;
+
+    if (checkMissionsCounter >= 20) {
+        // Dont' check to often
+        currentTick = value;
+        ships.checkMissions();
+        checkMissionsCounter = 0;
+    }
 });
