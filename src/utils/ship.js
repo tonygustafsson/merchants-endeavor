@@ -57,6 +57,10 @@ export const getRandomShip = shipType => {
                 name: shipName,
                 type: shipType,
                 health: 100,
+                crewMembers: 0,
+                cannons: 0,
+                food: 0,
+                water: 0,
                 onMission: false,
                 showModal: false
             };
