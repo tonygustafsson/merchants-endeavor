@@ -39,6 +39,12 @@ const gameStore = () => {
                     }
                 };
             });
+
+            if (id !== 0) {
+                window.history.pushState({}, page, `/${page}/${id}`);
+            } else {
+                window.history.pushState({}, page, `/${page}`);
+            }
         }
     };
 };
