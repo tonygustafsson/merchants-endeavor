@@ -4,6 +4,7 @@
     import { ships } from '../stores/ships';
     import { staff } from '../stores/staff';
     import { goods } from '../stores/goods';
+    import { game } from '../stores/game';
     import { ucFirst } from '../utils/string';
 
     let noOfShips = 0;
@@ -51,27 +52,39 @@
     <table>
         <tr>
             <td>Doubloons</td>
-            <td>{$merchant.doubloons} dbl</td>
+            <td>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$merchant.doubloons} dbl</a>
+            </td>
         </tr>
         <tr>
             <td>Ships</td>
-            <td>{noOfShips} ships</td>
+            <td>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('properties')}>{noOfShips} ships</a>
+            </td>
         </tr>
         <tr>
             <td>Cannons</td>
-            <td>{$goods.cannons} pcs</td>
+            <td>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$goods.cannons} pcs</a>
+            </td>
         </tr>
         <tr>
             <td>Staff</td>
-            <td>{noOfStaff} members</td>
+            <td>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('staff')}>{noOfStaff} members</a>
+            </td>
         </tr>
         <tr>
             <td>Food</td>
-            <td>{$goods.food} cartons</td>
+            <td>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$goods.food} cartons</a>
+            </td>
         </tr>
         <tr>
             <td>Water</td>
-            <td>{$goods.water} barrels</td>
+            <td>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$goods.water} barrels</a>
+            </td>
         </tr>
     </table>
 </div>
