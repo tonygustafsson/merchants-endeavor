@@ -16,6 +16,8 @@
     };
 </script>
 
+<svelte:options immutable={false} />
+
 <div class="app-ship">
     <p>
         <a href="/properties" on:click|preventDefault={() => game.changeRoute('properties')}>&lt; Back to Properties</a>
