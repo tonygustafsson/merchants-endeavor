@@ -1,6 +1,7 @@
 <script>
     import { staff } from '../stores/staff.js';
     import { goods } from '../stores/goods.js';
+    import { shipTotals } from '../stores/ships.js';
 </script>
 
 <div class="page-staff">
@@ -17,8 +18,12 @@
             <th>Quantity</th>
         </tr>
         <tr>
-            <td>Staff</td>
-            <td>{$staff.members}</td>
+            <td>Staff total</td>
+            <td>{$staff.members + $shipTotals.crewMembers}</td>
+        </tr>
+        <tr>
+            <td>Staff on board ships</td>
+            <td>{$shipTotals.crewMembers}</td>
         </tr>
         <tr>
             <td>Health</td>
@@ -31,7 +36,7 @@
     </table>
 
     <div>
-        <button on:click={() => staff.addStaff(1)}>Add staff</button>
-        <button on:click={() => staff.removeStaff(1)}>Fire staff</button>
+        <button on:click={() => staff.add(1)}>Add staff</button>
+        <button on:click={() => staff.remove(1)}>Fire staff</button>
     </div>
 </div>

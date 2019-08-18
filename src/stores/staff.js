@@ -18,13 +18,13 @@ const staffStore = () => {
         updateAll: data => {
             set(data);
         },
-        addStaff: additionalStaff => {
+        add: additionalStaff => {
             update(staff => {
                 if (staff.members + additionalStaff > maxValue) return staff;
                 return { ...staff, members: staff.members + additionalStaff };
             });
         },
-        removeStaff: removedStaff => {
+        remove: removedStaff => {
             update(staff => {
                 if (staff.members - removedStaff < minValue) return staff;
                 return { ...staff, members: staff.members - removedStaff };

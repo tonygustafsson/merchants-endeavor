@@ -51,8 +51,8 @@ const shipsStore = () => {
                 return newShips;
             });
         },
-        changeGoodsOnboard: (id, item, value) => {
-            const approvedItems = ['food', 'water', 'cannons'];
+        changeItemsOnboard: (id, item, value) => {
+            const approvedItems = ['crewMembers', 'food', 'water', 'cannons'];
             if (!approvedItems.includes(item)) return;
 
             update(ships => {

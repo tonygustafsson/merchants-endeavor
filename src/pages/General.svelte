@@ -73,7 +73,9 @@
         <tr>
             <td>Staff</td>
             <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('staff')}>{noOfStaff} members</a>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('staff')}>
+                    {$shipTotals.crewMembers + noOfStaff} members
+                </a>
             </td>
         </tr>
         <tr>

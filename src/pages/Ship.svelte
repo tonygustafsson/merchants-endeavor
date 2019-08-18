@@ -2,11 +2,13 @@
     import { ships } from '../stores/ships.js';
     import { merchant } from '../stores/merchant.js';
     import { goods } from '../stores/goods.js';
+    import { staff } from '../stores/staff.js';
     import { shipTypes, getRandomShip } from '../utils/ship';
     import { game } from '../stores/game';
     import { ucFirst } from '../utils/string';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
+    $: maxCrewMembers = ship ? ship.crewMembers + $staff.members : 0;
     $: maxCannons = ship ? ship.cannons + $goods.cannons : 0;
     $: maxFood = ship ? ship.food + $goods.food : 0;
     $: maxWater = ship ? ship.water + $goods.water : 0;
@@ -33,7 +35,21 @@
             goods.add(item, ship[item] - value);
         }
 
-        ships.changeGoodsOnboard(ship.id, item, value);
+        ships.changeItemsOnboard(ship.id, item, value);
+    };
+
+    const changeCrewMembersOnboard = value => {
+        value = parseInt(value, 10);
+
+        if (value > ship.crewMembers) {
+            // Add more crew members to ship
+            staff.remove(value - ship.crewMembers);
+        } else {
+            // Remove crew members from ship
+            staff.add(ship.crewMembers - value);
+        }
+
+        ships.changeItemsOnboard(ship.id, 'crewMembers', value);
     };
 </script>
 
@@ -101,6 +117,18 @@
         <div>
             <input type="text" value={ship.name} on:change={e => ships.setName(ship.id, e.target.value)} />
             <button>Save name</button>
+        </div>
+
+        <div>
+            <label for="crewMembers">Crew members onboard</label>
+            <input
+                on:input={e => changeCrewMembersOnboard(e.target.value)}
+                type="range"
+                name="crewMembers"
+                value={ship.crewMembers}
+                min="0"
+                max={maxCrewMembers} />
+            {ship.crewMembers} ({$staff.members} available)
         </div>
 
         <div>
