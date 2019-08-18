@@ -53,6 +53,13 @@
     };
 </script>
 
+<style>
+    input[type='range'] {
+        width: 40%;
+        margin: 1em;
+    }
+</style>
+
 <div class="app-ship">
     <p>
         <a href="/properties" on:click|preventDefault={() => game.changeRoute('properties')}>&lt; Back to Properties</a>
@@ -100,11 +107,19 @@
 
         <div>
             <input type="text" value={ship.name} on:change={e => ships.setName(ship.id, e.target.value)} />
-            <button>Save name</button>
+            <button>Change name</button>
         </div>
 
+        <button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>Send on mission</button>
+        <button on:click={() => sellShip(ship)}>Sell the ship</button>
+
+        <h3>Rearrange ship contents</h3>
+
         <div>
-            <label for="crewMembers">Crew members onboard</label>
+            <label for="crewMembers">
+                Crew members onboard
+                <strong>({ship.crewMembers} onboard)</strong>
+            </label>
             <input
                 on:input={e => changeCrewMembersOnboard(e.target.value)}
                 type="range"
@@ -112,11 +127,14 @@
                 value={ship.crewMembers}
                 min="0"
                 max={maxCrewMembers} />
-            {ship.crewMembers} ({$staff.members} available)
+            {$staff.members} more available
         </div>
 
         <div>
-            <label for="cannons">Cannons onboard</label>
+            <label for="cannons">
+                Cannons
+                <strong>({ship.cannons} onboard)</strong>
+            </label>
             <input
                 on:input={e => changeGoodsOnboard('cannons', e.target.value)}
                 type="range"
@@ -124,11 +142,14 @@
                 value={ship.cannons}
                 min="0"
                 max={maxCannons} />
-            {ship.cannons} ({$goods.cannons} available)
+            {$goods.cannons} more available
         </div>
 
         <div>
-            <label for="food">Food onboard</label>
+            <label for="food">
+                Food
+                <strong>({ship.food} onboard)</strong>
+            </label>
             <input
                 on:input={e => changeGoodsOnboard('food', e.target.value)}
                 type="range"
@@ -136,11 +157,14 @@
                 value={ship.food}
                 min="0"
                 max={maxFood} />
-            {ship.food} ({$goods.food} available)
+            {$goods.food} more available
         </div>
 
         <div>
-            <label for="water">Water onboard</label>
+            <label for="water">
+                Water
+                <strong>({ship.water} onboard)</strong>
+            </label>
             <input
                 on:input={e => changeGoodsOnboard('water', e.target.value)}
                 type="range"
@@ -148,11 +172,8 @@
                 value={ship.water}
                 min="0"
                 max={maxWater} />
-            {ship.water} ({$goods.water} available)
+            {$goods.water} more available
         </div>
-
-        <button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>Send on mission</button>
-        <button on:click={() => sellShip(ship)}>Sell ship</button>
     {:else}
         <p>Ship not found.</p>
     {/if}
