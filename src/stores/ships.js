@@ -51,6 +51,26 @@ const shipsStore = () => {
                 return newShips;
             });
         },
+        changeFoodOnboard: (id, value) => {
+            update(ships => {
+                let newShips = cloneDeep(ships);
+
+                let ship = newShips.find(ship => ship.id === id);
+                ship.food = value;
+
+                return newShips;
+            });
+        },
+        changeWaterOnboard: (id, value) => {
+            update(ships => {
+                let newShips = cloneDeep(ships);
+
+                let ship = newShips.find(ship => ship.id === id);
+                ship.water = value;
+
+                return newShips;
+            });
+        },
         sendOnMission: id => {
             update(ships => {
                 let newShips = cloneDeep(ships);
