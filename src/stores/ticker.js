@@ -16,8 +16,6 @@ const tickerStore = speed => {
         }, speed);
     };
 
-    setTickerInterval(speed);
-
     return {
         subscribe,
         setTick: newTick => {
