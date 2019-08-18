@@ -51,22 +51,15 @@ const shipsStore = () => {
                 return newShips;
             });
         },
-        changeFoodOnboard: (id, value) => {
+        changeGoodsOnboard: (id, item, value) => {
+            const approvedItems = ['food', 'water', 'cannons'];
+            if (!approvedItems.includes(item)) return;
+
             update(ships => {
                 let newShips = cloneDeep(ships);
 
                 let ship = newShips.find(ship => ship.id === id);
-                ship.food = value;
-
-                return newShips;
-            });
-        },
-        changeWaterOnboard: (id, value) => {
-            update(ships => {
-                let newShips = cloneDeep(ships);
-
-                let ship = newShips.find(ship => ship.id === id);
-                ship.water = value;
+                ship[item] = value;
 
                 return newShips;
             });

@@ -7,6 +7,7 @@
     import { ucFirst } from '../utils/string';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
+    $: maxCannons = ship ? ship.cannons + $goods.cannons : 0;
     $: maxFood = ship ? ship.food + $goods.food : 0;
     $: maxWater = ship ? ship.water + $goods.water : 0;
 
@@ -18,32 +19,21 @@
         game.changeRoute('properties');
     };
 
-    const changeFoodOnboard = value => {
+    const changeGoodsOnboard = (item, value) => {
+        const approvedItems = ['food', 'water', 'cannons'];
+        if (!approvedItems.includes(item)) return;
+
         value = parseInt(value, 10);
 
-        if (value > ship.food) {
-            // Add more food to ship
-            goods.remove('food', value - ship.food);
+        if (value > ship[item]) {
+            // Add more of the item to ship
+            goods.remove(item, value - ship[item]);
         } else {
-            // Remove food from
-            goods.add('food', ship.food - value);
+            // Remove the item from ship
+            goods.add(item, ship[item] - value);
         }
 
-        ships.changeFoodOnboard(ship.id, value);
-    };
-
-    const changeWaterOnboard = value => {
-        value = parseInt(value, 10);
-
-        if (value > ship.water) {
-            // Add more water to ship
-            goods.remove('water', value - ship.water);
-        } else {
-            // Remove water from
-            goods.add('water', ship.water - value);
-        }
-
-        ships.changeWaterOnboard(ship.id, value);
+        ships.changeGoodsOnboard(ship.id, item, value);
     };
 </script>
 
@@ -114,9 +104,21 @@
         </div>
 
         <div>
+            <label for="cannons">Cannons onboard</label>
+            <input
+                on:input={e => changeGoodsOnboard('cannons', e.target.value)}
+                type="range"
+                name="cannons"
+                value={ship.cannons}
+                min="0"
+                max={maxCannons} />
+            {ship.cannons} ({$goods.cannons} available)
+        </div>
+
+        <div>
             <label for="food">Food onboard</label>
             <input
-                on:change={e => changeFoodOnboard(e.target.value)}
+                on:input={e => changeGoodsOnboard('food', e.target.value)}
                 type="range"
                 name="food"
                 value={ship.food}
@@ -128,7 +130,7 @@
         <div>
             <label for="water">Water onboard</label>
             <input
-                on:change={e => changeWaterOnboard(e.target.value)}
+                on:input={e => changeGoodsOnboard('water', e.target.value)}
                 type="range"
                 name="water"
                 value={ship.water}
