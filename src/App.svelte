@@ -36,6 +36,7 @@
     h1 {
         text-shadow: 0px 0 20px #fff;
         margin: 0;
+        cursor: pointer;
     }
 </style>
 
@@ -43,7 +44,7 @@
     <Loader />
 
     <div class="container">
-        <h1>Merchant Simulator</h1>
+        <h1 on:click={() => game.changeRoute('general')}>Merchant Simulator</h1>
 
         {#if $game.route.page !== 'start'}
             <Time />
