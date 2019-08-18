@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import cloneDeep from 'lodash-es/cloneDeep';
 import { ticker } from './ticker';
 import { goods } from './goods';
 import { merchant } from './merchant';
@@ -22,9 +23,9 @@ const shipsStore = () => {
         },
         addShip: newShip => {
             update(ships => {
-                if (ships.length + 1 > maxValue) return ships;
+                if (ships.length + 1 > maxValue) return cloneDeep(ships);
 
-                let newShips = [...ships];
+                let newShips = cloneDeep(ships);
                 newShips.push(newShip);
 
                 return newShips;
@@ -32,9 +33,9 @@ const shipsStore = () => {
         },
         removeShip: id => {
             update(ships => {
-                if (ships.length - 1 < minValue) return ships;
+                if (ships.length - 1 < minValue) return cloneDeep(ships);
 
-                let newShips = [...ships];
+                let newShips = cloneDeep(ships);
                 newShips = newShips.filter(ship => ship.id !== id);
 
                 return newShips;
@@ -42,7 +43,7 @@ const shipsStore = () => {
         },
         setName: (id, newName) => {
             update(ships => {
-                let newShips = [...ships];
+                let newShips = cloneDeep(ships);
 
                 let ship = newShips.find(ship => ship.id === id);
                 ship.name = newName;
@@ -52,7 +53,7 @@ const shipsStore = () => {
         },
         sendOnMission: id => {
             update(ships => {
-                let newShips = [...ships];
+                let newShips = cloneDeep(ships);
 
                 let ship = newShips.find(ship => ship.id === id);
                 ship.onMission = currentTick + missionLength;
@@ -62,9 +63,9 @@ const shipsStore = () => {
         },
         checkMissions: () => {
             update(ships => {
-                if (ships.length < 1) return [...ships];
+                if (ships.length < 1) return cloneDeep(ships);
 
-                let newShips = [...ships];
+                let newShips = cloneDeep(ships);
 
                 newShips.map(ship => {
                     if (ship.onMission !== false && ship.onMission < currentTick) {
