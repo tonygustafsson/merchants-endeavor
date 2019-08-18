@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { ticker } from './ticker';
 import { goods } from './goods';
@@ -95,6 +95,20 @@ const shipsStore = () => {
 };
 
 export const ships = shipsStore();
+
+export const shipTotals = derived(ships, $ships => {
+    return {
+        crewMembers: $ships.reduce((sum, ship) => (sum += ship.crewMembers), 0),
+        cannons: $ships.reduce((sum, ship) => (sum += ship.cannons), 0),
+        doubloons: $ships.reduce((sum, ship) => (sum += ship.doubloons), 0),
+        food: $ships.reduce((sum, ship) => (sum += ship.food), 0),
+        water: $ships.reduce((sum, ship) => (sum += ship.water), 0),
+        spices: 0,
+        porcelain: 0,
+        tobacco: 0,
+        rum: 0
+    };
+});
 
 getStateFromDb(tableName)
     .then(value => {

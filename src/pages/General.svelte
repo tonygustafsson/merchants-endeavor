@@ -1,7 +1,7 @@
 <script>
     import { time } from '../stores/time.js';
     import { merchant } from '../stores/merchant';
-    import { ships } from '../stores/ships';
+    import { ships, shipTotals } from '../stores/ships.js';
     import { staff } from '../stores/staff';
     import { goods } from '../stores/goods';
     import { game } from '../stores/game';
@@ -65,7 +65,9 @@
         <tr>
             <td>Cannons</td>
             <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$goods.cannons} pcs</a>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>
+                    {$shipTotals.cannons + $goods.cannons} pcs
+                </a>
             </td>
         </tr>
         <tr>
@@ -77,13 +79,17 @@
         <tr>
             <td>Food</td>
             <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$goods.food} cartons</a>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>
+                    {$shipTotals.food + $goods.food} cartons
+                </a>
             </td>
         </tr>
         <tr>
             <td>Water</td>
             <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$goods.water} barrels</a>
+                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>
+                    {$shipTotals.water + $goods.water} barrels
+                </a>
             </td>
         </tr>
     </table>
