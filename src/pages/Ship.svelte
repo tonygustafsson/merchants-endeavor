@@ -68,30 +68,18 @@
             </tr>
             <tr>
                 <td>Crew members</td>
-                <td>{ship.crewMembers}</td>
+                <td>{ship.crewMembers} (Min: {shipTypes[ship.type].crewMin} Max: {shipTypes[ship.type].crewMax})</td>
             </tr>
             <tr>
-                <td>Minimum crew</td>
-                <td>{shipTypes[ship.type].crewMin}</td>
+                <td>Cannons</td>
+                <td>{ship.cannons} / {shipTypes[ship.type].cannonsMax}</td>
             </tr>
             <tr>
-                <td>Maximum crew</td>
-                <td>{shipTypes[ship.type].crewMax}</td>
-            </tr>
-            <tr>
-                <td>Cannons onboard</td>
-                <td>{ship.cannons}</td>
-            </tr>
-            <tr>
-                <td>Maximum Cannons</td>
-                <td>{shipTypes[ship.type].cannonsMax}</td>
-            </tr>
-            <tr>
-                <td>Food onboard</td>
+                <td>Food</td>
                 <td>{ship.food} cartons</td>
             </tr>
             <tr>
-                <td>Water onboard</td>
+                <td>Water</td>
                 <td>{ship.water} barrels</td>
             </tr>
             <tr>
@@ -99,12 +87,8 @@
                 <td>{ship.health}%</td>
             </tr>
             <tr>
-                <td>Current load</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>Maximum load</td>
-                <td>{shipTypes[ship.type].loadCapacity}</td>
+                <td>Load</td>
+                <td>{ship.food + ship.water} / {shipTypes[ship.type].loadCapacity}</td>
             </tr>
             <tr>
                 <td>On mission</td>

@@ -46,6 +46,7 @@
             <th>Name</th>
             <th>Type</th>
             <th>Health</th>
+            <th>Load</th>
             <th>On mission</th>
         </tr>
 
@@ -53,7 +54,8 @@
             <tr on:click={() => game.changeRoute('properties', ship.id)}>
                 <td>⛵ {ship.name}</td>
                 <td>{ucFirst(ship.type)}</td>
-                <td>{ship.health}</td>
+                <td>{ship.health}%</td>
+                <td>{ship.food + ship.water} / {shipTypes[ship.type].loadCapacity}</td>
                 <td>{ship.onMission ? 'Yes' : 'No'}</td>
             </tr>
         {/each}
