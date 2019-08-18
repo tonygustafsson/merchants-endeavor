@@ -56,10 +56,10 @@
                         <td>
                             <button
                                 disabled={goodsInfo[item].price > $merchant.doubloons}
-                                on:click={() => goods.add(item, 1)}>
+                                on:click={() => goods.buy(item, 1)}>
                                 +
                             </button>
-                            <button disabled={$goods[item] <= 0} on:click={() => goods.remove(item, 1)}>-</button>
+                            <button disabled={$goods[item] <= 0} on:click={() => goods.sell(item, 1)}>-</button>
                         </td>
                     </tr>
                 {/each}

@@ -24,6 +24,16 @@ const goodsStore = () => {
         },
         add: (item, quantity) => {
             update(goods => {
+                return { ...goods, [item]: goods[item] + quantity };
+            });
+        },
+        remove: (item, quantity) => {
+            update(goods => {
+                return { ...goods, [item]: goods[item] - quantity };
+            });
+        },
+        buy: (item, quantity) => {
+            update(goods => {
                 if (Object.hasOwnProperty.call(goodsInfo, item)) {
                     let price = goodsInfo[item].price;
 
@@ -39,7 +49,7 @@ const goodsStore = () => {
                 return { ...goods };
             });
         },
-        remove: (item, quantity) => {
+        sell: (item, quantity) => {
             update(goods => {
                 if (quantity > goods[item]) {
                     return goods;
