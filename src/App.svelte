@@ -31,7 +31,7 @@
         padding: 1rem;
     }
     .white-panel {
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.9);
     }
     h1 {
         text-shadow: 0px 0 20px #fff;

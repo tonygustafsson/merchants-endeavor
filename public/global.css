@@ -97,34 +97,6 @@ h3 {
     font-size: 170%;
 }
 
-table {
-    width: 100%;
-    background: #d8dbde;
-    margin: 1em 0;
-}
-
-tr {
-    padding: 0.25em 1em;
-}
-
-th {
-    text-align: left;
-}
-
-tr:nth-child(2n + 1) {
-    background: #fcfcfc;
-}
-
-th,
-td {
-    padding: 0.5em;
-}
-
-th:last-child,
-td:last-child {
-    text-align: right;
-}
-
 p {
     font-size: 18px;
 }

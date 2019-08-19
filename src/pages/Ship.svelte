@@ -6,6 +6,7 @@
     import { shipTypes, getRandomShip } from '../utils/ship';
     import { game } from '../stores/game';
     import { ucFirst } from '../utils/string';
+    import Table from '../components/Table.svelte';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
     $: maxCrewMembers = ship ? ship.crewMembers + $staff.members : 0;
@@ -68,7 +69,11 @@
     {#if ship}
         <h2>Ship: {ship.name}</h2>
 
-        <table>
+        <Table>
+            <tr>
+                <th>Ship quality</th>
+                <th>Value</th>
+            </tr>
             <tr>
                 <td>Type</td>
                 <td>{ucFirst(ship.type)}</td>
@@ -101,7 +106,7 @@
                 <td>On mission</td>
                 <td>{ship.onMission ? 'Yes' : 'No'}</td>
             </tr>
-        </table>
+        </Table>
 
         <h3>Actions</h3>
 

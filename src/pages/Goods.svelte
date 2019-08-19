@@ -3,6 +3,7 @@
     import { ships, shipTotals } from '../stores/ships.js';
     import { merchant } from '../stores/merchant.js';
     import Modal from '../components/Modal.svelte';
+    import Table from '../components/Table.svelte';
     import { goodsInfo } from '../utils/goods';
 
     let showModal = false;
@@ -16,7 +17,7 @@
         and making a profit from.
     </p>
 
-    <table>
+    <Table>
         <tr>
             <th>Item</th>
             <th>On board</th>
@@ -29,7 +30,7 @@
                 <td>{$goods[item] + $shipTotals[item]} {goodsInfo[item].suffix}</td>
             </tr>
         {/each}
-    </table>
+    </Table>
 
     <div>
         <button on:click={() => (showModal = true)}>Buy and sell goods</button>
@@ -41,7 +42,7 @@
 
             <p>Doubloons: {$merchant.doubloons}</p>
 
-            <table>
+            <Table dynamicWidth={true}>
                 <tr>
                     <th>Item</th>
                     <th>Quantity</th>
@@ -66,7 +67,7 @@
                         </td>
                     </tr>
                 {/each}
-            </table>
+            </Table>
 
         </Modal>
     {/if}

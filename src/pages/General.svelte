@@ -6,6 +6,7 @@
     import { goods } from '../stores/goods';
     import { game } from '../stores/game';
     import { ucFirst } from '../utils/string';
+    import Table from '../components/Table.svelte';
 
     let noOfShips = 0;
     let noOfStaff = 0;
@@ -18,15 +19,6 @@
         noOfShips = value.length;
     });
 </script>
-
-<style>
-    td:first-child {
-        width: 25%;
-    }
-    td:last-child {
-        text-align: left;
-    }
-</style>
 
 <div class="page-stats">
     <h2>General</h2>
@@ -49,7 +41,11 @@
 
     <h3>Possessions</h3>
 
-    <table>
+    <Table>
+        <tr>
+            <th>Item</th>
+            <th>Value</th>
+        </tr>
         <tr>
             <td>Doubloons</td>
             <td>
@@ -94,5 +90,5 @@
                 </a>
             </td>
         </tr>
-    </table>
+    </Table>
 </div>

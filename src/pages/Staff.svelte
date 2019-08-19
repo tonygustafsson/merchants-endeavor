@@ -2,6 +2,7 @@
     import { staff } from '../stores/staff.js';
     import { goods } from '../stores/goods.js';
     import { shipTotals } from '../stores/ships.js';
+    import Table from '../components/Table.svelte';
 </script>
 
 <div class="page-staff">
@@ -12,7 +13,7 @@
         and happy.
     </p>
 
-    <table>
+    <Table>
         <tr>
             <th>Item</th>
             <th>Quantity</th>
@@ -33,7 +34,7 @@
             <td>Mood</td>
             <td>{$staff.mood}%</td>
         </tr>
-    </table>
+    </Table>
 
     <div>
         <button on:click={() => staff.add(1)}>Add staff</button>

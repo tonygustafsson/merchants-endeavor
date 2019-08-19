@@ -4,6 +4,7 @@
     import { shipTypes, getRandomShip } from '../utils/ship';
     import { game } from '../stores/game';
     import Modal from '../components/Modal.svelte';
+    import Table from '../components/Table.svelte';
     import { ucFirst } from '../utils/string';
 
     let showBuyModal = false;
@@ -28,12 +29,6 @@
     };
 </script>
 
-<style>
-    .overview tr {
-        cursor: pointer;
-    }
-</style>
-
 <div class="app-properties">
     <h2>Properties</h2>
 
@@ -41,7 +36,7 @@
 
     <h3>Ships</h3>
 
-    <table class="overview">
+    <Table class="ship-table">
         <tr>
             <th>Name</th>
             <th>Type</th>
@@ -51,7 +46,7 @@
         </tr>
 
         {#each $ships as ship, i}
-            <tr on:click={() => game.changeRoute('properties', ship.id)}>
+            <tr style="cursor: pointer" on:click={() => game.changeRoute('properties', ship.id)}>
                 <td>⛵ {ship.name}</td>
                 <td>{ucFirst(ship.type)}</td>
                 <td>{ship.health}%</td>
@@ -59,7 +54,7 @@
                 <td>{ship.onMission ? 'Yes' : 'No'}</td>
             </tr>
         {/each}
-    </table>
+    </Table>
 
     <button on:click={() => (showBuyModal = true)}>Buy ships</button>
 
