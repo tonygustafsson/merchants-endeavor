@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { getRouteFromPath } from '../utils/url';
 
 const tableName = 'game';
 
@@ -27,7 +28,7 @@ const gameStore = () => {
                 return { ...game, loading: isLoading };
             });
         },
-        changeRoute: (page, id = 0) => {
+        changeRoute: (page, id = 0, pushState = true) => {
             if (!acceptedRoutePages.includes(page)) return { ...game };
 
             update(game => {
@@ -40,6 +41,8 @@ const gameStore = () => {
                 };
             });
 
+            if (!pushState) return;
+
             if (id !== 0) {
                 window.history.pushState({}, page, `/${page}/${id}`);
             } else {
@@ -51,9 +54,25 @@ const gameStore = () => {
 
 export const game = gameStore();
 
+window.addEventListener('popstate', () => {
+    // Listen for changed URL (back/forward in browser) and change route if needed
+    const routeFromUrl = getRouteFromPath();
+    game.changeRoute(routeFromUrl.page, routeFromUrl.id, false);
+});
+
 getStateFromDb(tableName)
     .then(value => {
+        // Successfully got game state from persistant store
         let newValue = { ...value, loaded: true };
+
+        const routeFromUrl = getRouteFromPath();
+
+        if (value.route.page !== routeFromUrl.page || value.route.id !== routeFromUrl.id) {
+            // If the URL doesn't match current route, change route (direct opening a link)
+            value.route.page = routeFromUrl.page;
+            value.route.id = routeFromUrl.id;
+        }
+
         game.updateAll(newValue);
     })
     .catch(err => {
