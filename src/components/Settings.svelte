@@ -1,5 +1,6 @@
 <script>
     import { clearDatabase } from '../utils/db';
+    import Button from '../components/Button.svelte';
 
     const forgetEverything = () => {
         clearDatabase();
@@ -14,12 +15,8 @@
         bottom: 10px;
         text-align: right;
     }
-
-    button {
-        background-color: pink;
-    }
 </style>
 
 <div class="settings-panel">
-    <button on:click={forgetEverything}>Forget everything</button>
+    <Button on:click={forgetEverything}>Forget everything</Button>
 </div>

@@ -5,6 +5,8 @@
     import { game } from '../stores/game';
     import Modal from '../components/Modal.svelte';
     import Table from '../components/Table.svelte';
+    import Button from '../components/Button.svelte';
+
     import { ucFirst } from '../utils/string';
 
     let showBuyModal = false;
@@ -56,26 +58,34 @@
         {/each}
     </Table>
 
-    <button on:click={() => (showBuyModal = true)}>Buy ships</button>
+    <Button on:click={() => (showBuyModal = true)}>Buy ships</Button>
 
     {#if showBuyModal}
         <Modal on:close={() => (showBuyModal = false)}>
             <h3>Buy ships</h3>
 
-            <button disabled={$merchant.doubloons < shipTypes.brig.price} on:click={() => buyShip('brig')}>
-                Buy brig ({shipTypes.brig.price} dbl)
-            </button>
-            <button
-                disabled={$merchant.doubloons < shipTypes.merchantman.price}
-                on:click={() => buyShip('merchantman')}>
-                Buy merchantman ({shipTypes.merchantman.price} dbl)
-            </button>
-            <button disabled={$merchant.doubloons < shipTypes.galleon.price} on:click={() => buyShip('galleon')}>
-                Buy galleon ({shipTypes.galleon.price} dbl)
-            </button>
-            <button disabled={$merchant.doubloons < shipTypes.frigate.price} on:click={() => buyShip('frigate')}>
-                Buy frigate ({shipTypes.frigate.price} dbl)
-            </button>
+            <div>
+                <Button disabled={$merchant.doubloons < shipTypes.brig.price} on:click={() => buyShip('brig')}>
+                    Buy brig ({shipTypes.brig.price} dbl)
+                </Button>
+            </div>
+            <div>
+                <Button
+                    disabled={$merchant.doubloons < shipTypes.merchantman.price}
+                    on:click={() => buyShip('merchantman')}>
+                    Buy merchantman ({shipTypes.merchantman.price} dbl)
+                </Button>
+            </div>
+            <div>
+                <Button disabled={$merchant.doubloons < shipTypes.galleon.price} on:click={() => buyShip('galleon')}>
+                    Buy galleon ({shipTypes.galleon.price} dbl)
+                </Button>
+            </div>
+            <div>
+                <Button disabled={$merchant.doubloons < shipTypes.frigate.price} on:click={() => buyShip('frigate')}>
+                    Buy frigate ({shipTypes.frigate.price} dbl)
+                </Button>
+            </div>
         </Modal>
     {/if}
 

@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import Button from '../components/Button.svelte';
 
     const dispatch = createEventDispatcher();
 </script>
@@ -40,5 +41,5 @@
     <slot />
     <hr />
 
-    <button on:click={() => dispatch('close')}>Close</button>
+    <Button on:click={() => dispatch('close')}>Close</Button>
 </div>

@@ -4,6 +4,7 @@
     import { merchant } from '../stores/merchant.js';
     import Modal from '../components/Modal.svelte';
     import Table from '../components/Table.svelte';
+    import Button from '../components/Button.svelte';
     import { goodsInfo } from '../utils/goods';
 
     let showModal = false;
@@ -33,7 +34,7 @@
     </Table>
 
     <div>
-        <button on:click={() => (showModal = true)}>Buy and sell goods</button>
+        <Button on:click={() => (showModal = true)}>Buy and sell goods</Button>
     </div>
 
     {#if showModal}
@@ -58,12 +59,12 @@
                         <td>{goodsInfo[item].price}</td>
                         <td>{goodsInfo[item].worth}</td>
                         <td>
-                            <button
+                            <Button
                                 disabled={goodsInfo[item].price > $merchant.doubloons}
                                 on:click={() => goods.buy(item, 1)}>
                                 +
-                            </button>
-                            <button disabled={$goods[item] <= 0} on:click={() => goods.sell(item, 1)}>-</button>
+                            </Button>
+                            <Button disabled={$goods[item] <= 0} on:click={() => goods.sell(item, 1)}>-</Button>
                         </td>
                     </tr>
                 {/each}

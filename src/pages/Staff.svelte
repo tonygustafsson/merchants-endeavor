@@ -3,6 +3,7 @@
     import { goods } from '../stores/goods.js';
     import { shipTotals } from '../stores/ships.js';
     import Table from '../components/Table.svelte';
+    import Button from '../components/Button.svelte';
 </script>
 
 <div class="page-staff">
@@ -37,7 +38,7 @@
     </Table>
 
     <div>
-        <button on:click={() => staff.add(1)}>Add staff</button>
-        <button on:click={() => staff.remove(1)}>Fire staff</button>
+        <Button on:click={() => staff.add(1)}>Add staff</Button>
+        <Button on:click={() => staff.remove(1)}>Fire staff</Button>
     </div>
 </div>

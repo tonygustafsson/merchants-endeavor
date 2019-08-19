@@ -1,6 +1,7 @@
 <script>
     import { merchant } from '../stores/merchant';
     import { game } from '../stores/game';
+    import Button from '../components/Button.svelte';
 
     const changeName = name => {
         merchant.changeName(name);
@@ -50,7 +51,7 @@
         </select>
 
         <div>
-            <button type="submit">Play</button>
+            <Button type="submit">Play</Button>
         </div>
     </form>
 </div>

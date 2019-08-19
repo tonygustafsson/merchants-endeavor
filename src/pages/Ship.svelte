@@ -7,6 +7,7 @@
     import { game } from '../stores/game';
     import { ucFirst } from '../utils/string';
     import Table from '../components/Table.svelte';
+    import Button from '../components/Button.svelte';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
     $: maxCrewMembers = ship ? ship.crewMembers + $staff.members : 0;
@@ -112,11 +113,11 @@
 
         <div>
             <input type="text" value={ship.name} on:change={e => ships.setName(ship.id, e.target.value)} />
-            <button>Change name</button>
+            <Button>Change name</Button>
         </div>
 
-        <button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>Send on mission</button>
-        <button on:click={() => sellShip(ship)}>Sell the ship</button>
+        <Button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>Send on mission</Button>
+        <Button on:click={() => sellShip(ship)}>Sell the ship</Button>
 
         <h3>Rearrange ship contents</h3>
 

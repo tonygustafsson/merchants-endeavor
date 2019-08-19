@@ -1,0 +1,36 @@
+<script>
+    export let disabled = false;
+    export let type = 'button';
+</script>
+
+<style>
+    button {
+        font-size: inherit;
+        color: #000;
+        background-color: #fff;
+        outline: none;
+        cursor: pointer;
+        padding: 0.5em 1em;
+        margin: 0.5em 0.5em 0.5em 0;
+        border: 1px #cdcdcd solid;
+        box-shadow: 0px 0px 4px #898989;
+    }
+
+    button:hover {
+        background-color: #f5f5f5;
+    }
+
+    button:focus {
+        border-color: #666;
+    }
+
+    button:disabled {
+        background-color: #f1f1f1;
+        color: #7e7e7e;
+        cursor: default;
+    }
+</style>
+
+<button {type} {disabled} on:click>
+    <slot />
+</button>
