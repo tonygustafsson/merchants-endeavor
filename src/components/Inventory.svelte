@@ -20,6 +20,16 @@
     });
 </script>
 
+<style>
+    tr {
+        cursor: pointer;
+    }
+
+    tr:hover td {
+        text-decoration: underline;
+    }
+</style>
+
 <div class="page-stats">
     <h3>{$merchant.name}</h3>
 
@@ -39,49 +49,29 @@
             <th>Item</th>
             <th>Value</th>
         </tr>
-        <tr>
+        <tr on:click={() => game.changeRoute('goods')}>
             <td>Doubloons</td>
-            <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>{$merchant.doubloons} dbl</a>
-            </td>
+            <td>{$merchant.doubloons} dbl</td>
         </tr>
-        <tr>
+        <tr on:click={() => game.changeRoute('properties')}>
             <td>Ships</td>
-            <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('properties')}>{noOfShips} ships</a>
-            </td>
+            <td>{noOfShips} ships</td>
         </tr>
-        <tr>
+        <tr on:click={() => game.changeRoute('goods')}>
             <td>Cannons</td>
-            <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>
-                    {$shipTotals.cannons + $goods.cannons} pcs
-                </a>
-            </td>
+            <td>{$shipTotals.cannons + $goods.cannons} pcs</td>
         </tr>
-        <tr>
+        <tr on:click={() => game.changeRoute('staff')}>
             <td>Staff</td>
-            <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('staff')}>
-                    {$shipTotals.crewMembers + noOfStaff} members
-                </a>
-            </td>
+            <td>{$shipTotals.crewMembers + noOfStaff} members</td>
         </tr>
-        <tr>
+        <tr on:click={() => game.changeRoute('goods')}>
             <td>Food</td>
-            <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>
-                    {$shipTotals.food + $goods.food} cartons
-                </a>
-            </td>
+            <td>{$shipTotals.food + $goods.food} cartons</td>
         </tr>
-        <tr>
+        <tr on:click={() => game.changeRoute('goods')}>
             <td>Water</td>
-            <td>
-                <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>
-                    {$shipTotals.water + $goods.water} barrels
-                </a>
-            </td>
+            <td>{$shipTotals.water + $goods.water} barrels</td>
         </tr>
     </Table>
 </div>
