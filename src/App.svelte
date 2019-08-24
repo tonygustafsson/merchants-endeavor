@@ -35,6 +35,9 @@
         margin: 0;
         cursor: pointer;
     }
+    .footer {
+        text-shadow: 0 0 10px #fff;
+    }
 </style>
 
 <div class="app wrapper">

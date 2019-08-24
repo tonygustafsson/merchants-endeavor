@@ -6,7 +6,7 @@
     .weather-symbol {
         position: fixed;
         top: 0;
-        right: 0;
+        right: 10px;
         opacity: 0.9;
         font-size: 500%;
         user-select: none;
