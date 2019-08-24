@@ -10,6 +10,7 @@
         opacity: 0.9;
         font-size: 1000%;
         user-select: none;
+        z-index: -1;
     }
 </style>
 
