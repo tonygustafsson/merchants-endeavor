@@ -95,6 +95,10 @@
     input[type='range']:focus::-ms-fill-upper {
         background: #000;
     }
+
+    label {
+        margin-bottom: 0.2em;
+    }
 </style>
 
 {#if label && label.length > 0}

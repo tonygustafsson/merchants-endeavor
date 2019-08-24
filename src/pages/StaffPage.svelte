@@ -20,25 +20,25 @@
             <th>Quantity</th>
         </tr>
         <tr>
-            <td>Staff total</td>
+            <td>👫 Staff total</td>
             <td>{$staff.members + $shipTotals.crewMembers}</td>
         </tr>
         <tr>
-            <td>Staff on board ships</td>
+            <td>⛵ Staff on board ships</td>
             <td>{$shipTotals.crewMembers}</td>
         </tr>
         <tr>
-            <td>Health</td>
+            <td>🖤 Health</td>
             <td>{$staff.health}%</td>
         </tr>
         <tr>
-            <td>Mood</td>
+            <td>😄 Mood</td>
             <td>{$staff.mood}%</td>
         </tr>
     </Table>
 
     <div>
-        <Button on:click={() => staff.add(1)}>Add staff</Button>
-        <Button on:click={() => staff.remove(1)}>Fire staff</Button>
+        <Button on:click={() => staff.add(1)}>👫 Add staff</Button>
+        <Button on:click={() => staff.remove(1)}>👫 Fire staff</Button>
     </div>
 </div>

@@ -24,26 +24,29 @@
         game.changeRoute(route);
     };
 
-    $: flag = '🇬🇧';
+    $: genderIcon = '👩';
+    $: flagIcon = '🇬🇧';
 
     merchant.subscribe(value => {
-        if (!value.nationality) return '🇬🇧';
+        if (!value.nationality || !value.gender) return;
+
+        genderIcon = value.gender === 'woman' ? '👩' : '👨';
 
         switch (value.nationality) {
             case 'english':
-                flag = '🇬🇧';
+                flagIcon = '🇬🇧';
                 break;
             case 'french':
-                flag = '🇫🇷';
+                flagIcon = '🇫🇷';
                 break;
             case 'spanish':
-                flag = '🇪🇸';
+                flagIcon = '🇪🇸';
                 break;
             case 'dutch':
-                flag = '🇧🇶';
+                flagIcon = '🇧🇶';
                 break;
             default:
-                flag = '🇬🇧';
+                flagIcon = '🇬🇧';
         }
     });
 </script>
@@ -60,14 +63,14 @@
     <p>To start playing, you can edit your profile or just press Play.</p>
 
     <form on:submit|preventDefault={startPlaying}>
-        <TextInput value={$merchant.name} label="Name" name="name" on:change={e => changeName(e.target.value)} />
+        <TextInput value={$merchant.name} label="📛 Name" name="name" on:change={e => changeName(e.target.value)} />
 
-        <SelectBox name="gender" label="Gender" on:change={e => changeGender(e.target.value)}>
+        <SelectBox name="gender" label="{genderIcon} Gender" on:change={e => changeGender(e.target.value)}>
             <option value="man" selected={$merchant.gender === 'man'}>Man</option>
             <option value="woman" selected={$merchant.gender === 'woman'}>Woman</option>
         </SelectBox>
 
-        <SelectBox name="nationality" label="{flag} Nationality" on:change={e => changeNationality(e.target.value)}>
+        <SelectBox name="nationality" label="{flagIcon} Nationality" on:change={e => changeNationality(e.target.value)}>
             <option value="english" selected={$merchant.nationality === 'english'}>English</option>
             <option value="french" selected={$merchant.nationality === 'french'}>French</option>
             <option value="spanish" selected={$merchant.nationality === 'spanish'}>Spanish</option>

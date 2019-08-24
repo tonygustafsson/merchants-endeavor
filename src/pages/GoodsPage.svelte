@@ -26,7 +26,7 @@
         </tr>
         {#each Object.keys(goodsInfo) as item}
             <tr>
-                <td>{goodsInfo[item].name}</td>
+                <td>{goodsInfo[item].icon} {goodsInfo[item].name}</td>
                 <td>{$shipTotals[item]} {goodsInfo[item].suffix}</td>
                 <td>{$goods[item] + $shipTotals[item]} {goodsInfo[item].suffix}</td>
             </tr>
@@ -34,7 +34,7 @@
     </Table>
 
     <div>
-        <Button on:click={() => (showModal = true)}>Buy and sell goods</Button>
+        <Button on:click={() => (showModal = true)}>🥫 Buy and sell goods</Button>
     </div>
 
     {#if showModal}
@@ -54,7 +54,7 @@
 
                 {#each Object.keys(goodsInfo) as item}
                     <tr>
-                        <td>{goodsInfo[item].name}</td>
+                        <td>{goodsInfo[item].icon} {goodsInfo[item].name}</td>
                         <td>{$goods[item]} {goodsInfo[item].suffix}</td>
                         <td>{goodsInfo[item].price}</td>
                         <td>{goodsInfo[item].worth}</td>

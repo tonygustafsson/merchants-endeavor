@@ -7,6 +7,7 @@
     label {
         display: block;
         font-weight: bold;
+        margin-bottom: 0.2em;
     }
 
     select {

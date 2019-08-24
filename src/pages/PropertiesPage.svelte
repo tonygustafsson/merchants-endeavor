@@ -58,7 +58,7 @@
         {/each}
     </Table>
 
-    <Button on:click={() => (showBuyModal = true)}>Buy ships</Button>
+    <Button on:click={() => (showBuyModal = true)}>⛵ Buy ships</Button>
 
     {#if showBuyModal}
         <Modal on:close={() => (showBuyModal = false)}>
@@ -68,24 +68,24 @@
 
             <div>
                 <Button disabled={$merchant.doubloons < shipTypes.brig.price} on:click={() => buyShip('brig')}>
-                    Buy brig ({shipTypes.brig.price} dbl)
+                    ⛵ Buy brig ({shipTypes.brig.price} dbl)
                 </Button>
             </div>
             <div>
                 <Button
                     disabled={$merchant.doubloons < shipTypes.merchantman.price}
                     on:click={() => buyShip('merchantman')}>
-                    Buy merchantman ({shipTypes.merchantman.price} dbl)
+                    ⛵ Buy merchantman ({shipTypes.merchantman.price} dbl)
                 </Button>
             </div>
             <div>
                 <Button disabled={$merchant.doubloons < shipTypes.galleon.price} on:click={() => buyShip('galleon')}>
-                    Buy galleon ({shipTypes.galleon.price} dbl)
+                    ⛵ Buy galleon ({shipTypes.galleon.price} dbl)
                 </Button>
             </div>
             <div>
                 <Button disabled={$merchant.doubloons < shipTypes.frigate.price} on:click={() => buyShip('frigate')}>
-                    Buy frigate ({shipTypes.frigate.price} dbl)
+                    ⛵ Buy frigate ({shipTypes.frigate.price} dbl)
                 </Button>
             </div>
         </Modal>

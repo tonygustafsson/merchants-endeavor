@@ -67,6 +67,10 @@
         padding: 0.5em;
         margin-bottom: 1.5em;
     }
+
+    td {
+        filter: grayscale(0.5);
+    }
 </style>
 
 <div class="app-ship">
@@ -79,39 +83,39 @@
 
         <Table>
             <tr>
-                <th>Ship quality</th>
+                <th>Quality</th>
                 <th>Value</th>
             </tr>
             <tr>
-                <td>Type</td>
+                <td>⛵ Type</td>
                 <td>{ucFirst(ship.type)}</td>
             </tr>
             <tr>
-                <td>Crew members</td>
+                <td>👫 Crew members</td>
                 <td>{ship.crewMembers} (Min: {shipTypes[ship.type].crewMin} Max: {shipTypes[ship.type].crewMax})</td>
             </tr>
             <tr>
-                <td>Cannons</td>
+                <td>💣 Cannons</td>
                 <td>{ship.cannons} / {shipTypes[ship.type].cannonsMax}</td>
             </tr>
             <tr>
-                <td>Food</td>
+                <td>🍲 Food</td>
                 <td>{ship.food} cartons</td>
             </tr>
             <tr>
-                <td>Water</td>
+                <td>🥛 Water</td>
                 <td>{ship.water} barrels</td>
             </tr>
             <tr>
-                <td>Health</td>
+                <td>💚 Health</td>
                 <td>{ship.health}%</td>
             </tr>
             <tr>
-                <td>Load</td>
+                <td>⚖ Load</td>
                 <td>{ship.food + ship.water} / {shipTypes[ship.type].loadCapacity}</td>
             </tr>
             <tr>
-                <td>On mission</td>
+                <td>⛵ On mission</td>
                 <td>{ship.onMission ? 'Yes' : 'No'}</td>
             </tr>
         </Table>
@@ -127,8 +131,8 @@
             <Button>Change name</Button>
         </div>
 
-        <Button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>Send on mission</Button>
-        <Button on:click={() => sellShip(ship)}>Sell the ship</Button>
+        <Button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>⛵ Send on mission</Button>
+        <Button on:click={() => sellShip(ship)}>⛵ Sell the ship</Button>
 
         <h3>Rearrange ship contents</h3>
 
@@ -138,7 +142,7 @@
                     value={ship.crewMembers}
                     max={maxCrewMembers}
                     on:input={e => changeCrewMembersOnboard(e.target.value)}
-                    label="Crew members onboard <strong>({ship.crewMembers} onboard)</strong>" />
+                    label="👫 Crew members onboard <strong>({ship.crewMembers} onboard)</strong>" />
                 {$staff.members} more available
             </div>
 
@@ -147,7 +151,7 @@
                     value={ship.cannons}
                     max={maxCannons}
                     on:input={e => changeGoodsOnboard('cannons', e.target.value)}
-                    label="Cannons <strong>({ship.cannons} onboard)</strong>" />
+                    label="💣 Cannons <strong>({ship.cannons} onboard)</strong>" />
                 {$goods.cannons} more available
             </div>
 
@@ -156,7 +160,7 @@
                     value={ship.food}
                     max={maxFood}
                     on:input={e => changeGoodsOnboard('food', e.target.value)}
-                    label="Food <strong>({ship.food} onboard)</strong>" />
+                    label="🍲 Food <strong>({ship.food} onboard)</strong>" />
                 {$goods.food} more available
             </div>
 
@@ -165,7 +169,7 @@
                     value={ship.water}
                     max={maxWater}
                     on:input={e => changeGoodsOnboard('water', e.target.value)}
-                    label="Water <strong>({ship.water} onboard)</strong>" />
+                    label="🥛 Water <strong>({ship.water} onboard)</strong>" />
                 {$goods.water} more available
             </div>
         </div>
