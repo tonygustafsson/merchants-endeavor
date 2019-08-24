@@ -1,0 +1,27 @@
+<script>
+    export let name;
+    export let label;
+    export let value;
+</script>
+
+<style>
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input {
+        font-family: inherit;
+        font-size: inherit;
+        padding: 0.4em;
+        margin: 0 0 0.5em 0;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        width: 100%;
+    }
+</style>
+
+{#if label && label.length > 0}
+    <label for={name}>{label}</label>
+{/if}
+<input type="text" {name} {value} on:change />

@@ -2,6 +2,8 @@
     import { merchant } from '../stores/merchant';
     import { game } from '../stores/game';
     import Button from '../components/Button.svelte';
+    import TextInput from '../components/TextInput.svelte';
+    import SelectBox from '../components/SelectBox.svelte';
 
     const changeName = name => {
         merchant.changeName(name);
@@ -18,7 +20,36 @@
     const startPlaying = () => {
         game.changeRoute('general');
     };
+
+    $: flag = '🇬🇧';
+
+    merchant.subscribe(value => {
+        if (!value.nationality) return '🇬🇧';
+
+        switch (value.nationality) {
+            case 'english':
+                flag = '🇬🇧';
+                break;
+            case 'french':
+                flag = '🇫🇷';
+                break;
+            case 'spanish':
+                flag = '🇪🇸';
+                break;
+            case 'dutch':
+                flag = '🇧🇶';
+                break;
+            default:
+                flag = '🇬🇧';
+        }
+    });
 </script>
+
+<style>
+    form {
+        width: 50%;
+    }
+</style>
 
 <div class="page-start">
     <h2>Welcome</h2>
@@ -26,29 +57,19 @@
     <p>To start playing, you can edit your profile or just press Play.</p>
 
     <form on:submit|preventDefault={startPlaying}>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value={$merchant.name} on:change={e => changeName(e.target.value)} />
+        <TextInput value={$merchant.name} label="Name" name="name" on:change={e => changeName(e.target.value)} />
 
-        <label for="gender">Gender</label>
-        <select name="gender" id="gender" on:change={e => changeGender(e.target.value)}>
+        <SelectBox name="gender" label="Gender" on:change={e => changeGender(e.target.value)}>
             <option value="man" selected={$merchant.gender === 'man'}>Man</option>
             <option value="woman" selected={$merchant.gender === 'woman'}>Woman</option>
-        </select>
+        </SelectBox>
 
-        <label for="nationality">
-            {#if $merchant.nationality === 'english'}
-                🇬🇧
-            {:else if $merchant.nationality === 'french'}
-                🇫🇷
-            {:else if $merchant.nationality === 'spanish'}🇪🇸{:else if $merchant.nationality === 'dutch'}🇧🇶{/if}
-            Nationality
-        </label>
-        <select name="nationality" id="nationality" on:change={e => changeNationality(e.target.value)}>
+        <SelectBox name="nationality" label="{flag} Nationality" on:change={e => changeNationality(e.target.value)}>
             <option value="english" selected={$merchant.nationality === 'english'}>English</option>
             <option value="french" selected={$merchant.nationality === 'french'}>French</option>
             <option value="spanish" selected={$merchant.nationality === 'spanish'}>Spanish</option>
             <option value="dutch" selected={$merchant.nationality === 'dutch'}>Dutch</option>
-        </select>
+        </SelectBox>
 
         <div>
             <Button type="submit">Play</Button>

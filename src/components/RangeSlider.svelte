@@ -3,6 +3,7 @@
     export let value = 0;
     export let min = 0;
     export let max = 0;
+    export let label;
 </script>
 
 <style>
@@ -10,6 +11,8 @@
         -webkit-appearance: none;
         width: 100%;
         margin: 5.7px;
+        border: 1px solid #ccc;
+        background-color: #fff;
     }
     input[type='range']:focus {
         outline: none;
@@ -93,4 +96,9 @@
     }
 </style>
 
+{#if label && label.length > 0}
+    <label for={name}>
+        {@html label}
+    </label>
+{/if}
 <input on:input type="range" {name} {value} {min} {max} />

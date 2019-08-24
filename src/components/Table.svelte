@@ -1,6 +1,5 @@
 <script>
     export let dynamicWidth = false;
-    export let noHeading = false;
 </script>
 
 <style>
