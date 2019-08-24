@@ -46,7 +46,7 @@
     <div class="container">
         <h1 on:click={() => game.changeRoute('general')}>Merchant Simulator</h1>
 
-        {#if $game.route.page !== 'start'}
+        {#if $game.started && $game.route.page !== 'start'}
             <Time />
             <Weather />
             <Navigation />
@@ -56,7 +56,7 @@
 
     <div class="container white-panel">
         {#if gameLoaded}
-            {#if $game.route.page === 'start'}
+            {#if !$game.started || $game.route.page === 'start'}
                 <Start />
             {:else if $game.route.page === 'properties' && $game.route.id !== 0}
                 <Ship />

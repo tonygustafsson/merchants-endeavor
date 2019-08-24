@@ -10,7 +10,8 @@ const initValue = {
         id: 0
     },
     loading: false,
-    loaded: false
+    loaded: false,
+    started: false
 };
 
 const acceptedRoutePages = ['general', 'properties', 'staff', 'goods'];
@@ -26,6 +27,11 @@ const gameStore = () => {
         setLoading: isLoading => {
             update(game => {
                 return { ...game, loading: isLoading };
+            });
+        },
+        startPlaying: () => {
+            update(game => {
+                return { ...game, started: true };
             });
         },
         changeRoute: (page, id = 0, pushState = true) => {

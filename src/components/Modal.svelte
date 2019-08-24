@@ -27,10 +27,6 @@
         padding: 1em;
         background: white;
     }
-
-    button {
-        display: block;
-    }
 </style>
 
 <div class="modal-background" on:click={() => dispatch('close')} />

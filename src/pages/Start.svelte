@@ -18,6 +18,7 @@
     };
 
     const startPlaying = () => {
+        game.startPlaying();
         game.changeRoute('general');
     };
 
