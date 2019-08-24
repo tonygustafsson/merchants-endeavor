@@ -13,6 +13,7 @@
         margin: 5.7px;
         border: 1px solid #ccc;
         background-color: #fff;
+        box-sizing: border-box;
     }
     input[type='range']:focus {
         outline: none;

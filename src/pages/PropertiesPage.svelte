@@ -64,6 +64,8 @@
         <Modal on:close={() => (showBuyModal = false)}>
             <h3>Buy ships</h3>
 
+            <p>Click on the ship you want and can afford.</p>
+
             <div>
                 <Button disabled={$merchant.doubloons < shipTypes.brig.price} on:click={() => buyShip('brig')}>
                     Buy brig ({shipTypes.brig.price} dbl)
