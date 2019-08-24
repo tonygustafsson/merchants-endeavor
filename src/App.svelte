@@ -50,7 +50,9 @@
         </h1>
 
         {#if $game.started && $game.route.page !== 'start'}
-            <Time />
+            {#if !$resolution.mobile}
+                <Time />
+            {/if}
             <Weather />
             <Settings />
         {/if}

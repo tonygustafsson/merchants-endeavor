@@ -8,9 +8,15 @@
         top: 0;
         right: 0;
         opacity: 0.9;
-        font-size: 1000%;
+        font-size: 500%;
         user-select: none;
         z-index: -1;
+    }
+
+    @media (min-width: 1000px) {
+        .weather-symbol {
+            font-size: 1000%;
+        }
     }
 </style>
 

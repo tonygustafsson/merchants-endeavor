@@ -14,7 +14,7 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        font-size: 170%;
+        font-size: 140%;
         font-family: 'Redressed', cursive;
     }
     li {
@@ -23,6 +23,11 @@
     }
     li.active a {
         text-decoration: underline;
+    }
+    @media (min-width: 1000px) {
+        ul {
+            font-size: 170%;
+        }
     }
 </style>
 
