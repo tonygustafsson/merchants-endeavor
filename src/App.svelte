@@ -54,7 +54,6 @@
                 <Time />
             {/if}
             <Weather />
-            <Settings />
         {/if}
     </header>
 
@@ -90,5 +89,10 @@
         </div>
     {/if}
 
-    <footer class="footer">Merchant Simulator &copy; 2019</footer>
+    <footer class="footer">
+        Merchant Simulator &copy; 2019
+        {#if $game.started && $game.route.page !== 'start'}
+            <Settings />
+        {/if}
+    </footer>
 </div>
