@@ -1,5 +1,5 @@
 {
-    "name": "merchant-simulator",
+    "name": "merchants-endeavor",
     "version": "1.0.0",
     "devDependencies": {
         "lodash-es": "^4.17.15",

@@ -49,7 +49,7 @@
                 const route = $resolution.mobile ? 'inventory' : 'properties';
                 return game.changeRoute(route);
             }}>
-            Merchant Simulator
+            Merchant's Endeavor
         </h1>
 
         {#if $game.started && $game.route.page !== 'start'}
@@ -93,7 +93,7 @@
     {/if}
 
     <footer class="footer">
-        Merchant Simulator &copy; 2019
+        Merchant's Endeavor &copy; 2019
         {#if $game.started && $game.route.page !== 'start'}
             <Settings />
         {/if}

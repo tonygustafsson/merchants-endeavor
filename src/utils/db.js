@@ -1,7 +1,7 @@
 import localforage from 'localforage';
 
 localforage.config({
-    name: 'Merchant Simulator',
+    name: `Merchant's Endeavor`,
     storeName: 'game'
 });
 
