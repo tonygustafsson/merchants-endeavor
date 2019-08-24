@@ -1,13 +1,15 @@
 <script>
     import { game } from './stores/game';
+    import { resolution } from './stores/resolution';
 
-    import Start from './pages/Start.svelte';
-    import General from './pages/General.svelte';
-    import Properties from './pages/Properties.svelte';
-    import Ship from './pages/Ship.svelte';
-    import Staff from './pages/Staff.svelte';
-    import Goods from './pages/Goods.svelte';
+    import Start from './pages/StartPage.svelte';
+    import Properties from './pages/PropertiesPage.svelte';
+    import Ship from './pages/ShipPage.svelte';
+    import Staff from './pages/StaffPage.svelte';
+    import Goods from './pages/GoodsPage.svelte';
+    import InventoryPage from './pages/InventoryPage.svelte';
 
+    import Inventory from './components/Inventory.svelte';
     import Time from './components/Time.svelte';
     import Settings from './components/Settings.svelte';
     import Weather from './components/Weather.svelte';
@@ -25,11 +27,6 @@
 </script>
 
 <style>
-    .container {
-        width: 80%;
-        margin: 1rem auto;
-        padding: 1rem;
-    }
     .white-panel {
         background: rgba(255, 255, 255, 0.9);
     }
@@ -40,21 +37,32 @@
     }
 </style>
 
-<div class="app">
+<div class="app wrapper">
     <Loader />
 
-    <div class="container">
-        <h1 on:click={() => game.changeRoute('general')}>Merchant Simulator</h1>
+    <header class="header">
+        <h1
+            on:click={() => {
+                const route = $resolution.mobile ? 'inventory' : 'properties';
+                return game.changeRoute(route);
+            }}>
+            Merchant Simulator
+        </h1>
 
         {#if $game.started && $game.route.page !== 'start'}
             <Time />
             <Weather />
-            <Navigation />
             <Settings />
         {/if}
-    </div>
+    </header>
 
-    <div class="container white-panel">
+    {#if $game.started && $game.route.page !== 'start'}
+        <div class="nav">
+            <Navigation />
+        </div>
+    {/if}
+
+    <div class="content white-panel">
         {#if gameLoaded}
             {#if !$game.started || $game.route.page === 'start'}
                 <Start />
@@ -67,10 +75,18 @@
             {:else if $game.route.page === 'goods'}
                 <Goods />
             {:else}
-                <General />
+                <InventoryPage />
             {/if}
         {:else}
             <h2>Loading data...</h2>
         {/if}
     </div>
+
+    {#if $game.started && !$resolution.mobile}
+        <div class="inventory white-panel">
+            <Inventory />
+        </div>
+    {/if}
+
+    <footer class="footer">Merchant Simulator &copy; 2019</footer>
 </div>

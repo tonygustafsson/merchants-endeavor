@@ -1,4 +1,9 @@
-const defaultRoutePage = 'general';
+import { get } from 'svelte/store';
+import { resolution } from '../stores/resolution';
+
+const $resolution = get(resolution);
+
+const defaultRoutePage = $resolution.mobile ? 'inventory' : 'properties';
 
 const getPathSegments = () => {
     const path = window.location.pathname.substr(1);

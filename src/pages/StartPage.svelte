@@ -1,6 +1,7 @@
 <script>
     import { merchant } from '../stores/merchant';
     import { game } from '../stores/game';
+    import { resolution } from '../stores/resolution';
     import Button from '../components/Button.svelte';
     import TextInput from '../components/TextInput.svelte';
     import SelectBox from '../components/SelectBox.svelte';
@@ -19,7 +20,8 @@
 
     const startPlaying = () => {
         game.startPlaying();
-        game.changeRoute('general');
+        const route = $resolution.mobile ? 'inventory' : 'properties';
+        game.changeRoute(route);
     };
 
     $: flag = '🇬🇧';

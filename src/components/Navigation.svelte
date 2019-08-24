@@ -1,5 +1,6 @@
 <script>
     import { game } from '../stores/game';
+    import { resolution } from '../stores/resolution';
 
     let currentRoutePage = '';
 
@@ -12,7 +13,7 @@
     ul {
         list-style: none;
         padding: 0;
-        margin: 0.5em 0 0 0;
+        margin: 0;
         font-size: 170%;
         font-family: 'Redressed', cursive;
     }
@@ -27,9 +28,11 @@
 
 <nav>
     <ul>
-        <li class:active={currentRoutePage === 'general'}>
-            <a href="/general" on:click|preventDefault={() => game.changeRoute('general')}>General</a>
-        </li>
+        {#if $resolution.mobile}
+            <li class:active={currentRoutePage === 'inventory'}>
+                <a href="/inventory" on:click|preventDefault={() => game.changeRoute('inventory')}>Inventory</a>
+            </li>
+        {/if}
         <li class:active={currentRoutePage === 'properties'}>
             <a href="/properties" on:click|preventDefault={() => game.changeRoute('properties')}>Properties</a>
         </li>

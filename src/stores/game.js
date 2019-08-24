@@ -14,7 +14,7 @@ const initValue = {
     started: false
 };
 
-const acceptedRoutePages = ['general', 'properties', 'staff', 'goods'];
+const acceptedRoutePages = ['inventory', 'properties', 'staff', 'goods'];
 
 const gameStore = () => {
     const { subscribe, set, update } = writable(initValue);

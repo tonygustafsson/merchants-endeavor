@@ -21,13 +21,6 @@
 </script>
 
 <div class="page-stats">
-    <h2>General</h2>
-
-    <p>
-        Here you can see general information about you and how things are going. It will also be a place to view recent
-        events.
-    </p>
-
     <h3>{$merchant.name}</h3>
 
     <p>
@@ -39,7 +32,7 @@
         You are trying to tame the carribean as a {ucFirst($merchant.nationality)} {$merchant.gender}. You started out {$time.sinceStart}.
     </p>
 
-    <h3>Possessions</h3>
+    <h3>Inventory</h3>
 
     <Table>
         <tr>
