@@ -12,6 +12,8 @@
     import TextInput from '../components/TextInput.svelte';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
+    $: currentLoad = ship ? ship.food + ship.water : 0;
+    $: loadLeft = ship ? shipTypes[ship.type].loadCapacity - currentLoad : 0;
     $: maxCrewMembers = () => {
         if (!ship) return 0;
 
@@ -32,6 +34,15 @@
     };
     $: maxFood = ship ? ship.food + $goods.food : 0;
     $: maxWater = ship ? ship.water + $goods.water : 0;
+
+    $: readyForMission = () => {
+        if (!ship) return false;
+        if (loadLeft < 0) return false;
+        if (ship.health < 0) return false;
+        if (ship.crewMembers < shipTypes[ship.type].crewMin) return false;
+
+        return true;
+    };
 
     const sellShip = ship => {
         // Return ship crew members
@@ -97,6 +108,21 @@
     td {
         filter: grayscale(0.5);
     }
+
+    .white-panel {
+        background: #fff;
+        margin: 1em 0;
+        padding: 1em;
+    }
+
+    .white-panel h3 {
+        margin-top: 0;
+    }
+
+    .warning {
+        color: red;
+        font-weight: bold;
+    }
 </style>
 
 <div class="app-ship">
@@ -118,7 +144,9 @@
             </tr>
             <tr>
                 <td>👫 Crew members</td>
-                <td>{ship.crewMembers} (Min: {shipTypes[ship.type].crewMin} Max: {shipTypes[ship.type].crewMax})</td>
+                <td class:warning={ship.crewMembers < shipTypes[ship.type].crewMin}>
+                    {ship.crewMembers} (Min: {shipTypes[ship.type].crewMin} Max: {shipTypes[ship.type].crewMax})
+                </td>
             </tr>
             <tr>
                 <td>💣 Cannons</td>
@@ -134,11 +162,11 @@
             </tr>
             <tr>
                 <td>💚 Health</td>
-                <td>{ship.health}%</td>
+                <td class:warning={ship.health < 0}>{ship.health}%</td>
             </tr>
             <tr>
                 <td>⚖ Load</td>
-                <td>{ship.food + ship.water} / {shipTypes[ship.type].loadCapacity}</td>
+                <td class:warning={loadLeft < 0}>{currentLoad} / {shipTypes[ship.type].loadCapacity}</td>
             </tr>
             <tr>
                 <td>⛵ On mission</td>
@@ -157,8 +185,23 @@
             <Button>Change name</Button>
         </div>
 
-        <Button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>⛵ Send on mission</Button>
         <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>
+
+        <div class="white-panel">
+            <h3>Mission</h3>
+
+            {#if ship.onMission}
+                <p>This ship is on a mission. Please wait for it to come back.</p>
+            {:else if readyForMission()}
+                <p>Everything seems fine. You are ready for a mission.</p>
+            {:else}
+                <p>This ship is not ready for a mission yet. Check the status above to see what's missing.</p>
+            {/if}
+
+            <Button disabled={!readyForMission() || ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>
+                ⛵ Send on mission
+            </Button>
+        </div>
 
         <h3>Rearrange ship contents</h3>
 
