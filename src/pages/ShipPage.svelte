@@ -188,10 +188,6 @@
                 <td>⚖ Load</td>
                 <td class:warning={loadLeft < 0}>{currentLoad} / {shipTypes[ship.type].loadCapacity}</td>
             </tr>
-            <tr>
-                <td>⛵ On mission</td>
-                <td>{ship.onMission ? 'Yes' : 'No'}</td>
-            </tr>
         </Table>
 
         <h3>Actions</h3>
@@ -207,45 +203,47 @@
             <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>
         </div>
 
-        <h3>Rearrange ship contents</h3>
+        {#if !ship.onMission}
+            <h3>Rearrange ship contents</h3>
 
-        <div class="slider-container">
-            <div>
-                <RangeSlider
-                    value={ship.crewMembers}
-                    max={maxCrewMembers()}
-                    on:input={e => changeCrewMembersOnboard(e.target.value)}
-                    label="👫 Crew members onboard <strong>({ship.crewMembers} onboard)</strong>" />
-                {$staff.members} more available
-            </div>
+            <div class="slider-container">
+                <div>
+                    <RangeSlider
+                        value={ship.crewMembers}
+                        max={maxCrewMembers()}
+                        on:input={e => changeCrewMembersOnboard(e.target.value)}
+                        label="👫 Crew members onboard <strong>({ship.crewMembers} onboard)</strong>" />
+                    {$staff.members} more available
+                </div>
 
-            <div>
-                <RangeSlider
-                    value={ship.cannons}
-                    max={maxCannons()}
-                    on:input={e => changeGoodsOnboard('cannons', e.target.value)}
-                    label="💣 Cannons <strong>({ship.cannons} onboard)</strong>" />
-                {$goods.cannons} more available
-            </div>
+                <div>
+                    <RangeSlider
+                        value={ship.cannons}
+                        max={maxCannons()}
+                        on:input={e => changeGoodsOnboard('cannons', e.target.value)}
+                        label="💣 Cannons <strong>({ship.cannons} onboard)</strong>" />
+                    {$goods.cannons} more available
+                </div>
 
-            <div>
-                <RangeSlider
-                    value={ship.food}
-                    max={maxFood}
-                    on:input={e => changeGoodsOnboard('food', e.target.value)}
-                    label="🍲 Food <strong>({ship.food} onboard)</strong>" />
-                {$goods.food} more available
-            </div>
+                <div>
+                    <RangeSlider
+                        value={ship.food}
+                        max={maxFood}
+                        on:input={e => changeGoodsOnboard('food', e.target.value)}
+                        label="🍲 Food <strong>({ship.food} onboard)</strong>" />
+                    {$goods.food} more available
+                </div>
 
-            <div>
-                <RangeSlider
-                    value={ship.water}
-                    max={maxWater}
-                    on:input={e => changeGoodsOnboard('water', e.target.value)}
-                    label="🥛 Water <strong>({ship.water} onboard)</strong>" />
-                {$goods.water} more available
+                <div>
+                    <RangeSlider
+                        value={ship.water}
+                        max={maxWater}
+                        on:input={e => changeGoodsOnboard('water', e.target.value)}
+                        label="🥛 Water <strong>({ship.water} onboard)</strong>" />
+                    {$goods.water} more available
+                </div>
             </div>
-        </div>
+        {/if}
     {:else}
         <p>Ship not found.</p>
     {/if}

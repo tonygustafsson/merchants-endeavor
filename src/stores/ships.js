@@ -84,7 +84,16 @@ const shipsStore = () => {
                     if (ship.onMission !== false && ship.onMission < currentTick) {
                         // Back from mission
                         ship.onMission = false;
-                        merchant.addDoubloons(1000);
+
+                        // Get rewards
+                        const doubloons = Math.floor(Math.random() * 1000);
+                        const food = ship.food - ship.crewMembers * 4;
+                        const water = ship.water - ship.crewMembers * 8;
+                        const health = ship.health - Math.floor(Math.random() * 25);
+                        merchant.addDoubloons(doubloons);
+                        ship.food = food;
+                        ship.water = water;
+                        ship.health = health;
                     }
                 });
 
