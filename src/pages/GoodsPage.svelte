@@ -35,6 +35,7 @@
 
     <div>
         <Button on:click={() => (showModal = true)}>🥫 Buy and sell goods</Button>
+        <Button on:click={() => merchant.addDoubloons(1000)}>💰 Magic Money</Button>
     </div>
 
     {#if showModal}
