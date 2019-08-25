@@ -18,10 +18,20 @@
     $: maxWater = ship ? ship.water + $goods.water : 0;
 
     const sellShip = ship => {
-        const worth = shipTypes[ship.type].worth;
+        // Return ship crew members
+        staff.add(ship.crewMembers);
 
+        // Return ship goods
+        goods.add('cannons', ship.cannons);
+        goods.add('food', ship.food);
+        goods.add('water', ship.water);
+
+        // Sell ship
+        const worth = shipTypes[ship.type].worth;
         ships.removeShip(ship.id);
         merchant.addDoubloons(worth);
+
+        // Go back to Property page
         game.changeRoute('properties');
     };
 
@@ -132,7 +142,7 @@
         </div>
 
         <Button disabled={ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>⛵ Send on mission</Button>
-        <Button on:click={() => sellShip(ship)}>⛵ Sell the ship</Button>
+        <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>
 
         <h3>Rearrange ship contents</h3>
 
