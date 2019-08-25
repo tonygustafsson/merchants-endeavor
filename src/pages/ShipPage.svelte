@@ -33,13 +33,17 @@
         return ship.cannons + $goods.cannons;
     };
     $: maxFood = ship ? ship.food + $goods.food : 0;
+    $: minFood = ship ? ship.crewMembers * 4 : 0;
     $: maxWater = ship ? ship.water + $goods.water : 0;
+    $: minWater = ship ? ship.crewMembers * 8 : 0;
 
     $: readyForMission = () => {
         if (!ship) return false;
         if (loadLeft < 0) return false;
         if (ship.health < 0) return false;
         if (ship.crewMembers < shipTypes[ship.type].crewMin) return false;
+        if (ship.food < minFood) return false;
+        if (ship.water < minWater) return false;
 
         return true;
     };
@@ -133,6 +137,22 @@
     {#if ship}
         <h2>Ship: {ship.name}</h2>
 
+        <div class="white-panel">
+            <h3>Mission</h3>
+
+            {#if ship.onMission}
+                <p>This ship is on a mission. Please wait for it to come back.</p>
+            {:else if readyForMission()}
+                <p>Everything seems fine. You are ready for a mission.</p>
+            {:else}
+                <p>This ship is not ready for a mission yet. Check the status above to see what's missing.</p>
+            {/if}
+
+            <Button disabled={!readyForMission() || ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>
+                ⛵ Send on mission
+            </Button>
+        </div>
+
         <Table>
             <tr>
                 <th>Quality</th>
@@ -154,11 +174,11 @@
             </tr>
             <tr>
                 <td>🍲 Food</td>
-                <td>{ship.food} cartons</td>
+                <td class:warning={ship.food < minFood}>{ship.food} cartons (Min: {minFood})</td>
             </tr>
             <tr>
                 <td>🥛 Water</td>
-                <td>{ship.water} barrels</td>
+                <td class:warning={ship.water < minWater}>{ship.water} barrels (Min: {minWater})</td>
             </tr>
             <tr>
                 <td>💚 Health</td>
@@ -182,25 +202,9 @@
                 name="ship-name"
                 value={ship.name}
                 on:change={e => ships.setName(ship.id, e.target.value)} />
-            <Button>Change name</Button>
-        </div>
+            <Button>📛 Change name</Button>
 
-        <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>
-
-        <div class="white-panel">
-            <h3>Mission</h3>
-
-            {#if ship.onMission}
-                <p>This ship is on a mission. Please wait for it to come back.</p>
-            {:else if readyForMission()}
-                <p>Everything seems fine. You are ready for a mission.</p>
-            {:else}
-                <p>This ship is not ready for a mission yet. Check the status above to see what's missing.</p>
-            {/if}
-
-            <Button disabled={!readyForMission() || ship.onMission} on:click={() => ships.sendOnMission(ship.id)}>
-                ⛵ Send on mission
-            </Button>
+            <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>
         </div>
 
         <h3>Rearrange ship contents</h3>
