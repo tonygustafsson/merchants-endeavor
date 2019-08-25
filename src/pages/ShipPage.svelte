@@ -12,8 +12,24 @@
     import TextInput from '../components/TextInput.svelte';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
-    $: maxCrewMembers = ship ? ship.crewMembers + $staff.members : 0;
-    $: maxCannons = ship ? ship.cannons + $goods.cannons : 0;
+    $: maxCrewMembers = () => {
+        if (!ship) return 0;
+
+        if (ship.crewMembers + $staff.members > shipTypes[ship.type].crewMax) {
+            return shipTypes[ship.type].crewMax;
+        }
+
+        return ship.crewMembers + $staff.members;
+    };
+    $: maxCannons = () => {
+        if (!ship) return 0;
+
+        if (ship.cannons + $goods.cannons > shipTypes[ship.type].cannonsMax) {
+            return shipTypes[ship.type].cannonsMax;
+        }
+
+        return ship.cannons + $goods.cannons;
+    };
     $: maxFood = ship ? ship.food + $goods.food : 0;
     $: maxWater = ship ? ship.water + $goods.water : 0;
 
@@ -150,7 +166,7 @@
             <div>
                 <RangeSlider
                     value={ship.crewMembers}
-                    max={maxCrewMembers}
+                    max={maxCrewMembers()}
                     on:input={e => changeCrewMembersOnboard(e.target.value)}
                     label="👫 Crew members onboard <strong>({ship.crewMembers} onboard)</strong>" />
                 {$staff.members} more available
@@ -159,7 +175,7 @@
             <div>
                 <RangeSlider
                     value={ship.cannons}
-                    max={maxCannons}
+                    max={maxCannons()}
                     on:input={e => changeGoodsOnboard('cannons', e.target.value)}
                     label="💣 Cannons <strong>({ship.cannons} onboard)</strong>" />
                 {$goods.cannons} more available
