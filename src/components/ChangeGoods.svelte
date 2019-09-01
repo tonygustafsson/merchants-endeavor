@@ -1,4 +1,5 @@
 <script>
+    import { fade } from 'svelte/transition';
     import { goods } from '../stores/goods.js';
     import { merchant } from '../stores/merchant.js';
     import Button from '../components/Button.svelte';
@@ -8,6 +9,15 @@
 
     $: tempGoods = cloneDeep($goods);
     $: tempDoubloons = $merchant.doubloons;
+    $: showTransactionMadeMessage = false;
+
+    const changeShowTransactionMadeMessage = () => {
+        showTransactionMadeMessage = true;
+
+        setTimeout(() => {
+            showTransactionMadeMessage = false;
+        }, 2000);
+    };
 
     const calculateDoubloons = () => {
         let totalCost = 0;
@@ -42,6 +52,7 @@
     const makeTransaction = () => {
         merchant.setDoubloons(tempDoubloons);
         goods.updateAll(tempGoods);
+        changeShowTransactionMadeMessage();
     };
 
     const resetGoods = () => {
@@ -65,22 +76,34 @@
         color: red;
         font-weight: bold;
     }
+    .transaction-made-message {
+        background-color: rgb(207, 255, 163);
+        padding: 1em;
+    }
 </style>
 
-<div class="slider-container">
-    {#each Object.keys(tempGoods) as item}
-        <div>
-            <RangeSlider
-                value={tempGoods[item]}
-                max={tempGoods[item] + 500}
-                on:input={e => changeGoods(item, e.target.value)}
-                label="{goodsInfo[item].icon}
-                {goodsInfo[item].name} ({tempGoods[item]}
-                {goodsInfo[item].suffix})" />
-        </div>
-    {/each}
+<div class="change-goods-component">
+    <div class="slider-container">
+        {#each Object.keys(tempGoods) as item}
+            <div>
+                <RangeSlider
+                    value={tempGoods[item]}
+                    max={tempGoods[item] + 500}
+                    on:input={e => changeGoods(item, e.target.value)}
+                    label="{goodsInfo[item].icon}
+                    {goodsInfo[item].name} ({tempGoods[item]}
+                    {goodsInfo[item].suffix})" />
+            </div>
+        {/each}
+    </div>
 
     <p class:warning={tempDoubloons < 0}>Doubloons afterwards: {tempDoubloons} dbl</p>
+
+    {#if showTransactionMadeMessage}
+        <div in:fade out:fade class="transaction-made-message">
+            <p>Transaction made!</p>
+        </div>
+    {/if}
 
     <Button on:click={makeTransaction} disabled={tempDoubloons < 0}>💰 Make transaction</Button>
     <Button on:click={resetGoods}>&times; Reset</Button>
