@@ -13,17 +13,13 @@
     $: tempGoods = cloneDeep($goods);
     $: tempDoubloons = $merchant.doubloons;
 
-    const changeGoods = (item, quantity) => {
-        // Change the item quantity
-        const newTempGoods = cloneDeep(tempGoods);
-        newTempGoods[item] = parseInt(quantity, 10);
-
+    const calculateDoubloons = () => {
         let totalCost = 0;
 
-        Object.keys(newTempGoods).forEach(goodsItem => {
+        Object.keys(tempGoods).forEach(goodsItem => {
             // Loop through all goods items and calculate the cost/profit
             const currentQuantity = $goods[goodsItem];
-            const newQuantity = newTempGoods[goodsItem];
+            const newQuantity = tempGoods[goodsItem];
             const worth = goodsInfo[goodsItem].price;
 
             if (newQuantity > currentQuantity) {
@@ -36,7 +32,20 @@
         });
 
         tempDoubloons = $merchant.doubloons - totalCost;
+    };
+
+    const changeGoods = (item, quantity) => {
+        // Change the item quantity
+        const newTempGoods = cloneDeep(tempGoods);
+        newTempGoods[item] = parseInt(quantity, 10);
+
         tempGoods = newTempGoods;
+        calculateDoubloons();
+    };
+
+    const resetGoods = () => {
+        tempGoods = cloneDeep($goods);
+        calculateDoubloons();
     };
 
     let showModal = false;
@@ -98,6 +107,7 @@
 
         <div>
             <Button>Buy / Sell</Button>
+            <Button on:click={resetGoods}>Reset</Button>
         </div>
     </div>
 
