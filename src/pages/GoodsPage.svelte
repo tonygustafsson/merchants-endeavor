@@ -14,29 +14,28 @@
     $: tempDoubloons = $merchant.doubloons;
 
     const changeGoods = (item, quantity) => {
+        // Change the item quantity
         const newTempGoods = cloneDeep(tempGoods);
-        const currentQuantity = $goods[item];
-        const newQuantity = parseInt(quantity, 10);
-        newTempGoods[item] = newQuantity;
+        newTempGoods[item] = parseInt(quantity, 10);
 
-        const worth = goodsInfo[item].price;
         let totalCost = 0;
 
-        Object.keys(newTempGoods).forEach(tempItem => {
-            const tempCurrentQuantity = $goods[tempItem];
-            const tempQuantity = newTempGoods[tempItem];
+        Object.keys(newTempGoods).forEach(goodsItem => {
+            // Loop through all goods items and calculate the cost/profit
+            const currentQuantity = $goods[goodsItem];
+            const newQuantity = newTempGoods[goodsItem];
+            const worth = goodsInfo[goodsItem].price;
 
-            if (tempQuantity > tempCurrentQuantity) {
-                // Buy
-                totalCost += (tempQuantity - tempCurrentQuantity) * worth;
-            } else if (tempCurrentQuantity > tempQuantity) {
-                // Sell
-                totalCost -= (tempCurrentQuantity - tempQuantity) * worth;
+            if (newQuantity > currentQuantity) {
+                // Buying item
+                totalCost += (newQuantity - currentQuantity) * worth;
+            } else if (currentQuantity > newQuantity) {
+                // Selling item
+                totalCost -= (currentQuantity - newQuantity) * worth;
             }
         });
 
         tempDoubloons = $merchant.doubloons - totalCost;
-
         tempGoods = newTempGoods;
     };
 
