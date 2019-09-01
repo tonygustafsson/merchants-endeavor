@@ -43,6 +43,10 @@
         calculateDoubloons();
     };
 
+    const makeTransaction = () => {
+        goods.updateAll(tempGoods);
+    };
+
     const resetGoods = () => {
         tempGoods = cloneDeep($goods);
         calculateDoubloons();
@@ -59,6 +63,10 @@
         background: #fff;
         padding: 0.5em;
         margin-bottom: 1.5em;
+    }
+    .warning {
+        color: red;
+        font-weight: bold;
     }
 </style>
 
@@ -103,10 +111,12 @@
             </div>
         {/each}
 
-        <div>Doubloons: {tempDoubloons}</div>
+        <div>
+            <p class:warning={tempDoubloons < 0}>Doubloons afterwards: {tempDoubloons} dbl</p>
+        </div>
 
         <div>
-            <Button>Buy / Sell</Button>
+            <Button on:click={makeTransaction} disabled={tempDoubloons < 0}>Make transaction</Button>
             <Button on:click={resetGoods}>Reset</Button>
         </div>
     </div>
