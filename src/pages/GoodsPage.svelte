@@ -14,21 +14,30 @@
     $: tempDoubloons = $merchant.doubloons;
 
     const changeGoods = (item, quantity) => {
-        quantity = parseInt(quantity, 10);
-
         const newTempGoods = cloneDeep(tempGoods);
-        newTempGoods[item] = quantity;
-        tempGoods = newTempGoods;
+        const currentQuantity = $goods[item];
+        const newQuantity = parseInt(quantity, 10);
+        newTempGoods[item] = newQuantity;
 
-        if (quantity > $goods[item]) {
-            // Buy
-            const price = goodsInfo[item].price;
-            tempDoubloons -= price;
-        } else if (quantity < $goods[item]) {
-            // Sell
-            const worth = goodsInfo[item].worth;
-            tempDoubloons += worth;
-        }
+        const worth = goodsInfo[item].price;
+        let totalCost = 0;
+
+        Object.keys(newTempGoods).forEach(tempItem => {
+            const tempCurrentQuantity = $goods[tempItem];
+            const tempQuantity = newTempGoods[tempItem];
+
+            if (tempQuantity > tempCurrentQuantity) {
+                // Buy
+                totalCost += (tempQuantity - tempCurrentQuantity) * worth;
+            } else if (tempCurrentQuantity > tempQuantity) {
+                // Sell
+                totalCost -= (tempCurrentQuantity - tempQuantity) * worth;
+            }
+        });
+
+        tempDoubloons = $merchant.doubloons - totalCost;
+
+        tempGoods = newTempGoods;
     };
 
     let showModal = false;
@@ -104,7 +113,6 @@
                     <th>Item</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Worth</th>
                     <th>Actions</th>
                 </tr>
 
@@ -113,7 +121,6 @@
                         <td>{goodsInfo[item].icon} {goodsInfo[item].name}</td>
                         <td>{$goods[item]} {goodsInfo[item].suffix}</td>
                         <td>{goodsInfo[item].price}</td>
-                        <td>{goodsInfo[item].worth}</td>
                         <td>
                             <Button
                                 disabled={goodsInfo[item].price > $merchant.doubloons}
