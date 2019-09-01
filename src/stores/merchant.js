@@ -28,6 +28,9 @@ const merchantStore = () => {
         changeNationality: newNationality => {
             update(merchant => ({ ...merchant, nationality: newNationality }));
         },
+        setDoubloons: doubloons => {
+            update(merchant => ({ ...merchant, doubloons: doubloons }));
+        },
         addDoubloons: doubloons => {
             update(merchant => ({ ...merchant, doubloons: merchant.doubloons + doubloons }));
         },

@@ -44,6 +44,7 @@
     };
 
     const makeTransaction = () => {
+        merchant.setDoubloons(tempDoubloons);
         goods.updateAll(tempGoods);
     };
 
