@@ -57,7 +57,7 @@ const goodsStore = () => {
                 }
 
                 if (Object.hasOwnProperty.call(goodsInfo, item)) {
-                    let worth = goodsInfo[item].worth;
+                    let worth = goodsInfo[item].price;
                     merchant.addDoubloons(worth);
                     return { ...goods, [item]: goods[item] - quantity };
                 }

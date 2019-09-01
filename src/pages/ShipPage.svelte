@@ -58,7 +58,7 @@
         goods.add('water', ship.water);
 
         // Sell ship
-        const worth = shipTypes[ship.type].worth;
+        const worth = shipTypes[ship.type].price;
         ships.removeShip(ship.id);
         merchant.addDoubloons(worth);
 
