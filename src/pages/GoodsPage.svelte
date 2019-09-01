@@ -2,12 +2,12 @@
     import { goods } from '../stores/goods.js';
     import { ships, shipTotals } from '../stores/ships.js';
     import { merchant } from '../stores/merchant.js';
-    import Modal from '../components/Modal.svelte';
     import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
+    import ChangeGoods from '../components/ChangeGoods.svelte';
     import { goodsInfo } from '../utils/goods';
 
-    let showModal = false;
+    $: showChangeGoods = false;
 </script>
 
 <div class="app-goods">
@@ -34,44 +34,11 @@
     </Table>
 
     <div>
-        <Button on:click={() => (showModal = true)}>🥫 Buy and sell goods</Button>
+        <Button on:click={() => (showChangeGoods = !showChangeGoods)}>🥫 Buy and sell goods</Button>
         <Button on:click={() => merchant.addDoubloons(1000)}>💰 Magic Money</Button>
     </div>
 
-    {#if showModal}
-        <Modal on:close={() => (showModal = false)}>
-            <h3>Buy and sell goods</h3>
-
-            <p>Doubloons: {$merchant.doubloons}</p>
-
-            <Table dynamicWidth={true}>
-                <tr>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Worth</th>
-                    <th>Actions</th>
-                </tr>
-
-                {#each Object.keys(goodsInfo) as item}
-                    <tr>
-                        <td>{goodsInfo[item].icon} {goodsInfo[item].name}</td>
-                        <td>{$goods[item]} {goodsInfo[item].suffix}</td>
-                        <td>{goodsInfo[item].price}</td>
-                        <td>{goodsInfo[item].worth}</td>
-                        <td>
-                            <Button
-                                disabled={goodsInfo[item].price > $merchant.doubloons}
-                                on:click={() => goods.buy(item, 1)}>
-                                +
-                            </Button>
-                            <Button disabled={$goods[item] <= 0} on:click={() => goods.sell(item, 1)}>-</Button>
-                        </td>
-                    </tr>
-                {/each}
-            </Table>
-
-        </Modal>
+    {#if showChangeGoods}
+        <ChangeGoods />
     {/if}
-
 </div>

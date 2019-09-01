@@ -7,8 +7,7 @@ export const shipTypes = {
         crewMin: 2,
         crewMax: 20,
         cannonsMax: 10,
-        price: 1500,
-        worth: 750
+        price: 1500
     },
     merchantman: {
         name: 'Merchantman',
@@ -16,8 +15,7 @@ export const shipTypes = {
         crewMin: 1,
         crewMax: 10,
         cannonsMax: 0,
-        price: 1000,
-        worth: 500
+        price: 1000
     },
     galleon: {
         name: 'Galleon',
@@ -25,8 +23,7 @@ export const shipTypes = {
         crewMin: 4,
         crewMax: 50,
         cannonsMax: 25,
-        price: 4000,
-        worth: 2000
+        price: 4000
     },
     frigate: {
         name: 'Frigate',
@@ -34,8 +31,7 @@ export const shipTypes = {
         crewMin: 8,
         crewMax: 50,
         cannonsMax: 50,
-        price: 10000,
-        worth: 5000
+        price: 10000
     }
 };
 
