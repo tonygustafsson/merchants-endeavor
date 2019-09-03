@@ -20,8 +20,8 @@
             <th>Quantity</th>
         </tr>
         <tr>
-            <td>👫 Staff total</td>
-            <td>{$staff.members + $shipTotals.crewMembers}</td>
+            <td>👫 Staff (unoccupied)</td>
+            <td>{$staff.members}</td>
         </tr>
         <tr>
             <td>⛵ Staff on board ships</td>
@@ -39,6 +39,6 @@
 
     <div>
         <Button on:click={() => staff.add(1)}>👫 Add staff</Button>
-        <Button on:click={() => staff.remove(1)}>👫 Fire staff</Button>
+        <Button disabled={$staff.members <= 0} on:click={() => staff.remove(1)}>👫 Fire staff</Button>
     </div>
 </div>

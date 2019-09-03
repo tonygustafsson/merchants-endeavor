@@ -38,7 +38,7 @@
 
     <h3>Ships</h3>
 
-    <Table class="ship-table">
+    <Table>
         <tr>
             <th>Name</th>
             <th>Type</th>

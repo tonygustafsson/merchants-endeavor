@@ -9,11 +9,6 @@
     import Table from '../components/Table.svelte';
 
     let noOfShips = 0;
-    let noOfStaff = 0;
-
-    staff.subscribe(value => {
-        noOfStaff = value.members;
-    });
 
     ships.subscribe(value => {
         noOfShips = value.length;
@@ -67,7 +62,7 @@
         </tr>
         <tr on:click={() => game.changeRoute('staff')}>
             <td>👫 Staff</td>
-            <td>{$shipTotals.crewMembers + noOfStaff} members</td>
+            <td>{$shipTotals.crewMembers + $staff.members} members</td>
         </tr>
         <tr on:click={() => game.changeRoute('goods')}>
             <td>🍲 Food</td>
