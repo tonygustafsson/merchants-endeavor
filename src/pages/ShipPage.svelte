@@ -3,14 +3,14 @@
     import { merchant } from '../stores/merchant.js';
     import { goods } from '../stores/goods.js';
     import { staff } from '../stores/staff.js';
-    import { shipTypes, getRandomShip } from '../utils/ship';
+    import { shipTypes } from '../utils/ship';
     import { game } from '../stores/game';
     import { ucFirst } from '../utils/string';
     import Button from '../components/Button.svelte';
     import RangeSlider from '../components/RangeSlider.svelte';
-    import TextInput from '../components/TextInput.svelte';
     import Mission from '../components/ship/Mission.svelte';
     import ShipInfo from '../components/ship/ShipInfo.svelte';
+    import ShipActions from '../components/ship/ShipActions.svelte';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
     $: currentLoad = ship ? ship.food + ship.water : 0;
@@ -35,24 +35,6 @@
     };
     $: maxFood = ship ? ship.food + $goods.food : 0;
     $: maxWater = ship ? ship.water + $goods.water : 0;
-
-    const sellShip = ship => {
-        // Return ship crew members
-        staff.add(ship.crewMembers);
-
-        // Return ship goods
-        goods.add('cannons', ship.cannons);
-        goods.add('food', ship.food);
-        goods.add('water', ship.water);
-
-        // Sell ship
-        const worth = shipTypes[ship.type].price;
-        ships.removeShip(ship.id);
-        merchant.addDoubloons(worth);
-
-        // Go back to Property page
-        game.changeRoute('properties');
-    };
 
     const changeGoodsOnboard = (item, value) => {
         const approvedItems = ['food', 'water', 'cannons'];
@@ -118,18 +100,7 @@
 
         <ShipInfo {ship} />
 
-        <h3>Actions</h3>
-
-        <div>
-            <TextInput
-                label="Ship name"
-                name="ship-name"
-                value={ship.name}
-                on:change={e => ships.setName(ship.id, e.target.value)} />
-            <Button>📛 Change name</Button>
-
-            <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>
-        </div>
+        <ShipActions {ship} />
 
         {#if !ship.onMission}
             <h3>Rearrange ship contents</h3>
