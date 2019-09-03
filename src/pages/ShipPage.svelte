@@ -6,11 +6,11 @@
     import { shipTypes, getRandomShip } from '../utils/ship';
     import { game } from '../stores/game';
     import { ucFirst } from '../utils/string';
-    import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
     import RangeSlider from '../components/RangeSlider.svelte';
     import TextInput from '../components/TextInput.svelte';
     import Mission from '../components/ship/Mission.svelte';
+    import ShipInfo from '../components/ship/ShipInfo.svelte';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
     $: currentLoad = ship ? ship.food + ship.water : 0;
@@ -97,10 +97,6 @@
         margin-bottom: 1.5em;
     }
 
-    td {
-        filter: grayscale(0.5);
-    }
-
     .white-panel {
         background: #fff;
         margin: 1em 0;
@@ -120,40 +116,7 @@
             <Mission {ship} />
         </div>
 
-        <Table>
-            <tr>
-                <th>Quality</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <td>⛵ Type</td>
-                <td>{ucFirst(ship.type)}</td>
-            </tr>
-            <tr>
-                <td>👫 Crew members</td>
-                <td>{ship.crewMembers} (Min: {shipTypes[ship.type].crewMin} Max: {shipTypes[ship.type].crewMax})</td>
-            </tr>
-            <tr>
-                <td>💣 Cannons</td>
-                <td>{ship.cannons} / {shipTypes[ship.type].cannonsMax}</td>
-            </tr>
-            <tr>
-                <td>🍲 Food</td>
-                <td>{ship.food} cartons</td>
-            </tr>
-            <tr>
-                <td>🥛 Water</td>
-                <td>{ship.water} barrels</td>
-            </tr>
-            <tr>
-                <td>💚 Health</td>
-                <td>{ship.health}%</td>
-            </tr>
-            <tr>
-                <td>⚖ Load</td>
-                <td>{currentLoad} / {shipTypes[ship.type].loadCapacity}</td>
-            </tr>
-        </Table>
+        <ShipInfo {ship} />
 
         <h3>Actions</h3>
 
