@@ -30,10 +30,10 @@ const staffStore = () => {
                 return { ...staff, members: staff.members - removedStaff };
             });
         },
-        increaseMood: moodBoost => {
+        restoreMood: moodBoost => {
             update(staff => {
                 if (staff.mood < 0) return { ...staff };
-                return { ...staff, mood: staff.mood + moodBoost };
+                return { ...staff, mood: 100 };
             });
         },
         decreaseMood: moodLoss => {
@@ -42,10 +42,10 @@ const staffStore = () => {
                 return { ...staff, mood: staff.mood - moodLoss };
             });
         },
-        increaseHealth: healthBoost => {
+        restoreHealth: healthBoost => {
             update(staff => {
                 if (staff.health < 0) return { ...staff };
-                return { ...staff, health: staff.health + healthBoost };
+                return { ...staff, health: 100 };
             });
         },
         decreaseHealth: healthLoss => {
