@@ -20,14 +20,38 @@ const staffStore = () => {
         },
         add: additionalStaff => {
             update(staff => {
-                if (staff.members + additionalStaff > maxValue) return staff;
+                if (staff.members + additionalStaff > maxValue) return { ...staff };
                 return { ...staff, members: staff.members + additionalStaff };
             });
         },
         remove: removedStaff => {
             update(staff => {
-                if (staff.members - removedStaff < minValue) return staff;
+                if (staff.members - removedStaff < minValue) return { ...staff };
                 return { ...staff, members: staff.members - removedStaff };
+            });
+        },
+        increaseMood: moodBoost => {
+            update(staff => {
+                if (staff.mood < 0) return { ...staff };
+                return { ...staff, mood: staff.mood + moodBoost };
+            });
+        },
+        decreaseMood: moodLoss => {
+            update(staff => {
+                if (staff.mood < 0) return { ...staff };
+                return { ...staff, mood: staff.mood - moodLoss };
+            });
+        },
+        increaseHealth: healthBoost => {
+            update(staff => {
+                if (staff.health < 0) return { ...staff };
+                return { ...staff, health: staff.health + healthBoost };
+            });
+        },
+        decreaseHealth: healthLoss => {
+            update(staff => {
+                if (staff.health < 0) return { ...staff };
+                return { ...staff, health: staff.health - healthLoss };
             });
         }
     };

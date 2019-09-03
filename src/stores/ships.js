@@ -3,6 +3,7 @@ import cloneDeep from 'lodash-es/cloneDeep';
 import { ticker } from './ticker';
 import { goods } from './goods';
 import { merchant } from './merchant';
+import { staff } from './staff';
 import { getRandomShip } from '../utils/ship';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 
@@ -87,13 +88,19 @@ const shipsStore = () => {
 
                         // Get rewards
                         const doubloons = Math.floor(Math.random() * 1000);
-                        const food = ship.food - ship.crewMembers * 4;
-                        const water = ship.water - ship.crewMembers * 8;
-                        const health = ship.health - Math.floor(Math.random() * 25);
+                        const shipFood = ship.food - ship.crewMembers * 4;
+                        const shipWater = ship.water - ship.crewMembers * 8;
+                        const shipHealth = ship.health - Math.floor(Math.random() * 25);
+                        const staffMoodLoss = Math.floor(Math.random() * 15);
+                        const staffHealthLoss = Math.floor(Math.random() * 15);
+
                         merchant.addDoubloons(doubloons);
-                        ship.food = food;
-                        ship.water = water;
-                        ship.health = health;
+                        staff.decreaseMood(staffMoodLoss);
+                        staff.decreaseHealth(staffHealthLoss);
+
+                        ship.food = shipFood;
+                        ship.water = shipWater;
+                        ship.health = shipHealth;
                     }
                 });
 
