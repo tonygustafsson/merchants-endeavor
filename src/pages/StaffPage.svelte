@@ -5,6 +5,9 @@
     import { shipTotals } from '../stores/ships.js';
     import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
+    import Notifications from '../components/Notifications.svelte';
+
+    let notifications;
 
     $: restoreMoodCost = ($staff.members + $shipTotals.crewMembers) * ((100 - $staff.mood) * 3);
     $: restoreMoodAvailable = $staff.mood < 100 && $merchant.doubloons >= restoreMoodCost;
@@ -21,7 +24,14 @@
         merchant.subtractDoubloons(restoreHealthCost);
         staff.restoreHealth();
     };
+
+    const requireHireStaff = () => {
+        staff.requestHire();
+        notifications.success('Requested to hire more staff members.');
+    };
 </script>
+
+<Notifications bind:this={notifications} />
 
 <div class="page-staff">
     <h2>Staff</h2>
@@ -55,7 +65,7 @@
     </Table>
 
     <div>
-        <Button on:click={() => staff.add(1)}>👫 Add staff</Button>
+        <Button disabled={$staff.hireRequestActive} on:click={requireHireStaff}>👫 Hire staff</Button>
         <Button disabled={$staff.members <= 0} on:click={() => staff.remove(1)}>👫 Fire staff</Button>
         <Button on:click={restoreMood} disabled={!restoreMoodAvailable}>😃 Restore mood ({restoreMoodCost} dbl)</Button>
         <Button on:click={restoreHealth} disabled={!restoreHealthAvailable}>

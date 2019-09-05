@@ -1,14 +1,19 @@
 import { writable } from 'svelte/store';
+import { ticker } from './ticker';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 
 const tableName = 'staff';
 const initValue = {
     members: 4,
     health: 100,
-    mood: 100
+    mood: 100,
+    hireRequestActive: false
 };
 const minValue = 0;
 const maxValue = 20;
+
+let currentTick = 0;
+const hireTickTime = 10;
 
 const staffStore = () => {
     const { subscribe, set, update } = writable({});
@@ -28,6 +33,25 @@ const staffStore = () => {
             update(staff => {
                 if (staff.members - removedStaff < minValue) return { ...staff };
                 return { ...staff, members: staff.members - removedStaff };
+            });
+        },
+        requestHire: () => {
+            update(staff => {
+                const hireTickFinished = currentTick + hireTickTime;
+
+                return { ...staff, hireRequestActive: hireTickFinished };
+            });
+        },
+        checkForHireApprovals: () => {
+            update(staff => {
+                console.log('Checking for hire approvals');
+                if (staff.hireRequestActive !== false && staff.hireRequestActive < currentTick) {
+                    // Hirering process finished
+                    const newStaffMembers = Math.floor(Math.random() * 10);
+                    return { ...staff, hireRequestActive: false, members: staff.members + newStaffMembers };
+                }
+
+                return { ...staff };
             });
         },
         restoreMood: moodBoost => {
@@ -71,3 +95,16 @@ getStateFromDb(tableName)
             saveStateToDb(tableName, value);
         });
     });
+
+let checkHireCounter = 0;
+
+ticker.subscribe(value => {
+    checkHireCounter++;
+
+    if (checkHireCounter >= 20) {
+        // Don't check to often
+        currentTick = value;
+        staff.checkForHireApprovals();
+        checkHireCounter = 0;
+    }
+});

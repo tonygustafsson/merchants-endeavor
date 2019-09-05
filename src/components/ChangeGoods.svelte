@@ -6,18 +6,12 @@
     import { goodsInfo } from '../utils/goods';
     import RangeSlider from '../components/RangeSlider.svelte';
     import cloneDeep from 'lodash-es/cloneDeep';
+    import Notifications from '../components/Notifications.svelte';
+
+    let notifications;
 
     $: tempGoods = cloneDeep($goods);
     $: tempDoubloons = $merchant.doubloons;
-    $: showTransactionMadeMessage = false;
-
-    const changeShowTransactionMadeMessage = () => {
-        showTransactionMadeMessage = true;
-
-        setTimeout(() => {
-            showTransactionMadeMessage = false;
-        }, 2000);
-    };
 
     const calculateDoubloons = () => {
         let totalCost = 0;
@@ -52,7 +46,7 @@
     const makeTransaction = () => {
         merchant.setDoubloons(tempDoubloons);
         goods.updateAll(tempGoods);
-        changeShowTransactionMadeMessage();
+        notifications.success('Transaction made successfully.');
     };
 
     const resetGoods = () => {
@@ -76,11 +70,9 @@
         color: red;
         font-weight: bold;
     }
-    .transaction-made-message {
-        background-color: rgb(207, 255, 163);
-        padding: 1em;
-    }
 </style>
+
+<Notifications bind:this={notifications} />
 
 <div class="change-goods-component">
     <div class="slider-container">
@@ -98,12 +90,6 @@
     </div>
 
     <p class:warning={tempDoubloons < 0}>Doubloons afterwards: {tempDoubloons} dbl</p>
-
-    {#if showTransactionMadeMessage}
-        <div in:fade out:fade class="transaction-made-message">
-            <p>Transaction made!</p>
-        </div>
-    {/if}
 
     <Button on:click={makeTransaction} disabled={tempDoubloons < 0}>💰 Make transaction</Button>
     <Button on:click={resetGoods}>&times; Reset</Button>
