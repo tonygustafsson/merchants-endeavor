@@ -44,7 +44,6 @@ const staffStore = () => {
         },
         checkForHireApprovals: () => {
             update(staff => {
-                console.log('Checking for hire approvals');
                 if (staff.hireRequestActive !== false && staff.hireRequestActive < currentTick) {
                     // Hirering process finished
                     const newStaffMembers = Math.floor(Math.random() * 10);
