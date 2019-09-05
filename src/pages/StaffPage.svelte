@@ -6,7 +6,7 @@
     import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
 
-    $: restoreMoodCost = $staff.members + $shipTotals.crewMembers * ((100 - $staff.mood) * 3);
+    $: restoreMoodCost = ($staff.members + $shipTotals.crewMembers) * ((100 - $staff.mood) * 3);
     $: restoreMoodAvailable = $staff.mood < 100 && $merchant.doubloons >= restoreMoodCost;
 
     const restoreMood = () => {
@@ -14,7 +14,7 @@
         staff.restoreMood();
     };
 
-    $: restoreHealthCost = $staff.members + $shipTotals.crewMembers * ((100 - $staff.health) * 3);
+    $: restoreHealthCost = ($staff.members + $shipTotals.crewMembers) * ((100 - $staff.health) * 3);
     $: restoreHealthAvailable = $staff.health < 100 && $merchant.doubloons >= restoreHealthCost;
 
     const restoreHealth = () => {
