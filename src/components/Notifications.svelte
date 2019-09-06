@@ -16,20 +16,26 @@
 <style>
     .notification {
         position: fixed;
-        bottom: 10px;
+        bottom: 0;
         left: 0;
-        width: 80%;
-        margin: 0 10%;
+        width: 100%;
         background-color: rgb(207, 255, 163);
         padding: 1em;
+        text-align: center;
         transform: translateY(100px);
         transition: transform 200ms;
     }
     .show {
         transform: translateY(0);
     }
+    .icon {
+        color: green;
+    }
 </style>
 
 <div class="notification" class:show={showNotification}>
-    <p>{notification}</p>
+    <p>
+        <span class="icon">✓</span>
+        {notification}
+    </p>
 </div>
