@@ -14,7 +14,7 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        font-size: 140%;
+        font-size: 110%;
         font-family: 'Redressed', cursive;
     }
     li {
@@ -27,6 +27,9 @@
     @media (min-width: 1000px) {
         ul {
             font-size: 170%;
+        }
+        li {
+            margin-right: 0.5em;
         }
     }
 </style>
@@ -46,6 +49,9 @@
         </li>
         <li class:active={currentRoutePage === 'goods'}>
             <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>Goods</a>
+        </li>
+        <li class:active={currentRoutePage === 'logs'}>
+            <a href="/logs" on:click|preventDefault={() => game.changeRoute('logs')}>Logs</a>
         </li>
     </ul>
 </nav>

@@ -3,6 +3,7 @@
     import { staff } from '../stores/staff.js';
     import { goods } from '../stores/goods.js';
     import { shipTotals } from '../stores/ships.js';
+    import { log } from '../stores/log';
     import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
     import Notifications from '../components/Notifications.svelte';
@@ -15,6 +16,7 @@
     const restoreMood = () => {
         merchant.subtractDoubloons(restoreMoodCost);
         staff.restoreMood();
+        log.add(`You restored your crews mood by giving them ${restoreMoodCost} dbl of your funds.`);
     };
 
     $: restoreHealthCost = ($staff.members + $shipTotals.crewMembers) * ((100 - $staff.health) * 3);
@@ -23,11 +25,18 @@
     const restoreHealth = () => {
         merchant.subtractDoubloons(restoreHealthCost);
         staff.restoreHealth();
+        log.add(`You restored your crews health for ${restoreHealthCost} dbl.`);
     };
 
     const requireHireStaff = () => {
         staff.requestHire();
         notifications.success('Requested to hire more staff members.');
+        log.add(`You requested to hire more staff members.`);
+    };
+
+    const fireStaffMember = () => {
+        staff.remove(1);
+        log.add(`You fired a staff member.`);
     };
 </script>
 
@@ -66,7 +75,7 @@
 
     <div>
         <Button disabled={$staff.hireRequestActive} on:click={requireHireStaff}>👫 Hire staff</Button>
-        <Button disabled={$staff.members <= 0} on:click={() => staff.remove(1)}>👫 Fire staff</Button>
+        <Button disabled={$staff.members <= 0} on:click={fireStaffMember}>👫 Fire staff</Button>
         <Button on:click={restoreMood} disabled={!restoreMoodAvailable}>😃 Restore mood ({restoreMoodCost} dbl)</Button>
         <Button on:click={restoreHealth} disabled={!restoreHealthAvailable}>
             😷 Restore health ({restoreHealthCost} dbl)

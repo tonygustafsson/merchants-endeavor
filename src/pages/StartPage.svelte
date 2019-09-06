@@ -2,6 +2,7 @@
     import { merchant } from '../stores/merchant';
     import { game } from '../stores/game';
     import { resolution } from '../stores/resolution';
+    import { log } from '../stores/log';
     import Button from '../components/Button.svelte';
     import TextInput from '../components/TextInput.svelte';
     import SelectBox from '../components/SelectBox.svelte';
@@ -22,6 +23,7 @@
         game.startPlaying();
         const route = $resolution.mobile ? 'inventory' : 'properties';
         game.changeRoute(route);
+        log.add(`You just woke as a ${$merchant.nationality} merchant named ${$merchant.name}.`);
     };
 
     $: genderIcon = '👩';

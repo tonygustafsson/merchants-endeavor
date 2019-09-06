@@ -3,6 +3,7 @@
     import { merchant } from '../stores/merchant.js';
     import { shipTypes, getRandomShip } from '../utils/ship';
     import { game } from '../stores/game';
+    import { log } from '../stores/log';
     import Modal from '../components/Modal.svelte';
     import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
@@ -19,15 +20,9 @@
 
             ships.addShip(newShip);
             merchant.subtractDoubloons(price);
+            log.add(`You bought a new ${newShip.type} named ${newShip.name} for ${price} dbl.`);
             game.setLoading(false);
         });
-    };
-
-    const sellShip = ship => {
-        const worth = shipTypes[ship.type].price;
-
-        ships.removeShip(ship.id);
-        merchant.addDoubloons(worth);
     };
 </script>
 

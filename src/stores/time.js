@@ -12,6 +12,7 @@ const timeStore = derived(ticker, $ticks => {
         now: moment(startDate)
             .add($ticks / ticksPerHour, 'hours')
             .format('dddd, MMMM Do YYYY'),
+        realTime: moment().format('YYYY-MM-DD HH:mm:ss'),
         sinceStart: moment(startDate).from(moment(startDate).add($ticks / ticksPerHour, 'hours'))
     };
 });

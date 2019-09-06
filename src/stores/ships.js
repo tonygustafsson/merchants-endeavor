@@ -1,9 +1,10 @@
-import { writable, derived } from 'svelte/store';
+import { writable, derived, get } from 'svelte/store';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { ticker } from './ticker';
 import { goods } from './goods';
 import { merchant } from './merchant';
 import { staff } from './staff';
+import { log } from './log';
 import { getRandomShip } from '../utils/ship';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 
@@ -72,6 +73,8 @@ const shipsStore = () => {
                 let ship = newShips.find(ship => ship.id === id);
                 ship.onMission = currentTick + missionLength;
 
+                log.add(`You sent your ${ship.type} ${ship.name} on a mission.`);
+
                 return newShips;
             });
         },
@@ -101,6 +104,10 @@ const shipsStore = () => {
                         ship.food = shipFood;
                         ship.water = shipWater;
                         ship.health = shipHealth;
+
+                        log.add(
+                            `Your ${ship.type} ${ship.name} returned from her mission. You collected ${doubloons} dbl.`
+                        );
                     }
                 });
 

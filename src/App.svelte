@@ -3,6 +3,7 @@
     import { resolution } from './stores/resolution';
 
     import Start from './pages/StartPage.svelte';
+    import Logs from './pages/LogsPage.svelte';
     import Properties from './pages/PropertiesPage.svelte';
     import Ship from './pages/ShipPage.svelte';
     import Staff from './pages/StaffPage.svelte';
@@ -74,6 +75,8 @@
                 <Ship />
             {:else if $game.route.page === 'properties'}
                 <Properties />
+            {:else if $game.route.page === 'logs'}
+                <Logs />
             {:else if $game.route.page === 'staff'}
                 <Staff />
             {:else if $game.route.page === 'goods'}

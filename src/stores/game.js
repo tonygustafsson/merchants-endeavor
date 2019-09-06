@@ -14,7 +14,7 @@ const initValue = {
     started: false
 };
 
-const acceptedRoutePages = ['inventory', 'properties', 'staff', 'goods'];
+const acceptedRoutePages = ['logs', 'inventory', 'properties', 'staff', 'goods'];
 
 const gameStore = () => {
     const { subscribe, set, update } = writable(initValue);
@@ -78,6 +78,9 @@ getStateFromDb(tableName)
             value.route.page = routeFromUrl.page;
             value.route.id = routeFromUrl.id;
         }
+
+        // On page load, loading should be resetted
+        newValue.loading = false;
 
         game.updateAll(newValue);
     })

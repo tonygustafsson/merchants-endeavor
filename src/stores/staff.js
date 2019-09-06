@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { ticker } from './ticker';
+import { log } from './log';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 
 const tableName = 'staff';
@@ -47,6 +48,9 @@ const staffStore = () => {
                 if (staff.hireRequestActive !== false && staff.hireRequestActive < currentTick) {
                     // Hirering process finished
                     const newStaffMembers = Math.floor(Math.random() * 10);
+
+                    log.add(`The hiring process has finished and you've got ${newStaffMembers} new staff members.`);
+
                     return { ...staff, hireRequestActive: false, members: staff.members + newStaffMembers };
                 }
 
