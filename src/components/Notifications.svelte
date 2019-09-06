@@ -1,4 +1,6 @@
 <script>
+    import { fly } from 'svelte/transition';
+
     $: showNotification = false;
 
     let notification;
@@ -22,20 +24,17 @@
         background-color: rgb(207, 255, 163);
         padding: 1em;
         text-align: center;
-        transform: translateY(100px);
-        transition: transform 200ms;
-    }
-    .show {
-        transform: translateY(0);
     }
     .icon {
         color: green;
     }
 </style>
 
-<div class="notification" class:show={showNotification}>
-    <p>
-        <span class="icon">✓</span>
-        {notification}
-    </p>
-</div>
+{#if showNotification}
+    <div class="notification" transition:fly={{ y: 100, duration: 200 }}>
+        <p>
+            <span class="icon">✓</span>
+            {notification}
+        </p>
+    </div>
+{/if}
