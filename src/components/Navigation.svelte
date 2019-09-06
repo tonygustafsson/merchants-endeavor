@@ -14,12 +14,12 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        font-size: 110%;
+        font-size: 100%;
         font-family: 'Redressed', cursive;
     }
     li {
         display: inline;
-        margin-right: 1em;
+        margin-right: 0.5em;
     }
     li.active a {
         text-decoration: underline;
@@ -29,7 +29,7 @@
             font-size: 170%;
         }
         li {
-            margin-right: 0.5em;
+            margin-right: 1em;
         }
     }
 </style>
