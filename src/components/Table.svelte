@@ -11,10 +11,6 @@
         border-collapse: collapse;
     }
 
-    table.dynamicWidth {
-        table-layout: auto;
-    }
-
     :global(table > tr) {
         padding: 0 1em;
         border-bottom: 1px solid #e6e6e6;
@@ -33,8 +29,15 @@
     :global(table td) {
         padding: 0.75em;
     }
+
+    @media (max-width: 1000px) {
+        :global(table th),
+        :global(table td) {
+            width: auto;
+        }
+    }
 </style>
 
-<table class:dynamicWidth>
+<table>
     <slot />
 </table>
