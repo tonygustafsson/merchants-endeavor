@@ -38,7 +38,8 @@
         cursor: pointer;
     }
     .footer {
-        text-shadow: 0 0 10px #fff;
+        color: #fff;
+        text-shadow: 0 0 10px #000;
     }
 </style>
 
