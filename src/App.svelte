@@ -10,6 +10,7 @@
     import Goods from './pages/GoodsPage.svelte';
     import InventoryPage from './pages/InventoryPage.svelte';
 
+    import Notifications from './components/Notifications.svelte';
     import Inventory from './components/Inventory.svelte';
     import Time from './components/Time.svelte';
     import Settings from './components/Settings.svelte';
@@ -43,6 +44,7 @@
 
 <div class="app wrapper">
     <Loader />
+    <Notifications />
 
     <header class="header">
         <h1

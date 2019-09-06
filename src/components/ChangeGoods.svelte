@@ -2,14 +2,12 @@
     import { fade } from 'svelte/transition';
     import { goods } from '../stores/goods.js';
     import { merchant } from '../stores/merchant.js';
+    import { notifications } from '../stores/notifications.js';
     import { log } from '../stores/log.js';
     import Button from '../components/Button.svelte';
     import { goodsInfo } from '../utils/goods';
     import RangeSlider from '../components/RangeSlider.svelte';
     import cloneDeep from 'lodash-es/cloneDeep';
-    import Notifications from '../components/Notifications.svelte';
-
-    let notifications;
 
     $: tempGoods = cloneDeep($goods);
     $: tempDoubloons = $merchant.doubloons;
@@ -47,7 +45,6 @@
     const makeTransaction = () => {
         merchant.setDoubloons(tempDoubloons);
         goods.updateAll(tempGoods);
-        notifications.success('Transaction made successfully.');
         log.add(`Your changed your goods in a transaction.`);
     };
 
@@ -73,8 +70,6 @@
         font-weight: bold;
     }
 </style>
-
-<Notifications bind:this={notifications} />
 
 <div class="change-goods-component">
     <div class="slider-container">

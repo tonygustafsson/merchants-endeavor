@@ -1,18 +1,12 @@
 <script>
     import { fly } from 'svelte/transition';
+    import { notifications } from '../stores/notifications';
 
-    $: showNotification = false;
+    let entries;
 
-    let notification;
-
-    export const success = message => {
-        notification = message;
-        showNotification = true;
-
-        setTimeout(() => {
-            showNotification = false;
-        }, 2000);
-    };
+    notifications.subscribe(value => {
+        entries = value;
+    });
 </script>
 
 <style>
@@ -30,11 +24,11 @@
     }
 </style>
 
-{#if showNotification}
+{#each entries as entry}
     <div class="notification" transition:fly={{ y: 100, duration: 200 }}>
         <p>
             <span class="icon">✓</span>
-            {notification}
+            {entry}
         </p>
     </div>
-{/if}
+{/each}

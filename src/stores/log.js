@@ -1,5 +1,6 @@
-import { writable, get } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { time } from './time.js';
+import { notifications } from './notifications';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 
 const tableName = 'logs';
@@ -22,7 +23,7 @@ const logStore = () => {
         updateAll: data => {
             set(data);
         },
-        add: entry => {
+        add: (entry, notify = true) => {
             update(logs => {
                 const newLogs = [...logs];
                 const item = {
@@ -34,6 +35,10 @@ const logStore = () => {
 
                 if (newLogs.length > maxItems) {
                     newLogs.pop();
+                }
+
+                if (notify) {
+                    notifications.add(entry);
                 }
 
                 return newLogs;

@@ -4,11 +4,9 @@
     import { goods } from '../stores/goods.js';
     import { shipTotals } from '../stores/ships.js';
     import { log } from '../stores/log';
+    import { notifications } from '../stores/notifications';
     import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
-    import Notifications from '../components/Notifications.svelte';
-
-    let notifications;
 
     $: restoreMoodCost = ($staff.members + $shipTotals.crewMembers) * ((100 - $staff.mood) * 3);
     $: restoreMoodAvailable = $staff.mood < 100 && $merchant.doubloons >= restoreMoodCost;
@@ -30,7 +28,6 @@
 
     const requireHireStaff = () => {
         staff.requestHire();
-        notifications.success('Requested to hire more staff members.');
         log.add(`You requested to hire more staff members.`);
     };
 
@@ -39,8 +36,6 @@
         log.add(`You fired a staff member.`);
     };
 </script>
-
-<Notifications bind:this={notifications} />
 
 <div class="page-staff">
     <h2>Staff</h2>
