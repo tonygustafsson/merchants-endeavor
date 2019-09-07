@@ -6,6 +6,8 @@
     import Table from '../../components/Table.svelte';
     import Button from '../../components/Button.svelte';
 
+    const maxLoan = 10000;
+
     $: getLoanInterest = (sum, tick) => {
         const ticksSinceLoan = $ticker - tick;
         return Math.floor(sum * (ticksSinceLoan * 0.00005));
@@ -15,11 +17,11 @@
         if (!$merchant.loans) return false;
 
         const totalLoan = $merchant.loans.reduce((acc, currentValue) => {
-            console.log(acc, currentValue);
             acc += currentValue.sum;
+            return acc;
         }, 0);
 
-        return totalLoan < 2000;
+        return totalLoan < maxLoan;
     };
 
     const takeLoan = () => {
@@ -54,6 +56,12 @@
 {:else}
     <p>
         <em>No loans yet.</em>
+    </p>
+{/if}
+
+{#if !loanAvailable()}
+    <p>
+        <em>You cannot take any more loans since you reached the limit of {maxLoan} dbl.</em>
     </p>
 {/if}
 
