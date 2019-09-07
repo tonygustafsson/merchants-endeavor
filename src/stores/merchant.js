@@ -3,6 +3,7 @@ import { getStateFromDb, saveStateToDb } from '../utils/db';
 import { getRandomMerchant } from '../utils/merchant';
 import { ticker } from './ticker';
 import cloneDeep from 'lodash-es/cloneDeep';
+import { getRandomId } from '../utils/string';
 
 const tableName = 'merchant';
 
@@ -50,11 +51,31 @@ const merchantStore = () => {
                 const $ticker = get(ticker);
 
                 const newLoan = {
+                    id: getRandomId(32),
                     tick: $ticker,
                     sum: sum
                 };
 
                 newMerchant.loans.push(newLoan);
+                newMerchant.doubloons += sum;
+
+                return newMerchant;
+            });
+        },
+        repayLoan: id => {
+            update(merchant => {
+                const newMerchant = cloneDeep(merchant);
+                const loan = newMerchant.loans.find(loan => loan.id === id);
+
+                if (!loan) return newMerchant;
+
+                const $ticker = get(ticker);
+                const ticksSinceLoan = $ticker - loan.tick;
+                const interest = Math.floor(loan.sum * (ticksSinceLoan * 0.00005));
+                const totalSum = loan.sum + interest;
+
+                newMerchant.loans = newMerchant.loans.filter(loan => loan.id !== id);
+                newMerchant.doubloons -= totalSum;
 
                 return newMerchant;
             });

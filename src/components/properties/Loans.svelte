@@ -2,6 +2,7 @@
     import { ticker } from '../../stores/ticker.js';
     import { time } from '../../stores/time.js';
     import { merchant } from '../../stores/merchant.js';
+    import { log } from '../../stores/log.js';
 
     import Table from '../../components/Table.svelte';
     import Button from '../../components/Button.svelte';
@@ -13,7 +14,7 @@
         return Math.floor(sum * (ticksSinceLoan * 0.00005));
     };
 
-    $: loanAvailable = () => {
+    $: loanAvailable = loanSum => {
         if (!$merchant.loans) return false;
 
         const totalLoan = $merchant.loans.reduce((acc, currentValue) => {
@@ -21,11 +22,17 @@
             return acc;
         }, 0);
 
-        return totalLoan < maxLoan;
+        return loanSum + totalLoan <= maxLoan;
     };
 
-    const takeLoan = () => {
-        merchant.takeLoan(1000);
+    const takeLoan = loanSum => {
+        merchant.takeLoan(loanSum);
+        log.add(`You took a new loan of ${loanSum} dbl.`);
+    };
+
+    const repayLoan = loanId => {
+        merchant.repayLoan(loanId);
+        log.add(`You repaid your loan.`);
     };
 </script>
 
@@ -46,9 +53,14 @@
         {#each $merchant.loans as loan}
             <tr>
                 <td>{$time.getTimeAtTick(loan.tick)}</td>
-                <td>{loan.sum}</td>
+                <td>{loan.sum} dbl</td>
                 <td>
-                    <Button variant="small">Repay for {loan.sum + getLoanInterest(loan.sum, loan.tick)} dbl</Button>
+                    <Button
+                        on:click={() => repayLoan(loan.id)}
+                        disabled={$merchant.doubloons < loan.sum + getLoanInterest(loan.sum, loan.tick)}
+                        variant="small">
+                        Repay for {loan.sum + getLoanInterest(loan.sum, loan.tick)} dbl
+                    </Button>
                 </td>
             </tr>
         {/each}
@@ -59,10 +71,12 @@
     </p>
 {/if}
 
-{#if !loanAvailable()}
+{#if !loanAvailable(1000)}
     <p>
         <em>You cannot take any more loans since you reached the limit of {maxLoan} dbl.</em>
     </p>
 {/if}
 
-<Button disabled={!loanAvailable()} on:click={takeLoan}>Take loan</Button>
+<Button disabled={!loanAvailable(1000)} on:click={() => takeLoan(1000)}>Loan 1000 dbl</Button>
+<Button disabled={!loanAvailable(2500)} on:click={() => takeLoan(2500)}>Loan 2500 dbl</Button>
+<Button disabled={!loanAvailable(5000)} on:click={() => takeLoan(5000)}>Loan 5000 dbl</Button>

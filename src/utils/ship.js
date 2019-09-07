@@ -1,4 +1,5 @@
 import { getRandomLineFromFile } from './fileReader';
+import { getRandomId } from './string';
 
 export const shipTypes = {
     brig: {
@@ -35,21 +36,11 @@ export const shipTypes = {
     }
 };
 
-const getRandomShipId = length => {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-};
-
 export const getRandomShip = shipType => {
     return getRandomLineFromFile('../lists/shipNames.txt')
         .then(shipName => {
             const ship = {
-                id: getRandomShipId(32),
+                id: getRandomId(32),
                 name: shipName,
                 type: shipType,
                 health: 100,
