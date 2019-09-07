@@ -1,6 +1,8 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 import { getRandomMerchant } from '../utils/merchant';
+import { ticker } from './ticker';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 const tableName = 'merchant';
 
@@ -8,7 +10,8 @@ const initValue = {
     name: '',
     gender: '',
     nationality: '',
-    doubloons: 1000
+    doubloons: 1000,
+    loans: []
 };
 
 const merchantStore = () => {
@@ -39,6 +42,21 @@ const merchantStore = () => {
                 if (merchant.doubloons - doubloons < 0) return { ...merchant };
 
                 return { ...merchant, doubloons: merchant.doubloons - doubloons };
+            });
+        },
+        takeLoan: sum => {
+            update(merchant => {
+                const newMerchant = cloneDeep(merchant);
+                const $ticker = get(ticker);
+
+                const newLoan = {
+                    tick: $ticker,
+                    sum: sum
+                };
+
+                newMerchant.loans.push(newLoan);
+
+                return newMerchant;
             });
         }
     };
