@@ -8,7 +8,6 @@ import { log } from './log';
 import { getRandomShip } from '../utils/ship';
 import { getStateFromDb, saveStateToDb } from '../utils/db';
 
-let currentTick = 0;
 const missionLength = 10;
 
 const tableName = 'ships';
@@ -70,8 +69,10 @@ const shipsStore = () => {
             update(ships => {
                 let newShips = cloneDeep(ships);
 
+                const $ticker = get(ticker);
+
                 let ship = newShips.find(ship => ship.id === id);
-                ship.onMission = currentTick + missionLength;
+                ship.onMission = $ticker + missionLength;
 
                 log.add(`You sent your ${ship.type} ${ship.name} on a mission.`);
 
@@ -85,7 +86,9 @@ const shipsStore = () => {
                 let newShips = cloneDeep(ships);
 
                 newShips.map(ship => {
-                    if (ship.onMission !== false && ship.onMission < currentTick) {
+                    const $ticker = get(ticker);
+
+                    if (ship.onMission !== false && ship.onMission < $ticker) {
                         // Back from mission
                         ship.onMission = false;
 
@@ -155,7 +158,6 @@ ticker.subscribe(value => {
 
     if (checkMissionsCounter >= 20) {
         // Dont' check to often
-        currentTick = value;
         ships.checkMissions();
         checkMissionsCounter = 0;
     }
