@@ -1,6 +1,7 @@
 <script>
     export let disabled = false;
     export let type = 'button';
+    export let variant = '';
 </script>
 
 <style>
@@ -14,6 +15,10 @@
         margin: 0.5em 0.5em 0.5em 0;
         border: 1px #cdcdcd solid;
         box-shadow: 0px 0px 4px #898989;
+    }
+
+    button.small {
+        font-size: 80%;
     }
 
     button:hover {
@@ -31,6 +36,6 @@
     }
 </style>
 
-<button {type} {disabled} on:click>
+<button {type} {disabled} class:small={variant === 'small'} on:click>
     <slot />
 </button>
