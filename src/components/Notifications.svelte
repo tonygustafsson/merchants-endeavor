@@ -16,11 +16,11 @@
         left: 0;
         width: 100%;
         background-color: rgb(207, 255, 163);
-        padding: 0.75em;
+        padding: 0.5em;
         text-align: center;
     }
     p {
-        font-size: 140%;
+        font-size: 120%;
     }
     .icon {
         color: green;
