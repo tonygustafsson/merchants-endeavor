@@ -6,16 +6,17 @@ import { merchant } from './merchant';
 import { staff } from './staff';
 import { log } from './log';
 import { getRandomShip } from '../utils/ship';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/db';
 
 const missionLength = 10;
 
 const tableName = 'ships';
+const initValue = [];
 const minValue = 0;
 const maxValue = 10;
 
 const shipsStore = () => {
-    const { subscribe, set, update } = writable([]);
+    const { subscribe, set, update } = writable(initValue);
 
     return {
         subscribe,
@@ -136,20 +137,11 @@ export const shipTotals = derived(ships, $ships => {
     };
 });
 
-getStateFromDb(tableName)
-    .then(value => {
-        ships.updateAll(value);
-    })
-    .catch(err => {
-        getRandomShip('brig').then(newShip => {
-            ships.updateAll([newShip]);
-        });
-    })
-    .finally(() => {
-        ships.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
+syncState(tableName, ships, initValue, () => {
+    return getRandomShip('brig').then(newShip => {
+        ships.updateAll([newShip]);
     });
+});
 
 let checkMissionsCounter = 0;
 

@@ -1,5 +1,5 @@
 import { writable, get } from 'svelte/store';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/db';
 import { getRandomMerchant } from '../utils/merchant';
 import { ticker } from './ticker';
 import cloneDeep from 'lodash-es/cloneDeep';
@@ -85,17 +85,7 @@ const merchantStore = () => {
 
 export const merchant = merchantStore();
 
-getStateFromDb(tableName)
-    .then(value => {
-        merchant.updateAll(value);
-    })
-    .catch(err => {
-        const randomMerchant = getRandomMerchant();
-        const newValue = Object.assign(initValue, randomMerchant);
-        merchant.updateAll(newValue);
-    })
-    .finally(() => {
-        merchant.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+syncState(tableName, merchant, initValue, () => {
+    const randomMerchant = getRandomMerchant();
+    return Object.assign(initValue, randomMerchant);
+});
