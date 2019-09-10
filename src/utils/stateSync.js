@@ -38,6 +38,7 @@ const mixDefaultValueWithState = (defaultValue, stateValue) => {
 }
 
 const calcDefaultValues = (defaultValueAdder, defaultValue) => {
+    // Sometimes the default values has to be calculated first time, but not if state exists
     if (defaultValueAdder) {
         Promise.resolve(defaultValueAdder()).then(extras => {
             // Resolves the extra data, add it to defaultValue and update store
@@ -52,14 +53,17 @@ export const syncState = (tableName, store, defaultValue, defaultValueAdder) => 
     return new Promise((resolve, reject) => {
         getStateFromDb(tableName)
             .then(value => {
+                // Got state from localForage
                 value = mixDefaultValueWithState(defaultValue, value)
                 store.updateAll(val);
             })
             .catch(err => {
+                // No state saved, calculate new state
                 defaultValue = calcDefaultValues(defaultValueAdder, defaultValue);
                 store.updateAll(defaultValue);
             })
             .finally(() => {
+                // Create subscriber that saves state to DB
                 store.subscribe(value => {
                     saveStateToDb(tableName, value);
                 });
