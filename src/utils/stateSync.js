@@ -28,34 +28,43 @@ const getStateFromDb = table => {
     });
 };
 
-export const syncState = (tableName, store, initValue, initValueAdder) => {
+const mixDefaultValueWithState = (defaultValue, stateValue) => {
+    // Adds state values to the default one, can add new defaultValues if state is missing them
+    if (typeof value === 'object') {
+        return = Object.assign(defaultValue, stateValue);
+    }
+
+    return value;
+}
+
+const calcDefaultValues = (defaultValueAdder, defaultValue) => {
+    if (defaultValueAdder) {
+        Promise.resolve(defaultValueAdder()).then(extras => {
+            // Resolves the extra data, add it to defaultValue and update store
+            return mixDefaultValueWithState(defaultValue, extras);
+        });
+    } 
+    
+    return defaultValue;
+}
+
+export const syncState = (tableName, store, defaultValue, defaultValueAdder) => {
     return new Promise((resolve, reject) => {
         getStateFromDb(tableName)
             .then(value => {
-                if (typeof value === 'object') {
-                    value = cloneDeep(Object.assign(initValue, value));
-                }
-
-                store.updateAll(value);
+                value = mixDefaultValueWithState(defaultValue, value)
+                store.updateAll(val);
             })
             .catch(err => {
-                if (initValueAdder) {
-                    const initValueExtras = initValueAdder();
-
-                    Promise.resolve(initValueExtras).then(extras => {
-                        // Resolves the extra data, add it to initValue and update store
-                        initValue = Object.assign(initValue, extras);
-                        store.updateAll(initValue);
-                    });
-                } else {
-                    store.updateAll(initValue);
-                }
+                defaultValue = calcDefaultValues(defaultValueAdder, defaultValue);
+                store.updateAll(defaultValue);
             })
             .finally(() => {
                 store.subscribe(value => {
                     saveStateToDb(tableName, value);
-                    resolve(get(store));
                 });
+
+                resolve(get(store));
             });
     });
 };
