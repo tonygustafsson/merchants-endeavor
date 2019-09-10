@@ -38,6 +38,8 @@
     :global(button > img) {
         display: block;
         margin: 0 auto;
+        width: 150px;
+        height: 150px;
         max-width: 100%;
     }
 

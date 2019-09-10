@@ -77,6 +77,6 @@
     </p>
 {/if}
 
-<Button disabled={!loanAvailable(1000)} on:click={() => takeLoan(1000)}>Loan 1000 dbl</Button>
-<Button disabled={!loanAvailable(2500)} on:click={() => takeLoan(2500)}>Loan 2500 dbl</Button>
-<Button disabled={!loanAvailable(5000)} on:click={() => takeLoan(5000)}>Loan 5000 dbl</Button>
+<Button disabled={!loanAvailable(1000)} on:click={() => takeLoan(1000)}>💰 Loan 1000 dbl</Button>
+<Button disabled={!loanAvailable(2500)} on:click={() => takeLoan(2500)}>💰 Loan 2500 dbl</Button>
+<Button disabled={!loanAvailable(5000)} on:click={() => takeLoan(5000)}>💰 Loan 5000 dbl</Button>

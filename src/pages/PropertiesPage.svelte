@@ -1,5 +1,6 @@
 <script>
     import Ships from '../components/properties/Ships.svelte';
+    import Businesses from '../components/properties/Businesses.svelte';
     import Loans from '../components/properties/Loans.svelte';
 </script>
 
@@ -10,13 +11,7 @@
 
     <Ships />
 
-    <h3>Corporations</h3>
-
-    <p>You do not control any corporations yet.</p>
-
-    <h3>Stocks</h3>
-
-    <p>You have no stocks or bonds yet.</p>
+    <Businesses />
 
     <Loans />
 </div>
