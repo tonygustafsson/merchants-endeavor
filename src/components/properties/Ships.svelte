@@ -29,25 +29,31 @@
 <div class="component-ships">
     <h3>Ships</h3>
 
-    <Table>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Health</th>
-            <th>Load</th>
-            <th>On mission</th>
-        </tr>
-
-        {#each $ships as ship, i}
-            <tr style="cursor: pointer" on:click={() => game.changeRoute('properties', ship.id)}>
-                <td>⛵ {ship.name}</td>
-                <td>{ucFirst(ship.type)}</td>
-                <td>{ship.health}%</td>
-                <td>{ship.food + ship.water} / {shipTypes[ship.type].loadCapacity}</td>
-                <td>{ship.onMission ? 'Yes' : 'No'}</td>
+    {#if $ships.length > 0}
+        <Table>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Health</th>
+                <th>Load</th>
+                <th>On mission</th>
             </tr>
-        {/each}
-    </Table>
+
+            {#each $ships as ship}
+                <tr style="cursor: pointer" on:click={() => game.changeRoute('properties', ship.id)}>
+                    <td>⛵ {ship.name}</td>
+                    <td>{ucFirst(ship.type)}</td>
+                    <td>{ship.health}%</td>
+                    <td>{ship.food + ship.water} / {shipTypes[ship.type].loadCapacity}</td>
+                    <td>{ship.onMission ? 'Yes' : 'No'}</td>
+                </tr>
+            {/each}
+        </Table>
+    {:else}
+        <p>
+            <em>You do not own any ships yet.</em>
+        </p>
+    {/if}
 
     <Button on:click={() => (showBuyModal = true)}>⛵ Buy ships</Button>
 
@@ -57,28 +63,35 @@
 
             <p>Click on the ship you want and can afford.</p>
 
-            <div>
-                <Button disabled={$merchant.doubloons < shipTypes.brig.price} on:click={() => buyShip('brig')}>
-                    ⛵ Buy brig ({shipTypes.brig.price} dbl)
-                </Button>
-            </div>
-            <div>
-                <Button
-                    disabled={$merchant.doubloons < shipTypes.merchantman.price}
-                    on:click={() => buyShip('merchantman')}>
-                    ⛵ Buy merchantman ({shipTypes.merchantman.price} dbl)
-                </Button>
-            </div>
-            <div>
-                <Button disabled={$merchant.doubloons < shipTypes.galleon.price} on:click={() => buyShip('galleon')}>
-                    ⛵ Buy galleon ({shipTypes.galleon.price} dbl)
-                </Button>
-            </div>
-            <div>
-                <Button disabled={$merchant.doubloons < shipTypes.frigate.price} on:click={() => buyShip('frigate')}>
-                    ⛵ Buy frigate ({shipTypes.frigate.price} dbl)
-                </Button>
-            </div>
+            <Button disabled={$merchant.doubloons < shipTypes.brig.price} on:click={() => buyShip('brig')}>
+                <img src="img/brig.jpg" alt="Brig" />
+                Brig
+                <br />
+                {shipTypes.brig.price} dbl
+            </Button>
+
+            <Button
+                disabled={$merchant.doubloons < shipTypes.merchantman.price}
+                on:click={() => buyShip('merchantman')}>
+                <img src="img/merchantman.jpg" alt="Merchantman" />
+                Merchantman
+                <br />
+                {shipTypes.merchantman.price} dbl
+            </Button>
+
+            <Button disabled={$merchant.doubloons < shipTypes.galleon.price} on:click={() => buyShip('galleon')}>
+                <img src="img/galleon.jpg" alt="Galleon" />
+                Galleon
+                <br />
+                {shipTypes.galleon.price} dbl
+            </Button>
+
+            <Button disabled={$merchant.doubloons < shipTypes.frigate.price} on:click={() => buyShip('frigate')}>
+                <img src="img/frigate.jpg" alt="Frigate" />
+                Frigate
+                <br />
+                {shipTypes.frigate.price} dbl
+            </Button>
         </Modal>
     {/if}
 </div>

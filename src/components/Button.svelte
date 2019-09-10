@@ -34,6 +34,16 @@
         color: #7e7e7e;
         cursor: default;
     }
+
+    :global(button > img) {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    :global(button:disabled > img) {
+        opacity: 0.5;
+    }
 </style>
 
 <button {type} {disabled} class:small={variant === 'small'} on:click>
