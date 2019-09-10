@@ -9,8 +9,6 @@ import { getRandomShip } from '../utils/ship';
 import { syncState } from '../utils/db';
 
 const missionLength = 10;
-
-const tableName = 'ships';
 const initValue = [];
 const minValue = 0;
 const maxValue = 10;
@@ -137,9 +135,9 @@ export const shipTotals = derived(ships, $ships => {
     };
 });
 
-syncState(tableName, ships, initValue, () => {
+syncState('ships', ships, initValue, () => {
     return getRandomShip('brig').then(newShip => {
-        ships.updateAll([newShip]);
+        return [newShip];
     });
 });
 

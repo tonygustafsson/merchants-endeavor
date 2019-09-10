@@ -5,8 +5,6 @@ import { ticker } from './ticker';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { getRandomId } from '../utils/string';
 
-const tableName = 'merchant';
-
 const initValue = {
     name: '',
     gender: '',
@@ -85,7 +83,6 @@ const merchantStore = () => {
 
 export const merchant = merchantStore();
 
-syncState(tableName, merchant, initValue, () => {
-    const randomMerchant = getRandomMerchant();
-    return Object.assign(initValue, randomMerchant);
+syncState('merchant', merchant, initValue, () => {
+    return getRandomMerchant();
 });

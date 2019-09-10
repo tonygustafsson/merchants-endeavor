@@ -27,15 +27,24 @@ export const getStateFromDb = table => {
     });
 };
 
-export const syncState = (tableName, store, initValue, calcInitValue) => {
+export const syncState = (tableName, store, initValue, initValueAdder) => {
     getStateFromDb(tableName)
         .then(value => {
             const newValue = cloneDeep(Object.assign(initValue, value));
             store.updateAll(newValue);
         })
         .catch(err => {
-            const newInitValue = calcInitValue ? Object.assign(initValue, calcInitValue()) : initValue;
-            store.updateAll(newInitValue);
+            if (initValueAdder) {
+                const initValueExtras = initValueAdder();
+
+                Promise.resolve(initValueExtras).then(extras => {
+                    // Resolves the extra data, add it to initValue and update store
+                    initValue = Object.assign(initValue, extras);
+                    store.updateAll(initValue);
+                });
+            } else {
+                store.updateAll(initValue);
+            }
         })
         .finally(() => {
             store.subscribe(value => {
