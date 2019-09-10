@@ -1,6 +1,6 @@
 import { readable, writable } from 'svelte/store';
 import { ticker } from './ticker.js';
-import { syncState } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 
 const initValue = 5;
 const max = 5;

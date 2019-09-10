@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { time } from './time.js';
 import { notifications } from './notifications';
-import { syncState } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 
 const initValue = [];
 

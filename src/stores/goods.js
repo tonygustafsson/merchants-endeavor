@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { syncState } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 import { goodsInfo } from '../utils/goods';
 import { merchant } from './merchant';
 

@@ -6,7 +6,7 @@ import { merchant } from './merchant';
 import { staff } from './staff';
 import { log } from './log';
 import { getRandomShip } from '../utils/ship';
-import { syncState } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 
 const missionLength = 10;
 const initValue = [];

@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { ticker } from './ticker';
 import { log } from './log';
-import { syncState } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 
 const initValue = {
     members: 4,
