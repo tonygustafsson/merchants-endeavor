@@ -61,12 +61,14 @@ export const syncState = (tableName, store, initValue, initValueAdder) => {
 };
 
 export const clearDatabase = () => {
-    localforage
-        .clear()
-        .then(() => {
-            console.log('Cleared database');
-        })
-        .catch(err => {
-            console.error(err);
-        });
+    return new Promise((resolve, reject) => {
+        localforage
+            .clear()
+            .then(() => {
+                resolve(console.log('Cleared database'));
+            })
+            .catch(err => {
+                reject(console.error(err));
+            });
+    });
 };

@@ -3,8 +3,9 @@
     import Button from '../components/Button.svelte';
 
     const forgetEverything = () => {
-        clearDatabase();
-        window.location.reload();
+        clearDatabase().then(() => {
+            window.location.reload();
+        });
     };
 </script>
 
