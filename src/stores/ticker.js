@@ -35,7 +35,7 @@ const tickerStore = speed => {
 
 export const ticker = tickerStore(defaultTickerSpeed);
 
-syncState('ticker', ticker, initValue);
+syncState('ticker', ticker, initValue).then(value => ticker.updateAll(value));
 
 tickerSpeed.subscribe(value => {
     ticker.updateSpeed(value);

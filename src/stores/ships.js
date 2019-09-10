@@ -139,7 +139,7 @@ syncState('ships', ships, initValue, () => {
     return getRandomShip('brig').then(newShip => {
         return [newShip];
     });
-});
+}).then(value => ships.updateAll(value));
 
 let checkMissionsCounter = 0;
 

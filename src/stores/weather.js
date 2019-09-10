@@ -27,7 +27,7 @@ const weatherStore = () => {
 
 export const weather = weatherStore();
 
-syncState('weather', weather, initValue);
+syncState('weather', weather, initValue).then(value => weather.updateAll(value));
 
 // Update the weather and follow the ticker
 ticker.subscribe(value => {

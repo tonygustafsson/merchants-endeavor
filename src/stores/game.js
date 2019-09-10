@@ -66,9 +66,9 @@ window.addEventListener('popstate', () => {
 
 syncState('game', game, initValue, () => {
     return { loaded: true };
-}).then($game => {
+}).then(value => {
     // Store is loaded
-    let newValue = { ...$game, loaded: true };
+    let newValue = { ...value, loaded: true };
 
     const routeFromUrl = getRouteFromPath();
 

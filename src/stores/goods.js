@@ -69,4 +69,4 @@ const goodsStore = () => {
 
 export const goods = goodsStore();
 
-syncState('goods', goods, initValue);
+syncState('goods', goods, initValue).then(value => goods.updateAll(value));

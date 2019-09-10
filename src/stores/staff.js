@@ -85,7 +85,7 @@ const staffStore = () => {
 
 export const staff = staffStore();
 
-syncState('staff', staff, initValue);
+syncState('staff', staff, initValue).then(value => staff.updateAll(value));
 
 let checkHireCounter = 0;
 

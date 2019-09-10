@@ -48,4 +48,4 @@ const logStore = () => {
 
 export const log = logStore();
 
-syncState('log', log, initValue);
+syncState('log', log, initValue).then(value => log.updateAll(value));

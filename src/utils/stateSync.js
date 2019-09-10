@@ -30,45 +30,43 @@ const getStateFromDb = table => {
 
 const mixDefaultValueWithState = (defaultValue, stateValue) => {
     // Adds state values to the default one, can add new defaultValues if state is missing them
-    if (typeof value === 'object') {
-        return = Object.assign(defaultValue, stateValue);
+    if (typeof defaultValue === 'object') {
+        return Object.assign(defaultValue, stateValue);
     }
 
-    return value;
-}
+    return stateValue;
+};
 
 const calcDefaultValues = (defaultValueAdder, defaultValue) => {
     // Sometimes the default values has to be calculated first time, but not if state exists
-    if (defaultValueAdder) {
-        Promise.resolve(defaultValueAdder()).then(extras => {
+    if (defaultValueAdder && typeof defaultValueAdder === 'function') {
+        return Promise.resolve(defaultValueAdder()).then(extras => {
             // Resolves the extra data, add it to defaultValue and update store
             return mixDefaultValueWithState(defaultValue, extras);
         });
-    } 
-    
+    }
+
     return defaultValue;
-}
+};
 
 export const syncState = (tableName, store, defaultValue, defaultValueAdder) => {
     return new Promise((resolve, reject) => {
         getStateFromDb(tableName)
-            .then(value => {
+            .then(stateValue => {
                 // Got state from localForage
-                value = mixDefaultValueWithState(defaultValue, value)
-                store.updateAll(val);
+                return mixDefaultValueWithState(defaultValue, stateValue);
             })
             .catch(err => {
                 // No state saved, calculate new state
-                defaultValue = calcDefaultValues(defaultValueAdder, defaultValue);
-                store.updateAll(defaultValue);
+                return calcDefaultValues(defaultValueAdder, defaultValue);
             })
-            .finally(() => {
+            .then(state => {
                 // Create subscriber that saves state to DB
                 store.subscribe(value => {
                     saveStateToDb(tableName, value);
                 });
 
-                resolve(get(store));
+                resolve(cloneDeep(state));
             });
     });
 };

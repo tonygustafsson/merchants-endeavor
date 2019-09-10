@@ -85,4 +85,4 @@ export const merchant = merchantStore();
 
 syncState('merchant', merchant, initValue, () => {
     return getRandomMerchant();
-});
+}).then(value => merchant.updateAll(value));
