@@ -1,10 +1,11 @@
 <script>
-    import { clearDatabase } from '../utils/db';
+    import { clearDatabase } from '../utils/stateSync';
     import Button from '../components/Button.svelte';
 
     const forgetEverything = () => {
-        clearDatabase();
-        window.location.reload();
+        clearDatabase().then(() => {
+            window.location.reload();
+        });
     };
 </script>
 

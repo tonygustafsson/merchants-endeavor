@@ -1,9 +1,8 @@
 import { writable } from 'svelte/store';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 import { goodsInfo } from '../utils/goods';
 import { merchant } from './merchant';
 
-const tableName = 'goods';
 const initValue = {
     cannons: 4,
     food: 50,
@@ -70,15 +69,4 @@ const goodsStore = () => {
 
 export const goods = goodsStore();
 
-getStateFromDb(tableName)
-    .then(value => {
-        goods.updateAll(value);
-    })
-    .catch(err => {
-        goods.updateAll(initValue);
-    })
-    .finally(() => {
-        goods.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+syncState('goods', goods, initValue).then(value => goods.updateAll(value));

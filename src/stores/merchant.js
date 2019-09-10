@@ -1,11 +1,9 @@
 import { writable, get } from 'svelte/store';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 import { getRandomMerchant } from '../utils/merchant';
 import { ticker } from './ticker';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { getRandomId } from '../utils/string';
-
-const tableName = 'merchant';
 
 const initValue = {
     name: '',
@@ -85,17 +83,6 @@ const merchantStore = () => {
 
 export const merchant = merchantStore();
 
-getStateFromDb(tableName)
-    .then(value => {
-        merchant.updateAll(value);
-    })
-    .catch(err => {
-        const randomMerchant = getRandomMerchant();
-        const newValue = Object.assign(initValue, randomMerchant);
-        merchant.updateAll(newValue);
-    })
-    .finally(() => {
-        merchant.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+syncState('merchant', merchant, initValue, () => {
+    return getRandomMerchant();
+}).then(value => merchant.updateAll(value));

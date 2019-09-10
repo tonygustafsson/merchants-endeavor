@@ -1,8 +1,8 @@
 import { readable, writable } from 'svelte/store';
 import { ticker } from './ticker.js';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 
-const tableName = 'weather';
+const initValue = 5;
 const max = 5;
 const changeability = 0.02;
 
@@ -11,10 +11,13 @@ const getRandomWeather = () => {
 };
 
 const weatherStore = () => {
-    const { subscribe, set } = writable(5);
+    const { subscribe, set } = writable(initValue);
 
     return {
         subscribe,
+        updateAll: data => {
+            set(data);
+        },
         changeWeather: () => {
             const newWeather = getRandomWeather();
             set(newWeather);
@@ -24,18 +27,7 @@ const weatherStore = () => {
 
 export const weather = weatherStore();
 
-getStateFromDb(tableName)
-    .then(value => {
-        weather.changeWeather(value);
-    })
-    .catch(err => {
-        weather.changeWeather(getRandomWeather());
-    })
-    .finally(() => {
-        weather.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+syncState('weather', weather, initValue).then(value => weather.updateAll(value));
 
 // Update the weather and follow the ticker
 ticker.subscribe(value => {

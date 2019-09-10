@@ -1,9 +1,8 @@
 import { writable } from 'svelte/store';
 import { time } from './time.js';
 import { notifications } from './notifications';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 
-const tableName = 'logs';
 const initValue = [];
 
 const maxItems = 50;
@@ -49,15 +48,4 @@ const logStore = () => {
 
 export const log = logStore();
 
-getStateFromDb(tableName)
-    .then(value => {
-        log.updateAll(value);
-    })
-    .catch(err => {
-        log.updateAll(initValue);
-    })
-    .finally(() => {
-        log.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+syncState('log', log, initValue).then(value => log.updateAll(value));

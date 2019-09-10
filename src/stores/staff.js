@@ -1,9 +1,8 @@
 import { writable } from 'svelte/store';
 import { ticker } from './ticker';
 import { log } from './log';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/stateSync';
 
-const tableName = 'staff';
 const initValue = {
     members: 4,
     health: 100,
@@ -86,18 +85,7 @@ const staffStore = () => {
 
 export const staff = staffStore();
 
-getStateFromDb(tableName)
-    .then(value => {
-        staff.updateAll(value);
-    })
-    .catch(err => {
-        staff.updateAll(initValue);
-    })
-    .finally(() => {
-        staff.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+syncState('staff', staff, initValue).then(value => staff.updateAll(value));
 
 let checkHireCounter = 0;
 

@@ -25,5 +25,5 @@
         🌞
     {:else if $weather === 4}
         🌤
-    {:else if $weather === 3}⛅{:else if $weather === 2}🌥{:else if $weather === 1}🌧{:else}⛈{/if}
+    {:else if $weather === 3}⛅{:else if $weather === 2}🌥{:else if $weather === 1}🌧{:else if $weather === 0}⛈{/if}
 </span>
