@@ -1,8 +1,6 @@
-import { writable } from 'svelte/store';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { writable, get } from 'svelte/store';
+import { syncState } from '../utils/db';
 import { getRouteFromPath } from '../utils/url';
-
-const tableName = 'game';
 
 const initValue = {
     route: {
@@ -66,30 +64,22 @@ window.addEventListener('popstate', () => {
     game.changeRoute(routeFromUrl.page, routeFromUrl.id, false);
 });
 
-getStateFromDb(tableName)
-    .then(value => {
-        // Successfully got game state from persistant store
-        let newValue = { ...value, loaded: true };
+syncState('game', game, initValue, () => {
+    return { loaded: true };
+}).then($game => {
+    // Store is loaded
+    let newValue = { ...$game, loaded: true };
 
-        const routeFromUrl = getRouteFromPath();
+    const routeFromUrl = getRouteFromPath();
 
-        if (value.route.page !== routeFromUrl.page || value.route.id !== routeFromUrl.id) {
-            // If the URL doesn't match current route, change route (direct opening a link)
-            value.route.page = routeFromUrl.page;
-            value.route.id = routeFromUrl.id;
-        }
+    if (newValue.route.page !== routeFromUrl.page || newValue.route.id !== routeFromUrl.id) {
+        // If the URL doesn't match current route, change route (direct opening a link)
+        newValue.route.page = routeFromUrl.page;
+        newValue.route.id = routeFromUrl.id;
+    }
 
-        // On page load, loading should be resetted
-        newValue.loading = false;
+    // On page load, loading should be resetted
+    newValue.loading = false;
 
-        game.updateAll(newValue);
-    })
-    .catch(err => {
-        let newValue = { ...initValue, loaded: true };
-        game.updateAll(newValue);
-    })
-    .finally(() => {
-        game.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+    game.updateAll(newValue);
+});

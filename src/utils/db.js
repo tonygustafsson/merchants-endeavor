@@ -1,3 +1,4 @@
+import { get } from 'svelte/store';
 import localforage from 'localforage';
 import cloneDeep from 'lodash-es/cloneDeep';
 
@@ -28,29 +29,35 @@ export const getStateFromDb = table => {
 };
 
 export const syncState = (tableName, store, initValue, initValueAdder) => {
-    getStateFromDb(tableName)
-        .then(value => {
-            const newValue = cloneDeep(Object.assign(initValue, value));
-            store.updateAll(newValue);
-        })
-        .catch(err => {
-            if (initValueAdder) {
-                const initValueExtras = initValueAdder();
+    return new Promise((resolve, reject) => {
+        getStateFromDb(tableName)
+            .then(value => {
+                if (typeof value === 'object') {
+                    value = cloneDeep(Object.assign(initValue, value));
+                }
 
-                Promise.resolve(initValueExtras).then(extras => {
-                    // Resolves the extra data, add it to initValue and update store
-                    initValue = Object.assign(initValue, extras);
+                store.updateAll(value);
+            })
+            .catch(err => {
+                if (initValueAdder) {
+                    const initValueExtras = initValueAdder();
+
+                    Promise.resolve(initValueExtras).then(extras => {
+                        // Resolves the extra data, add it to initValue and update store
+                        initValue = Object.assign(initValue, extras);
+                        store.updateAll(initValue);
+                    });
+                } else {
                     store.updateAll(initValue);
+                }
+            })
+            .finally(() => {
+                store.subscribe(value => {
+                    saveStateToDb(tableName, value);
+                    resolve(get(store));
                 });
-            } else {
-                store.updateAll(initValue);
-            }
-        })
-        .finally(() => {
-            store.subscribe(value => {
-                saveStateToDb(tableName, value);
             });
-        });
+    });
 };
 
 export const clearDatabase = () => {

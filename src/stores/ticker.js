@@ -1,12 +1,12 @@
 import { writable } from 'svelte/store';
-import { getStateFromDb, saveStateToDb } from '../utils/db';
+import { syncState } from '../utils/db';
 import { tickerSpeed } from './tickerSpeed';
 
-const tableName = 'tick';
+const initValue = 0;
 const defaultTickerSpeed = 1000;
 
 const tickerStore = speed => {
-    const { subscribe, set, update } = writable(0);
+    const { subscribe, set, update } = writable(initValue);
 
     let tickerInterval;
 
@@ -18,7 +18,7 @@ const tickerStore = speed => {
 
     return {
         subscribe,
-        setTick: newTick => {
+        updateAll: newTick => {
             set(newTick);
         },
         updateSpeed: speed => {
@@ -35,18 +35,7 @@ const tickerStore = speed => {
 
 export const ticker = tickerStore(defaultTickerSpeed);
 
-getStateFromDb(tableName)
-    .then(value => {
-        ticker.setTick(value);
-    })
-    .catch(err => {
-        console.log(err);
-    })
-    .finally(() => {
-        ticker.subscribe(value => {
-            saveStateToDb(tableName, value);
-        });
-    });
+syncState('ticker', ticker, initValue);
 
 tickerSpeed.subscribe(value => {
     ticker.updateSpeed(value);
