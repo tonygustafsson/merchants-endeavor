@@ -1,5 +1,5 @@
-import { writable, get } from 'svelte/store';
 import { syncState } from '../utils/stateSync';
+import { writable } from 'svelte/store';
 import { getRouteFromPath } from '../utils/url';
 
 const initValue = {
