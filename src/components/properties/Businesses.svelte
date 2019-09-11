@@ -19,7 +19,7 @@
 
             businesses.add(newBusiness);
             merchant.subtractDoubloons(price);
-            log.add(`You bought a new ${newBusiness.type} named ${newBusiness.name} for ${price} dbl.`);
+            log.add(`You bought a new ${newBusiness.type} business named ${newBusiness.name} for ${price} dbl.`);
             game.setLoading(false);
         });
     };
@@ -33,12 +33,14 @@
             <tr>
                 <th>Name</th>
                 <th>Type</th>
+                <th>Staff</th>
             </tr>
 
             {#each $businesses as business}
                 <tr style="cursor: pointer" on:click={() => game.changeRoute('properties', business.id)}>
-                    <td>⛵ {business.name}</td>
+                    <td>🏠 {business.name}</td>
                     <td>{ucFirst(business.type)}</td>
+                    <td>{business.staff}</td>
                 </tr>
             {/each}
         </Table>

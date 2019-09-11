@@ -29,7 +29,7 @@ export const businessTypes = {
 };
 
 export const getRandomBusiness = businessType => {
-    return getRandomLineFromFile(`../lists/businessName${businessType}.txt`)
+    return getRandomLineFromFile(`../lists/businessName-${businessType}.txt`)
         .then(businessName => {
             const business = {
                 id: getRandomId(32),

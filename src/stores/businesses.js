@@ -22,17 +22,17 @@ const businessesStore = () => {
         },
         add: newBusiness => {
             update(businesses => {
-                if (businesses.length + 1 > maxValue) return cloneDeep(businesses);
+                if (businesses.length + 1 > maxValue) return businesses;
 
                 let newBusinesses = cloneDeep(businesses);
-                newBusinesses.push(newBusinesses);
+                newBusinesses.push(newBusiness);
 
                 return newBusinesses;
             });
         },
         remove: id => {
             update(businesses => {
-                if (businesses.length - 1 < minValue) return cloneDeep(businesses);
+                if (businesses.length - 1 < minValue) return businesses;
 
                 let newBusinesses = cloneDeep(businesses);
                 newBusinesses = newBusinesses.filter(bus => bus.id !== id);
