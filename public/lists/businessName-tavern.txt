@@ -1,2 +1,10 @@
-{0}s shop
-{0}s plaza
+{0}s Tavern
+{0}s Restaurant
+{0}'s In
+Food & Wine
+Wine are Us
+Drunk or not
+Wine Cave
+Barrel of Beer
+Luck in a bottle
+The Tavern

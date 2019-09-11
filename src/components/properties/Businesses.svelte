@@ -73,7 +73,7 @@
             {businessTypes.blacksmith.price} dbl
         </Button>
 
-        <Button disabled={$merchant.doubloons < businessTypes.tavern.price} on:click={() => buyBusiness('tacern')}>
+        <Button disabled={$merchant.doubloons < businessTypes.tavern.price} on:click={() => buyBusiness('tavern')}>
             <img src="img/tavern.png" alt="Tavern" />
             Tavern
             <br />

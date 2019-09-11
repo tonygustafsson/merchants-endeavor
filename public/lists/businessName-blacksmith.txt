@@ -1,2 +1,10 @@
-{0}s shop
-{0}s plaza
+{0}s Iron Works
+{0}s Blacksmith
+Swords & Tools
+Local tool makin'
+Weapons are us
+Darksmith
+Iron Maiden
+We know Iron
+{0}s Swords
+{0}s Tools
