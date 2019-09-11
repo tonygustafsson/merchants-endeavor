@@ -94,20 +94,54 @@ const shipsStore = () => {
                         const shipHealth = ship.health - Math.floor(Math.random() * 25);
                         const staffMoodLoss = Math.floor(Math.random() * 15);
                         const staffHealthLoss = Math.floor(Math.random() * 15);
-                        const food = Math.floor(Math.random() * 40);
-                        const water = Math.floor(Math.random() * 70);
+
+                        let logMsg = `Your ${ship.type} ${ship.name} returned from her mission. You collected ${doubloons} dbl.`;
 
                         merchant.addDoubloons(doubloons);
-                        goods.add('food', food);
-                        goods.add('water', water);
+
+                        if (Math.random() < 0.5) {
+                            const food = Math.floor(Math.random() * 40);
+                            goods.add('food', food);
+                            logMsg += ` ${food} cartons of food.`;
+                        }
+                        if (Math.random() < 0.5) {
+                            const water = Math.floor(Math.random() * 80);
+                            goods.add('water', water);
+                            logMsg += ` ${water} barrels of water.`;
+                        }
+                        if (Math.random() < 0.2) {
+                            const spices = Math.floor(Math.random() * 10);
+                            goods.add('spices', spices);
+                            logMsg += ` ${spices} cartons of spices.`;
+                        }
+                        if (Math.random() < 0.2) {
+                            const porcelain = Math.floor(Math.random() * 10);
+                            goods.add('porcelain', porcelain);
+                            logMsg += ` ${porcelain} cartons of porcelain.`;
+                        }
+                        if (Math.random() < 0.2) {
+                            const tobacco = Math.floor(Math.random() * 5);
+                            goods.add('tobacco', tobacco);
+                            logMsg += ` ${tobacco} cartons of tobacco.`;
+                        }
+                        if (Math.random() < 0.2) {
+                            const rum = Math.floor(Math.random() * 5);
+                            goods.add('rum', rum);
+                            logMsg += ` ${water} barrels of water.`;
+                        }
+
+                        if (Math.random() < 0.5) {
+                            const newCrew = Math.floor(Math.random() * 10);
+                            staff.add(newCrew);
+                            logMsg += ` ${newCrew} crew members joined you.`;
+                        }
+
                         staff.decreaseMood(staffMoodLoss);
                         staff.decreaseHealth(staffHealthLoss);
 
                         ship.health = shipHealth;
 
-                        log.add(
-                            `Your ${ship.type} ${ship.name} returned from her mission. You collected ${doubloons} dbl.`
-                        );
+                        log.add(logMsg);
                     }
                 });
 
