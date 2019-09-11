@@ -21,10 +21,10 @@
         value = parseInt(value, 10);
 
         if (value > business.staff) {
-            // Add more crew members to ship
+            // Add more staff to business
             staff.remove(value - business.staff);
         } else {
-            // Remove crew members from ship
+            // Remove staff from business
             staff.add(business.staff - value);
         }
 
@@ -50,10 +50,10 @@
     <div class="slider-container">
         <div>
             <RangeSlider
-                value={business.crewMembers}
+                value={business.staff}
                 max={maxStaffMembers()}
                 on:input={e => changeStaffMembers(e.target.value)}
-                label="👫 Crew members onboard <strong>({business.crewMembers} onboard)</strong>" />
+                label="👫 Staff members <strong>({business.staff} employed)</strong>" />
             {$staff.members} more available
         </div>
     </div>

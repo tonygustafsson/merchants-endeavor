@@ -3,6 +3,7 @@
     import { staff } from '../stores/staff.js';
     import { goods } from '../stores/goods.js';
     import { shipTotals } from '../stores/ships.js';
+    import { businessTotals } from '../stores/businesses.js';
     import { log } from '../stores/log';
     import { notifications } from '../stores/notifications';
     import Table from '../components/Table.svelte';
@@ -57,6 +58,10 @@
         <tr>
             <td>⛵ Staff on board ships</td>
             <td>{$shipTotals.crewMembers}</td>
+        </tr>
+        <tr>
+            <td>🏠 Staff employed in businesses</td>
+            <td>{$businessTotals.staff}</td>
         </tr>
         <tr>
             <td>🖤 Health</td>

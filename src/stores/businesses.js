@@ -49,10 +49,26 @@ const businessesStore = () => {
 
                 return newBusinesses;
             });
+        },
+        changeStaff: (id, value) => {
+            update(businesses => {
+                let newBusinesses = cloneDeep(businesses);
+
+                let business = newBusinesses.find(business => business.id === id);
+                business.staff = value;
+
+                return newBusinesses;
+            });
         }
     };
 };
 
 export const businesses = businessesStore();
+
+export const businessTotals = derived(businesses, $businesses => {
+    return {
+        staff: $businesses.reduce((sum, business) => (sum += business.staff), 0)
+    };
+});
 
 syncState('businesses', businesses, initValue).then(value => businesses.updateAll(value));

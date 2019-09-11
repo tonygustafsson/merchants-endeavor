@@ -2,6 +2,7 @@
     import { time } from '../stores/time.js';
     import { merchant } from '../stores/merchant';
     import { ships, shipTotals } from '../stores/ships.js';
+    import { businessTotals } from '../stores/businesses.js';
     import { staff } from '../stores/staff';
     import { goods } from '../stores/goods';
     import { game } from '../stores/game';
@@ -62,7 +63,7 @@
         </tr>
         <tr on:click={() => game.changeRoute('staff')}>
             <td>👫 Staff</td>
-            <td>{$shipTotals.crewMembers + $staff.members} members</td>
+            <td>{$shipTotals.crewMembers + $businessTotals.staff + $staff.members} members</td>
         </tr>
         <tr on:click={() => game.changeRoute('goods')}>
             <td>🍲 Food</td>
