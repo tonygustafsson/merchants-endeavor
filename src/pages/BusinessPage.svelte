@@ -2,6 +2,7 @@
     import { businesses } from '../stores/businesses.js';
     import { game } from '../stores/game';
     import BusinessActions from '../components/business/BusinessActions.svelte';
+    import BusinessContents from '../components/business/BusinessContents.svelte';
 
     $: business = $businesses.find(s => s.id === $game.route.id);
 </script>
@@ -15,6 +16,8 @@
         <h2>Business: {business.name}</h2>
 
         <BusinessActions {business} />
+
+        <BusinessContents {business} />
     {:else}
         <p>Business not found.</p>
     {/if}
