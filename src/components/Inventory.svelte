@@ -67,11 +67,11 @@
         </tr>
         <tr on:click={() => game.changeRoute('goods')}>
             <td>🍲 Food</td>
-            <td>{$shipTotals.food + $goods.food} cartons</td>
+            <td>{$goods.food} cartons</td>
         </tr>
         <tr on:click={() => game.changeRoute('goods')}>
             <td>🥛 Water</td>
-            <td>{$shipTotals.water + $goods.water} barrels</td>
+            <td>{$goods.water} barrels</td>
         </tr>
     </Table>
 </div>

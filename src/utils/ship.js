@@ -7,6 +7,7 @@ export const shipTypes = {
         loadCapacity: 500,
         crewMin: 2,
         crewMax: 20,
+        cannonsMin: 4,
         cannonsMax: 10,
         price: 1500
     },
@@ -15,6 +16,7 @@ export const shipTypes = {
         loadCapacity: 1000,
         crewMin: 1,
         crewMax: 10,
+        cannonsMin: 2,
         cannonsMax: 0,
         price: 1000
     },
@@ -23,6 +25,7 @@ export const shipTypes = {
         loadCapacity: 300,
         crewMin: 4,
         crewMax: 50,
+        cannonsMin: 8,
         cannonsMax: 25,
         price: 4000
     },
@@ -31,6 +34,7 @@ export const shipTypes = {
         loadCapacity: 600,
         crewMin: 8,
         crewMax: 50,
+        cannonsMin: 25,
         cannonsMax: 50,
         price: 10000
     }
@@ -46,8 +50,6 @@ export const getRandomShip = shipType => {
                 health: 100,
                 crewMembers: 0,
                 cannons: 0,
-                food: 0,
-                water: 0,
                 onMission: false
             };
 

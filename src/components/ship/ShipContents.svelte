@@ -8,8 +8,6 @@
 
     export let ship;
 
-    $: currentLoad = ship ? ship.food + ship.water : 0;
-
     $: maxCrewMembers = () => {
         if (!ship) return 0;
 
@@ -19,6 +17,7 @@
 
         return ship.crewMembers + $staff.members;
     };
+
     $: maxCannons = () => {
         if (!ship) return 0;
 
@@ -28,24 +27,19 @@
 
         return ship.cannons + $goods.cannons;
     };
-    $: maxFood = ship ? ship.food + $goods.food : 0;
-    $: maxWater = ship ? ship.water + $goods.water : 0;
 
-    const changeGoodsOnboard = (item, value) => {
-        const approvedItems = ['food', 'water', 'cannons'];
-        if (!approvedItems.includes(item)) return;
-
+    const changeCannons = value => {
         value = parseInt(value, 10);
 
-        if (value > ship[item]) {
-            // Add more of the item to ship
-            goods.remove(item, value - ship[item]);
+        if (value > ship.cannons) {
+            // Add more cannons to ship
+            goods.remove('cannons', value - ship.cannons);
         } else {
-            // Remove the item from ship
-            goods.add(item, ship[item] - value);
+            // Remove cannons from ship
+            goods.add('cannons', ship.cannons - value);
         }
 
-        ships.changeItemsOnboard(ship.id, item, value);
+        ships.changeItemsOnboard(ship.id, 'cannons', value);
     };
 
     const changeCrewMembersOnboard = value => {
@@ -92,27 +86,9 @@
             <RangeSlider
                 value={ship.cannons}
                 max={maxCannons()}
-                on:input={e => changeGoodsOnboard('cannons', e.target.value)}
+                on:input={e => changeCannons(e.target.value)}
                 label="💣 Cannons <strong>({ship.cannons} onboard)</strong>" />
             {$goods.cannons} more available
-        </div>
-
-        <div>
-            <RangeSlider
-                value={ship.food}
-                max={maxFood}
-                on:input={e => changeGoodsOnboard('food', e.target.value)}
-                label="🍲 Food <strong>({ship.food} onboard)</strong>" />
-            {$goods.food} more available
-        </div>
-
-        <div>
-            <RangeSlider
-                value={ship.water}
-                max={maxWater}
-                on:input={e => changeGoodsOnboard('water', e.target.value)}
-                label="🥛 Water <strong>({ship.water} onboard)</strong>" />
-            {$goods.water} more available
         </div>
     </div>
 </div>

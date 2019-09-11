@@ -52,7 +52,7 @@ const shipsStore = () => {
             });
         },
         changeItemsOnboard: (id, item, value) => {
-            const approvedItems = ['crewMembers', 'food', 'water', 'cannons'];
+            const approvedItems = ['crewMembers', 'cannons'];
             if (!approvedItems.includes(item)) return;
 
             update(ships => {
@@ -73,8 +73,6 @@ const shipsStore = () => {
                 let ship = newShips.find(ship => ship.id === id);
                 ship.onMission = $ticker + missionLength;
 
-                log.add(`You sent your ${ship.type} ${ship.name} on a mission.`);
-
                 return newShips;
             });
         },
@@ -93,18 +91,18 @@ const shipsStore = () => {
 
                         // Get rewards
                         const doubloons = Math.floor(Math.random() * 1000);
-                        const shipFood = ship.food - ship.crewMembers * 4;
-                        const shipWater = ship.water - ship.crewMembers * 8;
                         const shipHealth = ship.health - Math.floor(Math.random() * 25);
                         const staffMoodLoss = Math.floor(Math.random() * 15);
                         const staffHealthLoss = Math.floor(Math.random() * 15);
+                        const food = Math.floor(Math.random() * 40);
+                        const water = Math.floor(Math.random() * 70);
 
                         merchant.addDoubloons(doubloons);
+                        goods.add('food', food);
+                        goods.add('water', water);
                         staff.decreaseMood(staffMoodLoss);
                         staff.decreaseHealth(staffHealthLoss);
 
-                        ship.food = shipFood;
-                        ship.water = shipWater;
                         ship.health = shipHealth;
 
                         log.add(
@@ -124,14 +122,7 @@ export const ships = shipsStore();
 export const shipTotals = derived(ships, $ships => {
     return {
         crewMembers: $ships.reduce((sum, ship) => (sum += ship.crewMembers), 0),
-        cannons: $ships.reduce((sum, ship) => (sum += ship.cannons), 0),
-        doubloons: $ships.reduce((sum, ship) => (sum += ship.doubloons), 0),
-        food: $ships.reduce((sum, ship) => (sum += ship.food), 0),
-        water: $ships.reduce((sum, ship) => (sum += ship.water), 0),
-        spices: 0,
-        porcelain: 0,
-        tobacco: 0,
-        rum: 0
+        cannons: $ships.reduce((sum, ship) => (sum += ship.cannons), 0)
     };
 });
 

@@ -17,8 +17,6 @@
 
         // Return ship goods
         goods.add('cannons', ship.cannons);
-        goods.add('food', ship.food);
-        goods.add('water', ship.water);
 
         // Sell ship
         const worth = shipTypes[ship.type].price;

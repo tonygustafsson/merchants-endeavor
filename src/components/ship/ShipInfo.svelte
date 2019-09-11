@@ -26,27 +26,15 @@
         </tr>
         <tr>
             <td>👫 Crew members</td>
-            <td>{ship.crewMembers} (Min: {shipTypes[ship.type].crewMin} Max: {shipTypes[ship.type].crewMax})</td>
+            <td>{ship.crewMembers} / {shipTypes[ship.type].crewMax}</td>
         </tr>
         <tr>
             <td>💣 Cannons</td>
             <td>{ship.cannons} / {shipTypes[ship.type].cannonsMax}</td>
         </tr>
         <tr>
-            <td>🍲 Food</td>
-            <td>{ship.food} cartons</td>
-        </tr>
-        <tr>
-            <td>🥛 Water</td>
-            <td>{ship.water} barrels</td>
-        </tr>
-        <tr>
             <td>💚 Health</td>
             <td>{ship.health}%</td>
-        </tr>
-        <tr>
-            <td>⚖ Load</td>
-            <td>{currentLoad} / {shipTypes[ship.type].loadCapacity}</td>
         </tr>
     </Table>
 </div>

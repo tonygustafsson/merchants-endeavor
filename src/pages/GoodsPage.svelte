@@ -21,14 +21,12 @@
     <Table>
         <tr>
             <th>Item</th>
-            <th>On board</th>
             <th>Total</th>
         </tr>
         {#each Object.keys(goodsInfo) as item}
             <tr>
                 <td>{goodsInfo[item].icon} {goodsInfo[item].name}</td>
-                <td>{$shipTotals[item]} {goodsInfo[item].suffix}</td>
-                <td>{$goods[item] + $shipTotals[item]} {goodsInfo[item].suffix}</td>
+                <td>{$goods[item]} {goodsInfo[item].suffix}</td>
             </tr>
         {/each}
     </Table>
