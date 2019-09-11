@@ -2,12 +2,13 @@
     import { game } from './stores/game';
     import { resolution } from './stores/resolution';
 
-    import Start from './pages/StartPage.svelte';
-    import Logs from './pages/LogsPage.svelte';
-    import Properties from './pages/PropertiesPage.svelte';
-    import Ship from './pages/ShipPage.svelte';
-    import Staff from './pages/StaffPage.svelte';
-    import Goods from './pages/GoodsPage.svelte';
+    import StartPage from './pages/StartPage.svelte';
+    import LogsPage from './pages/LogsPage.svelte';
+    import PropertiesPage from './pages/PropertiesPage.svelte';
+    import ShipPage from './pages/ShipPage.svelte';
+    import BusinessPage from './pages/BusinessPage.svelte';
+    import StaffPage from './pages/StaffPage.svelte';
+    import GoodsPage from './pages/GoodsPage.svelte';
     import InventoryPage from './pages/InventoryPage.svelte';
 
     import Notifications from './components/Notifications.svelte';
@@ -73,17 +74,19 @@
     <div class="content white-panel">
         {#if gameLoaded}
             {#if !$game.started || $game.route.page === 'start'}
-                <Start />
-            {:else if $game.route.page === 'properties' && $game.route.id !== 0}
-                <Ship />
+                <StartPage />
+            {:else if $game.route.page === 'ship' && $game.route.id !== 0}
+                <ShipPage />
+            {:else if $game.route.page === 'business' && $game.route.id !== 0}
+                <BusinessPage />
             {:else if $game.route.page === 'properties'}
-                <Properties />
+                <PropertiesPage />
             {:else if $game.route.page === 'logs'}
-                <Logs />
+                <LogsPage />
             {:else if $game.route.page === 'staff'}
-                <Staff />
+                <StaffPage />
             {:else if $game.route.page === 'goods'}
-                <Goods />
+                <GoodsPage />
             {:else}
                 <InventoryPage />
             {/if}

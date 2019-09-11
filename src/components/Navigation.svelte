@@ -41,7 +41,7 @@
                 <a href="/inventory" on:click|preventDefault={() => game.changeRoute('inventory')}>Inventory</a>
             </li>
         {/if}
-        <li class:active={currentRoutePage === 'properties'}>
+        <li class:active={currentRoutePage === 'properties' || currentRoutePage === 'ship'}>
             <a href="/properties" on:click|preventDefault={() => game.changeRoute('properties')}>Properties</a>
         </li>
         <li class:active={currentRoutePage === 'staff'}>

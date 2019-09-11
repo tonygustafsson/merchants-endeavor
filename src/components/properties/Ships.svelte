@@ -7,7 +7,6 @@
     import Modal from '../../components/Modal.svelte';
     import Table from '../../components/Table.svelte';
     import Button from '../../components/Button.svelte';
-
     import { ucFirst } from '../../utils/string';
 
     let showBuyModal = false;
@@ -40,7 +39,7 @@
             </tr>
 
             {#each $ships as ship}
-                <tr style="cursor: pointer" on:click={() => game.changeRoute('properties', ship.id)}>
+                <tr style="cursor: pointer" on:click={() => game.changeRoute('ship', ship.id)}>
                     <td>⛵ {ship.name}</td>
                     <td>{ucFirst(ship.type)}</td>
                     <td>{ship.health}%</td>

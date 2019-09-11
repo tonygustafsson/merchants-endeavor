@@ -37,7 +37,7 @@
             </tr>
 
             {#each $businesses as business}
-                <tr style="cursor: pointer" on:click={() => game.changeRoute('properties', business.id)}>
+                <tr style="cursor: pointer" on:click={() => game.changeRoute('business', business.id)}>
                     <td>🏠 {business.name}</td>
                     <td>{ucFirst(business.type)}</td>
                     <td>{business.staff}</td>
