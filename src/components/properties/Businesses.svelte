@@ -14,7 +14,7 @@
     const buyBusiness = businessType => {
         game.setLoading(true);
 
-        getRandomBusiness(businessType).then(newBusiness => {
+        getRandomBusiness(businessType, $merchant.name).then(newBusiness => {
             const price = businessTypes[businessType].price;
 
             businesses.add(newBusiness);

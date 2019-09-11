@@ -28,9 +28,12 @@ export const businessTypes = {
     }
 };
 
-export const getRandomBusiness = businessType => {
+export const getRandomBusiness = (businessType, merchantName = 'Merchant') => {
     return getRandomLineFromFile(`../lists/businessName-${businessType}.txt`)
         .then(businessName => {
+            merchantName = merchantName.split(' ')[0];
+            businessName = businessName.replace('{0}', merchantName);
+
             const business = {
                 id: getRandomId(32),
                 name: businessName,

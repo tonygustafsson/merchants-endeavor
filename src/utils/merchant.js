@@ -1,5 +1,3 @@
-import { getRandomLineFromFile } from './fileReader';
-
 const names = {
     firstNames: {
         man: {

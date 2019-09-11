@@ -1,2 +1,2 @@
-My shop
-My plaza
+{0}s shop
+{0}s plaza
