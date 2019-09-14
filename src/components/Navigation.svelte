@@ -1,6 +1,7 @@
 <script>
     import { game } from '../stores/game';
     import { resolution } from '../stores/resolution';
+    import { routes } from '../constants/game';
 
     let currentRoutePage = '';
 
@@ -37,21 +38,25 @@
 <nav>
     <ul>
         {#if $resolution.mobile}
-            <li class:active={currentRoutePage === 'inventory'}>
-                <a href="/inventory" on:click|preventDefault={() => game.changeRoute('inventory')}>Inventory</a>
+            <li class:active={currentRoutePage === routes.inventory}>
+                <a href={`/${routes.inventory}`} on:click|preventDefault={() => game.changeRoute(routes.inventory)}>
+                    Inventory
+                </a>
             </li>
         {/if}
-        <li class:active={currentRoutePage === 'properties' || currentRoutePage === 'ship'}>
-            <a href="/properties" on:click|preventDefault={() => game.changeRoute('properties')}>Properties</a>
+        <li class:active={currentRoutePage === routes.properties || currentRoutePage === routes.ship}>
+            <a href={`/${routes.properties}`} on:click|preventDefault={() => game.changeRoute(routes.properties)}>
+                Properties
+            </a>
         </li>
-        <li class:active={currentRoutePage === 'staff'}>
-            <a href="/staff" on:click|preventDefault={() => game.changeRoute('staff')}>Staff</a>
+        <li class:active={currentRoutePage === routes.staff}>
+            <a href={`/${routes.staff}`} on:click|preventDefault={() => game.changeRoute(routes.staff)}>Staff</a>
         </li>
-        <li class:active={currentRoutePage === 'goods'}>
-            <a href="/goods" on:click|preventDefault={() => game.changeRoute('goods')}>Goods</a>
+        <li class:active={currentRoutePage === routes.goods}>
+            <a href={`/${routes.goods}`} on:click|preventDefault={() => game.changeRoute(routes.goods)}>Goods</a>
         </li>
-        <li class:active={currentRoutePage === 'logs'}>
-            <a href="/logs" on:click|preventDefault={() => game.changeRoute('logs')}>Logs</a>
+        <li class:active={currentRoutePage === routes.logs}>
+            <a href={`/${routes.logs}`} on:click|preventDefault={() => game.changeRoute(routes.logs)}>Logs</a>
         </li>
     </ul>
 </nav>

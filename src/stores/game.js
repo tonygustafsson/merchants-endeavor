@@ -1,18 +1,17 @@
 import { syncState } from '../utils/stateSync';
 import { writable } from 'svelte/store';
 import { getRouteFromPath } from '../utils/url';
+import { startRoute, routes } from '../constants/game';
 
 const initValue = {
     route: {
-        page: 'start',
+        page: startRoute,
         id: 0
     },
     loading: false,
     loaded: false,
     started: false
 };
-
-const acceptedRoutePages = ['logs', 'inventory', 'properties', 'ship', 'business', 'staff', 'goods'];
 
 const gameStore = () => {
     const { subscribe, set, update } = writable(initValue);
@@ -33,7 +32,7 @@ const gameStore = () => {
             });
         },
         changeRoute: (page, id = 0, pushState = true) => {
-            if (!acceptedRoutePages.includes(page)) return { ...game };
+            if (!Object.keys(routes).includes(page)) return { ...game };
 
             update(game => {
                 return {
