@@ -34,7 +34,8 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Health</th>
-                <th>Load</th>
+                <th>Crew</th>
+                <th>Cannons</th>
                 <th>On mission</th>
             </tr>
 
@@ -43,7 +44,8 @@
                     <td>⛵ {ship.name}</td>
                     <td>{ucFirst(ship.type)}</td>
                     <td>{ship.health}%</td>
-                    <td>{ship.food + ship.water} / {shipTypes[ship.type].loadCapacity}</td>
+                    <td>{ship.crewMembers}</td>
+                    <td>{ship.cannons}</td>
                     <td>{ship.onMission ? 'Yes' : 'No'}</td>
                 </tr>
             {/each}
