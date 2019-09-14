@@ -1,4 +1,4 @@
-export const goodsInfo = {
+export const types = {
     cannons: {
         name: 'Cannons',
         suffix: 'pcs',

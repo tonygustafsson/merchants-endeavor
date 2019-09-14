@@ -5,7 +5,7 @@
     import Table from '../components/Table.svelte';
     import Button from '../components/Button.svelte';
     import ChangeGoods from '../components/ChangeGoods.svelte';
-    import { goodsInfo } from '../utils/goods';
+    import { types } from '../constants/goods';
 
     $: showChangeGoods = false;
 </script>
@@ -23,10 +23,10 @@
             <th>Item</th>
             <th>Total</th>
         </tr>
-        {#each Object.keys(goodsInfo) as item}
+        {#each Object.keys(types) as item}
             <tr>
-                <td>{goodsInfo[item].icon} {goodsInfo[item].name}</td>
-                <td>{$goods[item]} {goodsInfo[item].suffix}</td>
+                <td>{types[item].icon} {types[item].name}</td>
+                <td>{$goods[item]} {types[item].suffix}</td>
             </tr>
         {/each}
     </Table>

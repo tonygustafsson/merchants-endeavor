@@ -5,7 +5,7 @@
     import { notifications } from '../stores/notifications.js';
     import { log } from '../stores/log.js';
     import Button from '../components/Button.svelte';
-    import { goodsInfo } from '../utils/goods';
+    import { types } from '../constants/goods';
     import RangeSlider from '../components/RangeSlider.svelte';
     import cloneDeep from 'lodash-es/cloneDeep';
 
@@ -79,9 +79,9 @@
                     value={tempGoods[item]}
                     max={tempGoods[item] + 500}
                     on:input={e => changeGoods(item, e.target.value)}
-                    label="{goodsInfo[item].icon}
-                    {goodsInfo[item].name} ({tempGoods[item]}
-                    {goodsInfo[item].suffix})" />
+                    label="{types[item].icon}
+                    {types[item].name} ({tempGoods[item]}
+                    {types[item].suffix})" />
             </div>
         {/each}
     </div>

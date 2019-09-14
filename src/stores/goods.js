@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import { syncState } from '../utils/stateSync';
-import { goodsInfo } from '../utils/goods';
+import { types } from '../constants/goods';
 import { merchant } from './merchant';
 
 const initValue = {
@@ -33,8 +33,8 @@ const goodsStore = () => {
         },
         buy: (item, quantity) => {
             update(goods => {
-                if (Object.hasOwnProperty.call(goodsInfo, item)) {
-                    let price = goodsInfo[item].price;
+                if (Object.hasOwnProperty.call(types, item)) {
+                    let price = types[item].price;
 
                     if (price > merchant.doubloons) {
                         alert('Not enough money!');
@@ -55,8 +55,8 @@ const goodsStore = () => {
                     alert('Not enough ' + item);
                 }
 
-                if (Object.hasOwnProperty.call(goodsInfo, item)) {
-                    let worth = goodsInfo[item].price;
+                if (Object.hasOwnProperty.call(types, item)) {
+                    let worth = types[item].price;
                     merchant.addDoubloons(worth);
                     return { ...goods, [item]: goods[item] - quantity };
                 }
