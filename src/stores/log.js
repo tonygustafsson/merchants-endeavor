@@ -2,10 +2,10 @@ import { writable } from 'svelte/store';
 import { time } from './time.js';
 import { notifications } from './notifications';
 import { syncState } from '../utils/stateSync';
+import { maxItems } from '../constants/logs';
 
 const initValue = [];
 
-const maxItems = 50;
 let currentTime;
 let currentRealTime;
 
