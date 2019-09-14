@@ -2,7 +2,7 @@
     import { ships } from '../../stores/ships.js';
     import { goods } from '../../stores/goods.js';
     import { staff } from '../../stores/staff.js';
-    import { shipTypes } from '../../utils/ship';
+    import { types } from '../../constants/ships';
     import Button from '../../components/Button.svelte';
     import RangeSlider from '../../components/RangeSlider.svelte';
 
@@ -11,8 +11,8 @@
     $: maxCrewMembers = () => {
         if (!ship) return 0;
 
-        if (ship.crewMembers + $staff.members > shipTypes[ship.type].crewMax) {
-            return shipTypes[ship.type].crewMax;
+        if (ship.crewMembers + $staff.members > types[ship.type].crewMax) {
+            return types[ship.type].crewMax;
         }
 
         return ship.crewMembers + $staff.members;
@@ -21,8 +21,8 @@
     $: maxCannons = () => {
         if (!ship) return 0;
 
-        if (ship.cannons + $goods.cannons > shipTypes[ship.type].cannonsMax) {
-            return shipTypes[ship.type].cannonsMax;
+        if (ship.cannons + $goods.cannons > types[ship.type].cannonsMax) {
+            return types[ship.type].cannonsMax;
         }
 
         return ship.cannons + $goods.cannons;

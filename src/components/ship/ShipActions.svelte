@@ -2,7 +2,7 @@
     import { ships } from '../../stores/ships.js';
     import { merchant } from '../../stores/merchant.js';
     import { goods } from '../../stores/goods.js';
-    import { shipTypes } from '../../utils/ship';
+    import { types, repairCostPerPercentage } from '../../constants/ships';
     import { staff } from '../../stores/staff.js';
     import { game } from '../../stores/game';
     import { log } from '../../stores/log';
@@ -11,7 +11,7 @@
 
     export let ship;
 
-    $: repairCost = (100 - ship.health) * 5;
+    $: repairCost = (100 - ship.health) * repairCostPerPercentage;
 
     const sellShip = ship => {
         // Return ship crew members
@@ -21,7 +21,7 @@
         goods.add('cannons', ship.cannons);
 
         // Sell ship
-        const worth = shipTypes[ship.type].price;
+        const worth = types[ship.type].price;
         ships.removeShip(ship.id);
         merchant.addDoubloons(worth);
         log.add(`You sold your ${ship.type} ${ship.name} for ${worth} dbl.`);

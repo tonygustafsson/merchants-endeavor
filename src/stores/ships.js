@@ -5,13 +5,25 @@ import { goods } from './goods';
 import { merchant } from './merchant';
 import { staff } from './staff';
 import { log } from './log';
-import { getRandomShip } from '../utils/ship';
+import { getRandomShip } from '../utils/ships';
+import {
+    maxShips,
+    missionLength,
+    missionDoubloonsReward,
+    missionWaterReward,
+    missionPorcelainReward,
+    missionSpicesReward,
+    missionTobaccoReward,
+    missionRumReward,
+    missionCrewJoinReward,
+    missionShipHealthLoss,
+    missionCrewMoodLoss,
+    missionCrewHealthLoss,
+    missionFoodReward
+} from '../constants/ships';
 import { syncState } from '../utils/stateSync';
 
-const missionLength = 10;
 const initValue = [];
-const minValue = 0;
-const maxValue = 10;
 
 const shipsStore = () => {
     const { subscribe, set, update } = writable(initValue);
@@ -23,7 +35,7 @@ const shipsStore = () => {
         },
         addShip: newShip => {
             update(ships => {
-                if (ships.length + 1 > maxValue) return cloneDeep(ships);
+                if (ships.length + 1 > maxShips) return cloneDeep(ships);
 
                 let newShips = cloneDeep(ships);
                 newShips.push(newShip);
@@ -33,7 +45,7 @@ const shipsStore = () => {
         },
         removeShip: id => {
             update(ships => {
-                if (ships.length - 1 < minValue) return cloneDeep(ships);
+                if (ships.length - 1 < 0) return cloneDeep(ships);
 
                 let newShips = cloneDeep(ships);
                 newShips = newShips.filter(ship => ship.id !== id);
@@ -100,48 +112,48 @@ const shipsStore = () => {
                         ship.onMission = false;
 
                         // Get rewards
-                        const doubloons = Math.floor(Math.random() * 1000);
-                        const shipHealth = ship.health - Math.floor(Math.random() * 25);
-                        const staffMoodLoss = Math.floor(Math.random() * 15);
-                        const staffHealthLoss = Math.floor(Math.random() * 15);
+                        const doubloons = Math.floor(Math.random() * missionDoubloonsReward);
+                        const shipHealth = ship.health - Math.floor(Math.random() * missionShipHealthLoss);
+                        const staffMoodLoss = Math.floor(Math.random() * missionCrewMoodLoss);
+                        const staffHealthLoss = Math.floor(Math.random() * missionCrewHealthLoss);
 
                         let logMsg = `Your ${ship.type} ${ship.name} returned from her mission. You collected ${doubloons} dbl.`;
 
                         merchant.addDoubloons(doubloons);
 
                         if (Math.random() < 0.5) {
-                            const food = Math.floor(Math.random() * 40);
+                            const food = Math.floor(Math.random() * missionFoodReward);
                             goods.add('food', food);
                             logMsg += ` ${food} cartons of food.`;
                         }
                         if (Math.random() < 0.5) {
-                            const water = Math.floor(Math.random() * 80);
+                            const water = Math.floor(Math.random() * missionWaterReward);
                             goods.add('water', water);
                             logMsg += ` ${water} barrels of water.`;
                         }
                         if (Math.random() < 0.2) {
-                            const spices = Math.floor(Math.random() * 10);
+                            const spices = Math.floor(Math.random() * missionSpicesReward);
                             goods.add('spices', spices);
                             logMsg += ` ${spices} cartons of spices.`;
                         }
                         if (Math.random() < 0.2) {
-                            const porcelain = Math.floor(Math.random() * 10);
+                            const porcelain = Math.floor(Math.random() * missionPorcelainReward);
                             goods.add('porcelain', porcelain);
                             logMsg += ` ${porcelain} cartons of porcelain.`;
                         }
                         if (Math.random() < 0.2) {
-                            const tobacco = Math.floor(Math.random() * 5);
+                            const tobacco = Math.floor(Math.random() * missionTobaccoReward);
                             goods.add('tobacco', tobacco);
                             logMsg += ` ${tobacco} cartons of tobacco.`;
                         }
                         if (Math.random() < 0.2) {
-                            const rum = Math.floor(Math.random() * 5);
+                            const rum = Math.floor(Math.random() * missionRumReward);
                             goods.add('rum', rum);
                             logMsg += ` ${rum} barrels of water.`;
                         }
 
                         if (Math.random() < 0.5) {
-                            const newCrew = Math.floor(Math.random() * 10);
+                            const newCrew = Math.floor(Math.random() * missionCrewJoinReward);
                             staff.add(newCrew);
                             logMsg += ` ${newCrew} crew members joined you.`;
                         }

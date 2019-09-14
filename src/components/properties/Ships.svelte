@@ -1,7 +1,8 @@
 <script>
     import { ships } from '../../stores/ships.js';
     import { merchant } from '../../stores/merchant.js';
-    import { shipTypes, getRandomShip } from '../../utils/ship';
+    import { getRandomShip } from '../../utils/ships';
+    import { types } from '../../constants/ships';
     import { game } from '../../stores/game';
     import { log } from '../../stores/log';
     import Modal from '../../components/Modal.svelte';
@@ -15,7 +16,7 @@
         game.setLoading(true);
 
         getRandomShip(shipType).then(newShip => {
-            const price = shipTypes[shipType].price;
+            const price = types[shipType].price;
 
             ships.addShip(newShip);
             merchant.subtractDoubloons(price);
@@ -64,34 +65,32 @@
 
             <p>Click on the ship you want and can afford.</p>
 
-            <Button disabled={$merchant.doubloons < shipTypes.brig.price} on:click={() => buyShip('brig')}>
+            <Button disabled={$merchant.doubloons < types.brig.price} on:click={() => buyShip('brig')}>
                 <img src="img/brig.jpg" alt="Brig" />
                 Brig
                 <br />
-                {shipTypes.brig.price} dbl
+                {types.brig.price} dbl
             </Button>
 
-            <Button
-                disabled={$merchant.doubloons < shipTypes.merchantman.price}
-                on:click={() => buyShip('merchantman')}>
+            <Button disabled={$merchant.doubloons < types.merchantman.price} on:click={() => buyShip('merchantman')}>
                 <img src="img/merchantman.jpg" alt="Merchantman" />
                 Merchantman
                 <br />
-                {shipTypes.merchantman.price} dbl
+                {types.merchantman.price} dbl
             </Button>
 
-            <Button disabled={$merchant.doubloons < shipTypes.galleon.price} on:click={() => buyShip('galleon')}>
+            <Button disabled={$merchant.doubloons < types.galleon.price} on:click={() => buyShip('galleon')}>
                 <img src="img/galleon.jpg" alt="Galleon" />
                 Galleon
                 <br />
-                {shipTypes.galleon.price} dbl
+                {types.galleon.price} dbl
             </Button>
 
-            <Button disabled={$merchant.doubloons < shipTypes.frigate.price} on:click={() => buyShip('frigate')}>
+            <Button disabled={$merchant.doubloons < types.frigate.price} on:click={() => buyShip('frigate')}>
                 <img src="img/frigate.jpg" alt="Frigate" />
                 Frigate
                 <br />
-                {shipTypes.frigate.price} dbl
+                {types.frigate.price} dbl
             </Button>
         </Modal>
     {/if}

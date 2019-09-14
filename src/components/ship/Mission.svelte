@@ -3,23 +3,30 @@
     import { staff } from '../../stores/staff.js';
     import { goods } from '../../stores/goods.js';
     import { log } from '../../stores/log.js';
-    import { shipTypes } from '../../utils/ship';
+    import {
+        types,
+        minFoodPerCrewMemberForMission,
+        minWaterPerCrewMemberForMission,
+        minShipHealthForMission,
+        minCrewHealthForMission,
+        minCrewMoodForMission
+    } from '../../constants/ships';
     import Button from '../Button.svelte';
 
     export let ship;
 
-    $: minFood = ship ? ship.crewMembers * 4 : 0;
-    $: minWater = ship ? ship.crewMembers * 8 : 0;
+    $: minFood = ship ? ship.crewMembers * minFoodPerCrewMemberForMission : 0;
+    $: minWater = ship ? ship.crewMembers * minWaterPerCrewMemberForMission : 0;
 
     $: readyForMission = () => {
         if (!ship) return false;
-        if (ship.health < 0) return false;
-        if (ship.crewMembers < shipTypes[ship.type].crewMin) return false;
-        if (ship.cannons < shipTypes[ship.type].cannonsMin) return false;
+        if (ship.health <= minShipHealthForMission) return false;
+        if (ship.crewMembers < types[ship.type].crewMin) return false;
+        if (ship.cannons < types[ship.type].cannonsMin) return false;
         if ($goods.food < minFood) return false;
         if ($goods.water < minWater) return false;
-        if (staff.mood <= 0) return false;
-        if (staff.health <= 0) return false;
+        if (staff.mood <= minCrewMoodForMission) return false;
+        if (staff.health <= minCrewHealthForMission) return false;
 
         return true;
     };
@@ -55,16 +62,16 @@
     {:else if readyForMission()}
         <p>Everything seems fine. You are ready for a mission.</p>
     {:else}
-        {#if ship.crewMembers < shipTypes[ship.type].crewMin}
+        {#if ship.crewMembers < types[ship.type].crewMin}
             <p>
                 <span class="warning-sign">⚠</span>
-                There needs to be at least {shipTypes[ship.type].crewMin} crew members to sail.
+                There needs to be at least {types[ship.type].crewMin} crew members to sail.
             </p>
         {/if}
-        {#if ship.cannons < shipTypes[ship.type].cannonsMin}
+        {#if ship.cannons < types[ship.type].cannonsMin}
             <p>
                 <span class="warning-sign">⚠</span>
-                You need at least {shipTypes[ship.type].cannonsMin} cannons to sail.
+                You need at least {types[ship.type].cannonsMin} cannons to sail.
             </p>
         {/if}
         {#if ship.health < 0}

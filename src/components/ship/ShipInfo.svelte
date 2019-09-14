@@ -1,11 +1,9 @@
 <script>
-    import { shipTypes } from '../../utils/ship';
+    import { types } from '../../constants/ships';
     import { ucFirst } from '../../utils/string';
     import Table from '../../components/Table.svelte';
 
     export let ship;
-
-    $: currentLoad = ship ? ship.food + ship.water : 0;
 </script>
 
 <style>
@@ -26,11 +24,11 @@
         </tr>
         <tr>
             <td>👫 Crew members</td>
-            <td>{ship.crewMembers} / {shipTypes[ship.type].crewMax}</td>
+            <td>{ship.crewMembers} / {types[ship.type].crewMax}</td>
         </tr>
         <tr>
             <td>💣 Cannons</td>
-            <td>{ship.cannons} / {shipTypes[ship.type].cannonsMax}</td>
+            <td>{ship.cannons} / {types[ship.type].cannonsMax}</td>
         </tr>
         <tr>
             <td>💚 Health</td>
