@@ -1,9 +1,8 @@
 import { writable, get } from 'svelte/store';
 import { time } from './time.js';
+import { duration } from '../constants/notifications';
 
 const initValue = [];
-
-const duration = 2500;
 
 const notificationsStore = () => {
     const { subscribe, update, set } = writable(initValue);

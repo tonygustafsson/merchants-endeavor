@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
+import { mobileMaxWidth } from '../constants/resolution';
 
-const isMobile = screenWidth => screenWidth < 1000;
+const isMobile = screenWidth => screenWidth < mobileMaxWidth;
 
 const initValue = {
     mobile: isMobile(window.innerWidth)
