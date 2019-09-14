@@ -11,6 +11,8 @@
 
     export let ship;
 
+    $: repairCost = (100 - ship.health) * 5;
+
     const sellShip = ship => {
         // Return ship crew members
         staff.add(ship.crewMembers);
@@ -32,6 +34,12 @@
         ships.setName(ship.id, newName);
         log.add(`You renamed your ${ship.type} from ${ship.name} to ${newName}.`);
     };
+
+    const repairShip = ship => {
+        ships.repair(ship.id);
+        merchant.subtractDoubloons(repairCost);
+        log.add(`You repaired your ${ship.type} ${ship.name} for ${repairCost}.`);
+    };
 </script>
 
 <div class="component-shipactions">
@@ -46,5 +54,8 @@
         <Button>📛 Change name</Button>
 
         <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>
+        <Button disabled={repairCost <= 0 || $merchant.doubloons < repairCost} on:click={() => repairShip(ship)}>
+            💰 Repair ({repairCost} dbl)
+        </Button>
     </div>
 </div>

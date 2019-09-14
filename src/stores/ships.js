@@ -51,6 +51,16 @@ const shipsStore = () => {
                 return newShips;
             });
         },
+        repair: id => {
+            update(ships => {
+                let newShips = cloneDeep(ships);
+
+                let ship = newShips.find(ship => ship.id === id);
+                ship.health = 100;
+
+                return newShips;
+            });
+        },
         changeItemsOnboard: (id, item, value) => {
             const approvedItems = ['crewMembers', 'cannons'];
             if (!approvedItems.includes(item)) return;
@@ -127,7 +137,7 @@ const shipsStore = () => {
                         if (Math.random() < 0.2) {
                             const rum = Math.floor(Math.random() * 5);
                             goods.add('rum', rum);
-                            logMsg += ` ${water} barrels of water.`;
+                            logMsg += ` ${rum} barrels of water.`;
                         }
 
                         if (Math.random() < 0.5) {
