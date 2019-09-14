@@ -1,5 +1,7 @@
 import { getRandomId } from './string';
 import { getRandomLineFromFile } from './fileReader';
+import { get } from 'svelte/store';
+import { ticker } from '../stores/ticker';
 
 export const businessTypes = {
     merchant: {
@@ -33,11 +35,14 @@ export const getRandomBusiness = (businessType, merchantName = 'Merchant') => {
         .then(businessName => {
             merchantName = merchantName.split(' ')[0];
             businessName = businessName.replace('{0}', merchantName);
+            let currentTick = get(ticker);
 
             const business = {
                 id: getRandomId(32),
+                created: currentTick,
                 name: businessName,
                 type: businessType,
+                profit: 0,
                 staff: 0
             };
 

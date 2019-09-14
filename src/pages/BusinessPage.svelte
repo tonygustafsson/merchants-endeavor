@@ -3,6 +3,7 @@
     import { game } from '../stores/game';
     import BusinessActions from '../components/business/BusinessActions.svelte';
     import BusinessContents from '../components/business/BusinessContents.svelte';
+    import { time } from '../stores/time';
 
     $: business = $businesses.find(s => s.id === $game.route.id);
 </script>
@@ -14,6 +15,9 @@
 
     {#if business}
         <h2>Business: {business.name}</h2>
+
+        <p>Created {$time.getTimeAtTick(business.created)}</p>
+        <p>Profit: {business.profit} dbl</p>
 
         <BusinessActions {business} />
 

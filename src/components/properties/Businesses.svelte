@@ -34,6 +34,7 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Staff</th>
+                <th>Profit</th>
             </tr>
 
             {#each $businesses as business}
@@ -41,6 +42,7 @@
                     <td>🏠 {business.name}</td>
                     <td>{ucFirst(business.type)}</td>
                     <td>{business.staff}</td>
+                    <td>{business.profit} dbl</td>
                 </tr>
             {/each}
         </Table>

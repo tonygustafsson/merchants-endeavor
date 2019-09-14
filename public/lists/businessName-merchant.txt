@@ -6,5 +6,5 @@ Food & stuff
 The local store
 {0}s local store
 {0}s Deli
-{0} Fish
+{0}s Fish
 Fish & eggs

@@ -28,6 +28,12 @@
         businesses.setName(business.id, newName);
         log.add(`You renamed your ${business.type} from ${business.name} to ${newName}.`);
     };
+
+    const takeProfit = () => {
+        merchant.addDoubloons(business.profit);
+        businesses.takeProfit(business.id);
+        log.add(`You took profit from your ${business.type} ${business.name} and got ${business.profit}.`);
+    };
 </script>
 
 <div class="component-businessactions">
@@ -42,5 +48,6 @@
         <Button>📛 Change name</Button>
 
         <Button on:click={() => sellBusiness(business)}>💰 Sell the business</Button>
+        <Button disabled={business.profit <= 0} on:click={() => takeProfit()}>💰 Take profit</Button>
     </div>
 </div>

@@ -59,6 +59,34 @@ const businessesStore = () => {
 
                 return newBusinesses;
             });
+        },
+        checkProfit: () => {
+            update(businesses => {
+                if (businesses.length < 1) return businesses;
+
+                let newBusiness = cloneDeep(businesses);
+
+                newBusiness.map(business => {
+                    if (Math.random() > 0.8) return;
+
+                    const profit = Math.floor(Math.random() * business.staff * 100);
+                    business.profit += profit;
+
+                    log.add(`Your ${business.type} ${business.name} just made ${profit} dbl in profit.`);
+                });
+
+                return newBusiness;
+            });
+        },
+        takeProfit: id => {
+            update(businesses => {
+                let newBusinesses = cloneDeep(businesses);
+
+                let business = newBusinesses.find(business => business.id === id);
+                business.profit = 0;
+
+                return newBusinesses;
+            });
         }
     };
 };
@@ -72,3 +100,15 @@ export const businessTotals = derived(businesses, $businesses => {
 });
 
 syncState('businesses', businesses, initValue).then(value => businesses.updateAll(value));
+
+let checkProfitCounter = 0;
+
+ticker.subscribe(value => {
+    checkProfitCounter++;
+
+    if (checkProfitCounter >= 50) {
+        // Dont' check to often
+        businesses.checkProfit();
+        checkProfitCounter = 0;
+    }
+});
