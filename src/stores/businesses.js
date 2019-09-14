@@ -5,12 +5,15 @@ import { goods } from './goods';
 import { merchant } from './merchant';
 import { staff } from './staff';
 import { log } from './log';
-import { getRandomBusiness } from '../utils/business';
 import { syncState } from '../utils/stateSync';
+import {
+    maxNumberOfBusinesses,
+    chanceOfMakingProfit,
+    profitValue,
+    profitCheckFrequency
+} from '../constants/businesses';
 
 const initValue = [];
-const minValue = 0;
-const maxValue = 10;
 
 const businessesStore = () => {
     const { subscribe, set, update } = writable(initValue);
@@ -22,7 +25,7 @@ const businessesStore = () => {
         },
         add: newBusiness => {
             update(businesses => {
-                if (businesses.length + 1 > maxValue) return businesses;
+                if (businesses.length + 1 > maxNumberOfBusinesses) return businesses;
 
                 let newBusinesses = cloneDeep(businesses);
                 newBusinesses.push(newBusiness);
@@ -32,10 +35,8 @@ const businessesStore = () => {
         },
         remove: id => {
             update(businesses => {
-                if (businesses.length - 1 < minValue) return businesses;
-
                 let newBusinesses = cloneDeep(businesses);
-                newBusinesses = newBusinesses.filter(bus => bus.id !== id);
+                newBusinesses = newBusinesses.filter(business => business.id !== id);
 
                 return newBusinesses;
             });
@@ -44,7 +45,7 @@ const businessesStore = () => {
             update(businesses => {
                 let newBusinesses = cloneDeep(businesses);
 
-                let business = newBusinesses.find(bus => bus.id === id);
+                let business = newBusinesses.find(business => business.id === id);
                 business.name = newName;
 
                 return newBusinesses;
@@ -67,12 +68,12 @@ const businessesStore = () => {
                 let newBusiness = cloneDeep(businesses);
 
                 newBusiness.map(business => {
-                    if (Math.random() > 0.8) return;
+                    if (Math.random() > chanceOfMakingProfit) return;
 
-                    const profit = Math.floor(Math.random() * business.staff * 100);
+                    const profit = Math.floor(Math.random() * business.staff * profitValue);
                     business.profit += profit;
 
-                    log.add(`Your ${business.type} ${business.name} just made ${profit} dbl in profit.`);
+                    log.add(`Your ${business.type} ${business.name} just made ${profit} dbl in profit.`, false);
                 });
 
                 return newBusiness;
@@ -106,7 +107,7 @@ let checkProfitCounter = 0;
 ticker.subscribe(value => {
     checkProfitCounter++;
 
-    if (checkProfitCounter >= 50) {
+    if (checkProfitCounter >= profitCheckFrequency) {
         // Dont' check to often
         businesses.checkProfit();
         checkProfitCounter = 0;

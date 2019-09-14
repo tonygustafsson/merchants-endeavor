@@ -1,21 +1,46 @@
 <script>
     import { merchant } from '../../stores/merchant.js';
     import { businesses } from '../../stores/businesses.js';
-    import { businessTypes, getRandomBusiness } from '../../utils/business';
     import { game } from '../../stores/game';
     import { log } from '../../stores/log';
+    import { ticker } from '../../stores/ticker';
     import Modal from '../../components/Modal.svelte';
     import Table from '../../components/Table.svelte';
     import Button from '../../components/Button.svelte';
-    import { ucFirst } from '../../utils/string';
+    import { types } from '../../constants/businesses';
+    import { getRandomId, ucFirst } from '../../utils/string';
+    import { getRandomLineFromFile } from '../../utils/fileReader';
 
     let showBuyModal = false;
+
+    export const getRandomBusiness = (businessType, merchantName = 'Merchant') => {
+        return getRandomLineFromFile(`../lists/businessName-${businessType}.txt`)
+            .then(businessName => {
+                merchantName = merchantName.split(' ')[0];
+                businessName = businessName.replace('{0}', merchantName);
+                let currentTick = $ticker;
+
+                const business = {
+                    id: getRandomId(32),
+                    created: currentTick,
+                    name: businessName,
+                    type: businessType,
+                    profit: 0,
+                    staff: 0
+                };
+
+                return business;
+            })
+            .catch(err => {
+                alert('Could not create business...');
+            });
+    };
 
     const buyBusiness = businessType => {
         game.setLoading(true);
 
         getRandomBusiness(businessType, $merchant.name).then(newBusiness => {
-            const price = businessTypes[businessType].price;
+            const price = types[businessType].price;
 
             businesses.add(newBusiness);
             merchant.subtractDoubloons(price);
@@ -59,34 +84,32 @@
     <Modal on:close={() => (showBuyModal = false)}>
         <h3>Buy businesses</h3>
 
-        <Button disabled={$merchant.doubloons < businessTypes.merchant.price} on:click={() => buyBusiness('merchant')}>
+        <Button disabled={$merchant.doubloons < types.merchant.price} on:click={() => buyBusiness('merchant')}>
             <img src="img/merchant.png" alt="Merchant" />
             Merchant
             <br />
-            {businessTypes.merchant.price} dbl
+            {types.merchant.price} dbl
         </Button>
 
-        <Button
-            disabled={$merchant.doubloons < businessTypes.blacksmith.price}
-            on:click={() => buyBusiness('blacksmith')}>
+        <Button disabled={$merchant.doubloons < types.blacksmith.price} on:click={() => buyBusiness('blacksmith')}>
             <img src="img/blacksmith.png" alt="Blacksmith" />
             Blacksmith
             <br />
-            {businessTypes.blacksmith.price} dbl
+            {types.blacksmith.price} dbl
         </Button>
 
-        <Button disabled={$merchant.doubloons < businessTypes.tavern.price} on:click={() => buyBusiness('tavern')}>
+        <Button disabled={$merchant.doubloons < types.tavern.price} on:click={() => buyBusiness('tavern')}>
             <img src="img/tavern.png" alt="Tavern" />
             Tavern
             <br />
-            {businessTypes.tavern.price} dbl
+            {types.tavern.price} dbl
         </Button>
 
-        <Button disabled={$merchant.doubloons < businessTypes.brothel.price} on:click={() => buyBusiness('brothel')}>
+        <Button disabled={$merchant.doubloons < types.brothel.price} on:click={() => buyBusiness('brothel')}>
             <img src="img/brothel.png" alt="Brothel" />
             Brothel
             <br />
-            {businessTypes.brothel.price} dbl
+            {types.brothel.price} dbl
         </Button>
     </Modal>
 {/if}

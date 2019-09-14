@@ -1,7 +1,7 @@
 <script>
     import { businesses } from '../../stores/businesses.js';
     import { merchant } from '../../stores/merchant.js';
-    import { businessTypes } from '../../utils/business';
+    import { types } from '../../constants/businesses';
     import { staff } from '../../stores/staff.js';
     import { game } from '../../stores/game';
     import { log } from '../../stores/log';
@@ -15,7 +15,7 @@
         staff.add(business.staff);
 
         // Sell ship
-        const worth = businessTypes[business.type].price;
+        const worth = types[business.type].price;
         businesses.remove(business.id);
         merchant.addDoubloons(worth);
         log.add(`You sold your ${business.type} ${business.name} for ${worth} dbl.`);

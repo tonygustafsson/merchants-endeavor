@@ -1,7 +1,7 @@
 <script>
     import { businesses } from '../../stores/businesses.js';
     import { staff } from '../../stores/staff.js';
-    import { businessTypes } from '../../utils/business';
+    import { types } from '../../constants/businesses';
     import Button from '../../components/Button.svelte';
     import RangeSlider from '../../components/RangeSlider.svelte';
 
@@ -10,8 +10,8 @@
     $: maxStaffMembers = () => {
         if (!business) return 0;
 
-        if (business.staff + $staff.members > businessTypes[business.type].staffMax) {
-            return businessTypes[business.type].staffMax;
+        if (business.staff + $staff.members > types[business.type].staffMax) {
+            return types[business.type].staffMax;
         }
 
         return business.staff + $staff.members;
