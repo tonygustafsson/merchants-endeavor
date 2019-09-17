@@ -1,23 +1,22 @@
 import { writable } from 'svelte/store';
-
-const defaultTickerSpeed = 1000;
+import { pauseTickerSpeed, normalTickerSpeed, fastTickerSpeed, rapidTickerSpeed } from '../constants/time';
 
 const tickerSpeedStore = () => {
-    const { subscribe, set, update } = writable(defaultTickerSpeed);
+    const { subscribe, set, update } = writable(normalTickerSpeed);
 
     return {
         subscribe,
         pause: () => {
-            set(0);
+            set(pauseTickerSpeed);
         },
         normal: () => {
-            set(1000);
+            set(normalTickerSpeed);
         },
         fast: () => {
-            set(300);
+            set(fastTickerSpeed);
         },
         rapid: () => {
-            set(100);
+            set(rapidTickerSpeed);
         }
     };
 };

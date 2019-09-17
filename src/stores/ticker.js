@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 import { syncState } from '../utils/stateSync';
 import { tickerSpeed } from './tickerSpeed';
+import { normalTickerSpeed } from '../constants/time';
 
 const initValue = 0;
-const defaultTickerSpeed = 1000;
 
 const tickerStore = speed => {
     const { subscribe, set, update } = writable(initValue);
@@ -33,7 +33,7 @@ const tickerStore = speed => {
     };
 };
 
-export const ticker = tickerStore(defaultTickerSpeed);
+export const ticker = tickerStore(normalTickerSpeed);
 
 syncState('ticker', ticker, initValue).then(value => ticker.updateAll(value));
 

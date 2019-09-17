@@ -1,9 +1,7 @@
 import { readable, derived } from 'svelte/store';
 import { ticker } from './ticker.js';
 import moment from 'moment';
-
-const startDate = '1660-01-01T08:00:00';
-const ticksPerHour = 6;
+import { startDate, ticksPerHour, dateFormat, dateSpecificFormat } from '../constants/time';
 
 const timeStore = derived(ticker, $ticks => {
     // Calculate time where one hour is sixth seconds after the first date
@@ -11,13 +9,13 @@ const timeStore = derived(ticker, $ticks => {
     return {
         now: moment(startDate)
             .add($ticks / ticksPerHour, 'hours')
-            .format('dddd, MMMM Do YYYY'),
-        realTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+            .format(dateFormat),
+        realTime: moment().format(dateSpecificFormat),
         sinceStart: moment(startDate).from(moment(startDate).add($ticks / ticksPerHour, 'hours')),
         getTimeAtTick: tick =>
             moment(startDate)
                 .add(tick / ticksPerHour, 'hours')
-                .format('dddd, MMMM Do YYYY')
+                .format(dateFormat)
     };
 });
 

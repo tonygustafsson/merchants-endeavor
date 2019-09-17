@@ -19,7 +19,8 @@ import {
     missionShipHealthLoss,
     missionCrewMoodLoss,
     missionCrewHealthLoss,
-    missionFoodReward
+    missionFoodReward,
+    missionTickCheck
 } from '../constants/ships';
 import { syncState } from '../utils/stateSync';
 
@@ -193,7 +194,7 @@ let checkMissionsCounter = 0;
 ticker.subscribe(value => {
     checkMissionsCounter++;
 
-    if (checkMissionsCounter >= 20) {
+    if (checkMissionsCounter >= missionTickCheck) {
         // Dont' check to often
         ships.checkMissions();
         checkMissionsCounter = 0;

@@ -1,14 +1,13 @@
 import { readable, writable } from 'svelte/store';
 import { ticker } from './ticker.js';
 import { syncState } from '../utils/stateSync';
-
-const initValue = 5;
-const max = 5;
-const changeability = 0.02;
+import { weathers, weatherChangeability } from '../constants/game';
 
 const getRandomWeather = () => {
-    return Math.floor(Math.random() * Math.floor(max)) + 1;
+    return weathers[Math.floor(Math.random() * weathers.length)];
 };
+
+const initValue = getRandomWeather();
 
 const weatherStore = () => {
     const { subscribe, set } = writable(initValue);
@@ -31,7 +30,7 @@ syncState('weather', weather, initValue).then(value => weather.updateAll(value))
 
 // Update the weather and follow the ticker
 ticker.subscribe(value => {
-    if (Math.random() < changeability) {
+    if (Math.random() < weatherChangeability) {
         weather.changeWeather();
     }
 });

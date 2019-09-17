@@ -41,6 +41,7 @@ export const minFoodPerCrewMemberForMission = 4;
 export const minWaterPerCrewMemberForMission = 8;
 export const missionLength = 50;
 export const maxShips = 10;
+export const missionTickCheck = 20;
 export const repairCostPerPercentage = 5;
 export const minShipHealthForMission = 5;
 export const minCrewMoodForMission = 5;

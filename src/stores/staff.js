@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { ticker } from './ticker';
 import { log } from './log';
+import { maxStaff, hireTimeLength, hireNewStaff, hireStaffTickCheck } from '../constants/staff';
 import { syncState } from '../utils/stateSync';
 
 const initValue = {
@@ -9,11 +10,8 @@ const initValue = {
     mood: 100,
     hireRequestActive: false
 };
-const minValue = 0;
-const maxValue = 20;
 
 let currentTick = 0;
-const hireTickTime = 10;
 
 const staffStore = () => {
     const { subscribe, set, update } = writable({});
@@ -25,19 +23,19 @@ const staffStore = () => {
         },
         add: additionalStaff => {
             update(staff => {
-                if (staff.members + additionalStaff > maxValue) return { ...staff };
+                if (staff.members + additionalStaff > maxStaff) return { ...staff };
                 return { ...staff, members: staff.members + additionalStaff };
             });
         },
         remove: removedStaff => {
             update(staff => {
-                if (staff.members - removedStaff < minValue) return { ...staff };
+                if (staff.members - removedStaff < 0) return { ...staff };
                 return { ...staff, members: staff.members - removedStaff };
             });
         },
         requestHire: () => {
             update(staff => {
-                const hireTickFinished = currentTick + hireTickTime;
+                const hireTickFinished = currentTick + hireTimeLength;
 
                 return { ...staff, hireRequestActive: hireTickFinished };
             });
@@ -46,7 +44,7 @@ const staffStore = () => {
             update(staff => {
                 if (staff.hireRequestActive !== false && staff.hireRequestActive < currentTick) {
                     // Hirering process finished
-                    const newStaffMembers = Math.floor(Math.random() * 10);
+                    const newStaffMembers = Math.floor(Math.random() * hireNewStaff);
 
                     log.add(`The hiring process has finished and you've got ${newStaffMembers} new staff members.`);
 
@@ -92,7 +90,7 @@ let checkHireCounter = 0;
 ticker.subscribe(value => {
     checkHireCounter++;
 
-    if (checkHireCounter >= 20) {
+    if (checkHireCounter >= hireStaffTickCheck) {
         // Don't check to often
         currentTick = value;
         staff.checkForHireApprovals();

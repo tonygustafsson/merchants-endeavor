@@ -8,3 +8,13 @@ export const routes = {
     staff: 'staff',
     goods: 'goods'
 };
+
+export const weathers = [
+    { name: 'sunny', icon: '🌞' },
+    { name: 'mostly sunny', icon: '🌤' },
+    { name: 'cloudy', icon: '⛅' },
+    { name: 'raining', icon: '🌧' },
+    { name: 'thunderstorm', icon: '⛈' }
+];
+
+export const weatherChangeability = 0.02;
