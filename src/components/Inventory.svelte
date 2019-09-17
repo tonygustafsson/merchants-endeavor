@@ -6,7 +6,7 @@
     import { staff } from '../stores/staff';
     import { goods } from '../stores/goods';
     import { game } from '../stores/game';
-    import { ucFirst } from '../utils/string';
+    import { nationalities } from '../constants/game';
     import Table from '../components/Table.svelte';
 
     let noOfShips = 0;
@@ -33,14 +33,12 @@
 <div class="page-stats">
     <h3>{$merchant.name}</h3>
 
-    <p>
-        {#if $merchant.nationality === 'english'}
-            🇬🇧
-        {:else if $merchant.nationality === 'french'}
-            🇫🇷
-        {:else if $merchant.nationality === 'spanish'}🇪🇸{:else if $merchant.nationality === 'dutch'}🇧🇶{/if}
-        You are trying to tame the carribean as a {ucFirst($merchant.nationality)} {$merchant.gender}. You started out {$time.sinceStart}.
-    </p>
+    {#if $merchant.nationality}
+        <p>
+            {$merchant.nationality.flag} You are trying to tame the carribean as a {$merchant.nationality.adjective}
+            {$merchant.gender}. You started out {$time.sinceStart}.
+        </p>
+    {/if}
 
     <h3>Inventory</h3>
 

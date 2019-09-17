@@ -6,6 +6,7 @@
     import Button from '../components/Button.svelte';
     import TextInput from '../components/TextInput.svelte';
     import SelectBox from '../components/SelectBox.svelte';
+    import { nationalities } from '../constants/game';
 
     const changeName = name => {
         merchant.changeName(name);
@@ -16,7 +17,11 @@
     };
 
     const changeNationality = nationality => {
-        merchant.changeNationality(nationality);
+        merchant.changeNationality(nationalities[nationality.toLowerCase()]);
+    };
+
+    const changeTown = town => {
+        console.log(town);
     };
 
     const startPlaying = () => {
@@ -35,16 +40,16 @@
         genderIcon = value.gender === 'woman' ? '👩' : '👨';
 
         switch (value.nationality) {
-            case 'english':
+            case 'England':
                 flagIcon = '🇬🇧';
                 break;
-            case 'french':
+            case 'France':
                 flagIcon = '🇫🇷';
                 break;
-            case 'spanish':
+            case 'Spain':
                 flagIcon = '🇪🇸';
                 break;
-            case 'dutch':
+            case 'Holland':
                 flagIcon = '🇧🇶';
                 break;
             default:
@@ -72,12 +77,29 @@
             <option value="woman" selected={$merchant.gender === 'woman'}>Woman</option>
         </SelectBox>
 
-        <SelectBox name="nationality" label="{flagIcon} Nationality" on:change={e => changeNationality(e.target.value)}>
-            <option value="english" selected={$merchant.nationality === 'english'}>English</option>
-            <option value="french" selected={$merchant.nationality === 'french'}>French</option>
-            <option value="spanish" selected={$merchant.nationality === 'spanish'}>Spanish</option>
-            <option value="dutch" selected={$merchant.nationality === 'dutch'}>Dutch</option>
-        </SelectBox>
+        {#if $merchant.nationality}
+            <SelectBox
+                name="nationality"
+                label="{$merchant.nationality.flag} Nationality"
+                on:change={e => changeNationality(e.target.value)}>
+                {#each Object.keys(nationalities) as nationality}
+                    <option
+                        value={nationalities[nationality].name}
+                        selected={$merchant.nationality && $merchant.nationality.name === nationalities[nationality].name}>
+                        {nationalities[nationality].name}
+                    </option>
+                {/each}
+            </SelectBox>
+
+            <SelectBox
+                name="town"
+                label="{$merchant.nationality.flag} Town"
+                on:change={e => changeTown(e.target.value)}>
+                {#each $merchant.nationality.towns as town}
+                    <option value={town}>{town}</option>
+                {/each}
+            </SelectBox>
+        {/if}
 
         <div>
             <Button type="submit">Play</Button>
