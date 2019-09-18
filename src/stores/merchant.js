@@ -9,6 +9,7 @@ const initValue = {
     name: '',
     gender: '',
     nationality: '',
+    town: '',
     doubloons: 1000,
     loans: []
 };
@@ -32,13 +33,6 @@ const merchantStore = () => {
         },
         changeTown: newTown => {
             update(merchant => ({ ...merchant, town: newTown }));
-        },
-        removeTowns: () => {
-            update(merchant => {
-                const newMerchant = { ...merchant };
-                delete newMerchant.towns;
-                return newMerchant;
-            });
         },
         setDoubloons: doubloons => {
             update(merchant => ({ ...merchant, doubloons: doubloons }));

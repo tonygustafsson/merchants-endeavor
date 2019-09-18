@@ -11,25 +11,25 @@ export const routes = {
 
 export const nationalities = {
     england: {
-        name: 'England',
+        name: 'england',
         adjective: 'english',
         flag: '🇬🇧',
         towns: ['Charles Towne', 'Belize', 'Port Royale', 'Barbados']
     },
     france: {
-        name: 'France',
+        name: 'france',
         adjective: 'french',
         flag: '🇫🇷',
         towns: ['Martinique', 'Biloxi', 'Tortuga', 'Leogane']
     },
     holland: {
-        name: 'Holland',
+        name: 'holland',
         adjective: 'dutch',
         flag: '🇧🇶',
         towns: ['Curacao', 'St. Eustatius', 'Bonaire', 'St. Martin']
     },
     spain: {
-        name: 'Spain',
+        name: 'spain',
         adjective: 'spanish',
         flag: '🇪🇸',
         towns: ['Panama', 'San Juan', 'Havana', 'Villa Hermosa']

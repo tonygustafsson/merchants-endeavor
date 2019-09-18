@@ -8,6 +8,7 @@
     import { game } from '../stores/game';
     import { nationalities } from '../constants/game';
     import Table from '../components/Table.svelte';
+    import { ucFirst } from '../utils/string';
 
     let noOfShips = 0;
 
@@ -35,8 +36,8 @@
 
     {#if $merchant.nationality}
         <p>
-            {$merchant.nationality.flag} You are trying to tame the carribean as a {$merchant.nationality.adjective}
-            {$merchant.gender}. You started out {$time.sinceStart}.
+            {nationalities[$merchant.nationality].flag} You are trying to tame the carribean as a {$merchant.gender}
+            from {ucFirst($merchant.nationality)}. You started out {$time.sinceStart} in {$merchant.town}.
         </p>
     {/if}
 

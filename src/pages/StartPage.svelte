@@ -7,11 +7,7 @@
     import TextInput from '../components/TextInput.svelte';
     import SelectBox from '../components/SelectBox.svelte';
     import { nationalities } from '../constants/game';
-
-    $: towns = () => {
-        const nationality = nationalities[$merchant.nationality.name.toLowerCase()];
-        return nationality.towns;
-    };
+    import { ucFirst } from '../utils/string';
 
     const changeName = name => {
         merchant.changeName(name);
@@ -21,17 +17,19 @@
         merchant.changeGender(gender);
     };
 
-    const changeNationality = nationality => {
-        merchant.changeNationality(nationalities[nationality.toLowerCase()]);
+    const changeNationality = nationalityName => {
+        const nationality = nationalities[nationalityName];
+        const town = nationality.towns[0];
+
+        merchant.changeNationality(nationalityName);
+        merchant.changeTown(town);
     };
 
     const changeTown = town => {
-        alert(town);
         merchant.changeTown(town);
     };
 
     const startPlaying = () => {
-        merchant.removeTowns();
         game.startPlaying();
         const route = $resolution.mobile ? 'inventory' : 'properties';
         game.changeRoute(route);
@@ -39,6 +37,8 @@
     };
 
     $: genderIcon = '👩';
+    $: towns = () => nationalities[$merchant.nationality].towns;
+    $: currentFlag = () => $merchant.nationality && nationalities[$merchant.nationality].flag;
 
     merchant.subscribe(value => {
         if (!value.nationality || !value.gender) return;
@@ -69,20 +69,20 @@
         {#if $merchant.nationality}
             <SelectBox
                 name="nationality"
-                label="{$merchant.nationality.flag} Nationality"
+                label="{currentFlag()} Nationality"
                 on:change={e => changeNationality(e.target.value)}>
                 {#each Object.keys(nationalities) as nationality}
                     <option
                         value={nationalities[nationality].name}
-                        selected={$merchant.nationality && $merchant.nationality.name === nationalities[nationality].name}>
-                        {nationalities[nationality].name}
+                        selected={$merchant.nationality === nationalities[nationality].name}>
+                        {ucFirst(nationalities[nationality].name)}
                     </option>
                 {/each}
             </SelectBox>
 
-            <SelectBox name="town" label="Town" on:change={e => changeTown(e.target.value)}>
+            <SelectBox name="town" label="🏠 Town" on:change={e => changeTown(e.target.value)}>
                 {#each towns() as town}
-                    <option value={town}>{town}</option>
+                    <option selected={town === $merchant.town} value={town}>{town}</option>
                 {/each}
             </SelectBox>
         {/if}
