@@ -30,6 +30,16 @@ const merchantStore = () => {
         changeNationality: newNationality => {
             update(merchant => ({ ...merchant, nationality: newNationality }));
         },
+        changeTown: newTown => {
+            update(merchant => ({ ...merchant, town: newTown }));
+        },
+        removeTowns: () => {
+            update(merchant => {
+                const newMerchant = { ...merchant };
+                delete newMerchant.towns;
+                return newMerchant;
+            });
+        },
         setDoubloons: doubloons => {
             update(merchant => ({ ...merchant, doubloons: doubloons }));
         },

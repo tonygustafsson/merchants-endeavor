@@ -22,7 +22,6 @@ const getRandomSurname = nationality => {
 
 export const getRandomMerchant = () => {
     let nationality = getRandomNationality();
-    //delete nationality.towns;
 
     let gender = Math.random() > 0.5 ? 'woman' : 'man';
 

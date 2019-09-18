@@ -8,6 +8,11 @@
     import SelectBox from '../components/SelectBox.svelte';
     import { nationalities } from '../constants/game';
 
+    $: towns = () => {
+        const nationality = nationalities[$merchant.nationality.name.toLowerCase()];
+        return nationality.towns;
+    };
+
     const changeName = name => {
         merchant.changeName(name);
     };
@@ -21,10 +26,12 @@
     };
 
     const changeTown = town => {
-        console.log(town);
+        alert(town);
+        merchant.changeTown(town);
     };
 
     const startPlaying = () => {
+        merchant.removeTowns();
         game.startPlaying();
         const route = $resolution.mobile ? 'inventory' : 'properties';
         game.changeRoute(route);
@@ -32,29 +39,11 @@
     };
 
     $: genderIcon = '👩';
-    $: flagIcon = '🇬🇧';
 
     merchant.subscribe(value => {
         if (!value.nationality || !value.gender) return;
 
         genderIcon = value.gender === 'woman' ? '👩' : '👨';
-
-        switch (value.nationality) {
-            case 'England':
-                flagIcon = '🇬🇧';
-                break;
-            case 'France':
-                flagIcon = '🇫🇷';
-                break;
-            case 'Spain':
-                flagIcon = '🇪🇸';
-                break;
-            case 'Holland':
-                flagIcon = '🇧🇶';
-                break;
-            default:
-                flagIcon = '🇬🇧';
-        }
     });
 </script>
 
@@ -91,11 +80,8 @@
                 {/each}
             </SelectBox>
 
-            <SelectBox
-                name="town"
-                label="{$merchant.nationality.flag} Town"
-                on:change={e => changeTown(e.target.value)}>
-                {#each $merchant.nationality.towns as town}
+            <SelectBox name="town" label="Town" on:change={e => changeTown(e.target.value)}>
+                {#each towns() as town}
                     <option value={town}>{town}</option>
                 {/each}
             </SelectBox>
