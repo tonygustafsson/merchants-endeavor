@@ -1,6 +1,12 @@
-import { names, nationalities } from '../constants/merchant';
+import { nationalities } from '../constants/game';
+import { names } from '../constants/merchant';
 
-export const getRandomNationality = () => nationalities[Math.floor(Math.random() * nationalities.length)];
+const getRandomProperty = function(obj) {
+    var keys = Object.keys(obj);
+    return obj[keys[(keys.length * Math.random()) << 0]];
+};
+
+const getRandomNationality = () => getRandomProperty(nationalities);
 
 const getRandomFirstName = (nationality, gender) => {
     let firstNameArray = names.firstNames[gender][nationality];
@@ -16,12 +22,15 @@ const getRandomSurname = nationality => {
 
 export const getRandomMerchant = () => {
     let nationality = getRandomNationality();
+    const town = nationality.towns[Math.floor(Math.random() * nationality.towns.length)];
+
     let gender = Math.random() > 0.5 ? 'woman' : 'man';
 
     let merchant = {
-        name: `${getRandomFirstName(nationality, gender)} ${getRandomSurname(nationality)}`,
+        name: `${getRandomFirstName(nationality.adjective, gender)} ${getRandomSurname(nationality.adjective)}`,
         gender: gender,
-        nationality: nationality
+        nationality: nationality.name,
+        town: town
     };
 
     return merchant;

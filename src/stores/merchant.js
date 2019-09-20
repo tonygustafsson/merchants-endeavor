@@ -9,6 +9,7 @@ const initValue = {
     name: '',
     gender: '',
     nationality: '',
+    town: '',
     doubloons: 1000,
     loans: []
 };
@@ -29,6 +30,9 @@ const merchantStore = () => {
         },
         changeNationality: newNationality => {
             update(merchant => ({ ...merchant, nationality: newNationality }));
+        },
+        changeTown: newTown => {
+            update(merchant => ({ ...merchant, town: newTown }));
         },
         setDoubloons: doubloons => {
             update(merchant => ({ ...merchant, doubloons: doubloons }));
