@@ -36,15 +36,9 @@
         log.add(`You just woke as a ${$merchant.nationality} merchant named ${$merchant.name}.`);
     };
 
-    $: genderIcon = '👩';
+    $: genderIcon = $merchant.gender === 'woman' ? '👩' : '👨';
     $: towns = () => nationalities[$merchant.nationality].towns;
     $: currentFlag = () => $merchant.nationality && nationalities[$merchant.nationality].flag;
-
-    merchant.subscribe(value => {
-        if (!value.nationality || !value.gender) return;
-
-        genderIcon = value.gender === 'woman' ? '👩' : '👨';
-    });
 </script>
 
 <style>
@@ -62,8 +56,8 @@
         <TextInput value={$merchant.name} label="📛 Name" name="name" on:change={e => changeName(e.target.value)} />
 
         <SelectBox name="gender" label="{genderIcon} Gender" on:change={e => changeGender(e.target.value)}>
-            <option value="man" selected={$merchant.gender === 'man'}>Man</option>
             <option value="woman" selected={$merchant.gender === 'woman'}>Woman</option>
+            <option value="man" selected={$merchant.gender === 'man'}>Man</option>
         </SelectBox>
 
         {#if $merchant.nationality}
