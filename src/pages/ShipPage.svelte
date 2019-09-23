@@ -6,6 +6,7 @@
     import ShipInfo from '../components/ship/ShipInfo.svelte';
     import ShipActions from '../components/ship/ShipActions.svelte';
     import ShipContents from '../components/ship/ShipContents.svelte';
+    import ShipMap from '../components/ship/ShipMap.svelte';
 
     $: ship = $ships.find(s => s.id === $game.route.id);
 </script>
@@ -17,6 +18,8 @@
 
     {#if ship}
         <h2>Ship: {ship.name}</h2>
+
+        <ShipMap />
 
         <Mission {ship} />
 
