@@ -6,59 +6,56 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   viewBox="0 0 914 771"
-   preserveAspectRatio="none"
+   id="svg8"
    version="1.1"
-   id="svg7"
-   sodipodi:docname="map.svg"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><metadata
-   id="metadata13">
+   preserveAspectRatio="none"
+   height="771"
+   width="914"
+   viewBox="0 0 914 771"
+   class="map"><metadata
+   id="metadata14">
   <rdf:RDF>
     <cc:Work
        rdf:about="">
       <dc:format>image/svg+xml</dc:format>
       <dc:type
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      <dc:title></dc:title>
     </cc:Work>
   </rdf:RDF>
 </metadata>
 <defs
-   id="defs11" />
-<sodipodi:namedview
-   pagecolor="#ffffff"
-   bordercolor="#666666"
-   borderopacity="1"
-   objecttolerance="10"
-   gridtolerance="10"
-   guidetolerance="10"
-   inkscape:pageopacity="0"
-   inkscape:pageshadow="2"
-   inkscape:window-width="1866"
-   inkscape:window-height="1016"
-   id="namedview9"
-   showgrid="false"
-   inkscape:zoom="1.2243839"
-   inkscape:cx="438.68321"
-   inkscape:cy="424.02846"
-   inkscape:window-x="54"
-   inkscape:window-y="27"
-   inkscape:window-maximized="1"
-   inkscape:current-layer="svg7" />
+   id="defs12" />
 <image
-   sodipodi:absref="/home/tony/Projects/merchants-endeavor/public/img/./map.jpg"
-   xlink:href="./map.jpg"
-   id="image2"
+   xlink:href="background.jpg"
+   cx="0"
    cy="0"
-   cx="0" />
+   id="image2" />
+<image
+   xlink:href="ship-right.png"
+   x="100"
+   y="100"
+   width="48"
+   height="48"
+   id="image4" />
 <path
-   d="m 215.38464,73.673322 c 0,0 186.272,144.289158 218.31469,223.246548 13.0901,32.25572 -33.78089,171.35124 -31.47016,199.37418 3.85447,46.74441 225.09076,116.62449 230.99397,135.17048"
-   id="path1"
-   style="fill:none;stroke:#ff0000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-   inkscape:connector-curvature="0"
-   sodipodi:nodetypes="cssc" />
-<circle
-   id="circle5" />
-0 cy=0 r=&quot;10&quot; /&gt;
+   id="path6" />
+{routePath}
+      d=&quot;m 132.89417,122.67756 c 0,0 423.94256,15.24466 455.98525,94.20205 13.0901,32.25572 -431.53196,49.65739
+      -429.22123,77.68033 1.78224,21.61373 310.16866,34.94889 417.8882,105.46853 125.2475,81.99448
+      -808.33804,1.76305 -281.63575,113.82589&quot;
+      id=&quot;path1&quot;
+      style=&quot;fill:none;stroke:red&quot; /&gt;
+<path
+   id="path825"
+   d="m 117.61017,575.79979 c 0,0 188.67666,-41.08891 271.98903,-82.46016 40.65385,-20.18789 243.57759,-179.42535 292.29311,-215.31042 48.71552,-35.88507 168.33121,-77.11184 168.33121,-77.11184"
+   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path
+   id="path854"
+   d="m 117.61017,575.79979 c 0,0 177.44306,-16.24475 266.22161,-12.84221 100.41931,3.84868 203.95205,5.29378 299.13376,37.53183 53.08149,17.9787 145.20607,84.75317 145.20607,84.75317"
+   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path
+   id="path854-4"
+   d="m 828.17161,685.24258 c 0,0 -204.23497,-126.00498 -219.73708,-207.22568 -2.99002,-15.66573 -27.1846,-52.69457 14.09245,-118.46499 13.16597,-20.97852 42.52811,-62.36231 88.08927,-95.0242 57.53297,-41.24424 139.60727,-63.61034 139.60727,-63.61034"
+   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
 </svg>
