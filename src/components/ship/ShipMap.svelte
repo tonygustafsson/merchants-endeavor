@@ -1,16 +1,17 @@
 <script>
     import { onMount } from 'svelte';
 
-    const mapWidth = 914;
-    const mapHeight = 771;
+    const mapWidth = 1249;
+    const mapHeight = 949;
     const shipWidth = 48;
     const shipHeight = 48;
     const pixelsPerAnimation = 4;
 
-    let santacatalina_marigo;
-    let santacatalina_portofspain;
-    let portofspain_marigo;
-    let marigo_portofspain;
+    let charlestown_bridgetown;
+    let charlestown_bermuda;
+    let bermuda_charlestown;
+    let bridgetown_charlestown;
+
     let traveling = false;
 
     let shipDirection = 'left';
@@ -23,14 +24,14 @@
     const travel = (from, to) => {
         traveling = true;
 
-        if (from === 'santacatalina' && to === 'marigo') {
-            routePath = santacatalina_marigo;
-        } else if (from === 'santacatalina' && to === 'portofspain') {
-            routePath = santacatalina_portofspain;
-        } else if (from === 'portofspain' && to === 'marigo') {
-            routePath = portofspain_marigo;
-        } else if (from === 'marigo' && to === 'portofspain') {
-            routePath = marigo_portofspain;
+        if (from === 'charlestown' && to === 'bridgetown') {
+            routePath = charlestown_bridgetown;
+        } else if (from === 'charlestown' && to === 'bermuda') {
+            routePath = charlestown_bermuda;
+        } else if (from === 'bermuda' && to === 'charlestown') {
+            routePath = bermuda_charlestown;
+        } else if (from === 'bridgetown' && to === 'charlestown') {
+            routePath = bridgetown_charlestown;
         }
 
         routePathLength = routePath.getTotalLength();
@@ -68,15 +69,23 @@
         max-width: 100%;
         padding-bottom: 2em;
     }
+
+    @media (max-width: 600px) {
+        .map {
+            max-height: 300px;
+        }
+    }
 </style>
 
 <div class="ship-map">
-    <button disabled={traveling} on:click={() => travel('santacatalina', 'marigo')}>Santa Catalina to Marigo</button>
-    <button disabled={traveling} on:click={() => travel('santacatalina', 'portofspain')}>
-        Santa Catalina to Port of Spain
+    <button disabled={traveling} on:click={() => travel('charlestown', 'bridgetown')}>
+        Charles Town to Bridgetown
     </button>
-    <button disabled={traveling} on:click={() => travel('portofspain', 'marigo')}>Port of Spain to Marigo</button>
-    <button disabled={traveling} on:click={() => travel('marigo', 'portofspain')}>Port of Spain to Marigo</button>
+    <button disabled={traveling} on:click={() => travel('bridgetown', 'charlestown')}>
+        Bridgetown to Charles Town
+    </button>
+    <button disabled={traveling} on:click={() => travel('charlestown', 'bermuda')}>Charles Town to Bermuda</button>
+    <button disabled={traveling} on:click={() => travel('bermuda', 'charlestown')}>Bermuda to Charles Town</button>
 
     <svg
         class="map"
@@ -94,29 +103,27 @@
             width={shipWidth}
             height={shipHeight} />
         <path
-            bind:this={santacatalina_marigo}
-            id="santacatalina-marigo"
-            d="m 117.61017,575.79979 c 0,0 188.67666,-41.08891 271.98903,-82.46016 40.65385,-20.18789
-            243.57759,-179.42535 292.29311,-215.31042 48.71552,-35.88507 168.33121,-77.11184 168.33121,-77.11184"
+            bind:this={charlestown_bridgetown}
+            id="charles-town-bridgetown"
+            d="m 1004.8856,362.1155 c 0,0 -12.05335,172.60364 29.0602,243.10195 25.7185,44.09996 123.4052,90.70489
+            123.4052,90.70489"
             style="fill:none;stroke:none" />
         <path
-            bind:this={santacatalina_portofspain}
-            id="santacataline-portofspain"
-            d="m 117.61017,575.79979 c 0,0 177.44306,-16.24475 266.22161,-12.84221 100.41931,3.84868 203.95205,5.29378
-            299.13376,37.53183 53.08149,17.9787 145.20607,84.75317 145.20607,84.75317"
+            bind:this={charlestown_bermuda}
+            id="charles-town-bermuda"
+            d="m 1004.8856,362.1155 c 0,0 0,0 3.5307,-96.47393 2.821,-77.08159 126.989,-193.441345 126.989,-193.441345"
             style="fill:none;stroke:none" />
         <path
-            bind:this={portofspain_marigo}
-            id="portofspain-marigo"
-            d="m 828.17161,685.24258 c 0,0 -204.23497,-126.00498 -219.73708,-207.22568 -2.99002,-15.66573
-            -27.1846,-52.69457 14.09245,-118.46499 13.16597,-20.97852 42.52811,-62.36231 88.08927,-95.0242
-            57.53297,-41.24424 139.60727,-63.61034 139.60727,-63.61034"
+            bind:this={bermuda_charlestown}
+            id="bermuda-charles-town"
+            d="m 1135.4053,72.200225 c 0,0 -103.6062,116.053475 -126.9887,187.959445 -10.516,32.3388 -3.531,101.95583
+            -3.531,101.95583"
             style="fill:none;stroke:none" />
         <path
-            bind:this={marigo_portofspain}
-            id="portofspain-marigo"
-            d="m 850.22352,200.91737 c 0,0 -350.98597,205.9078 -262.20742,209.31034 100.41931,3.84868 -0.23227,158.02365
-            94.94944,190.2617 53.08149,17.9787 145.20607,84.75317 145.20607,84.75317"
+            bind:this={bridgetown_charlestown}
+            id="bridgedown-charles-town"
+            d="m 1157.351,695.92234 c 0,0 -13.5248,-83.56164 -32.5131,-120.62323 -29.3659,-57.31656 -101.4462,-88.76255
+            -122.0352,-149.78415 -6.75992,-20.03487 2.0829,-63.39946 2.0829,-63.39946"
             style="fill:none;stroke:none" />
     </svg>
 </div>

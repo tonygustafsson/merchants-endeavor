@@ -6,13 +6,13 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   id="svg8"
-   version="1.1"
-   preserveAspectRatio="none"
-   height="771"
-   width="914"
+   class="map"
    viewBox="0 0 914 771"
-   class="map"><metadata
+   width="914"
+   height="771"
+   preserveAspectRatio="none"
+   version="1.1"
+   id="svg8"><metadata
    id="metadata14">
   <rdf:RDF>
     <cc:Work
@@ -40,6 +40,7 @@
    id="image4" />
 <path
    id="path6" />
+
 {routePath}
       d=&quot;m 132.89417,122.67756 c 0,0 423.94256,15.24466 455.98525,94.20205 13.0901,32.25572 -431.53196,49.65739
       -429.22123,77.68033 1.78224,21.61373 310.16866,34.94889 417.8882,105.46853 125.2475,81.99448
@@ -47,15 +48,19 @@
       id=&quot;path1&quot;
       style=&quot;fill:none;stroke:red&quot; /&gt;
 <path
-   id="path825"
-   d="m 117.61017,575.79979 c 0,0 188.67666,-41.08891 271.98903,-82.46016 40.65385,-20.18789 243.57759,-179.42535 292.29311,-215.31042 48.71552,-35.88507 168.33121,-77.11184 168.33121,-77.11184"
+   id="carhles-town-bridgetown"
+   d="m 1004.8856,362.1155 c 0,0 -12.05335,172.60364 29.0602,243.10195 25.7185,44.09996 123.4052,90.70489 123.4052,90.70489"
    style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
 <path
-   id="path854"
-   d="m 117.61017,575.79979 c 0,0 177.44306,-16.24475 266.22161,-12.84221 100.41931,3.84868 203.95205,5.29378 299.13376,37.53183 53.08149,17.9787 145.20607,84.75317 145.20607,84.75317"
+   id="charles-town-bermuda"
+   d="m 1004.8856,362.1155 c 0,0 0,0 3.5307,-96.47393 2.821,-77.08159 126.989,-193.441345 126.989,-193.441345"
    style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
 <path
-   id="path854-4"
-   d="m 828.17161,685.24258 c 0,0 -204.23497,-126.00498 -219.73708,-207.22568 -2.99002,-15.66573 -27.1846,-52.69457 14.09245,-118.46499 13.16597,-20.97852 42.52811,-62.36231 88.08927,-95.0242 57.53297,-41.24424 139.60727,-63.61034 139.60727,-63.61034"
+   id="bermuda-charles-town"
+   d="m 1135.4053,72.200225 c 0,0 -103.6062,116.053475 -126.9887,187.959445 -10.516,32.3388 -3.531,101.95583 -3.531,101.95583"
+   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path
+   id="bridgedown-charles-town"
+   d="m 1157.351,695.92234 c 0,0 -13.5248,-83.56164 -32.5131,-120.62323 -29.3659,-57.31656 -101.4462,-88.76255 -122.0352,-149.78415 -6.75992,-20.03487 2.0829,-63.39946 2.0829,-63.39946"
    style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
 </svg>
