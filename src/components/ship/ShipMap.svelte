@@ -78,6 +78,28 @@
 </style>
 
 <div class="ship-map">
+    <!--
+EN:
+Nevis (Charles Town)
+Barbados (Bridgetown)
+Bermuda
+
+FE:
+Martinique (Fort de France)
+Tortuga
+Hispaniola (Port au Prince)
+
+Dutch:
+Curacao (Villemstad)
+St. Martin (Marigo)
+Cartagena
+
+Spain:
+Havana
+Santiago
+San Juan
+-->
+
     <button disabled={traveling} on:click={() => travel('charlestown', 'bridgetown')}>
         Charles Town to Bridgetown
     </button>
