@@ -7,32 +7,50 @@
     const shipHeight = 48;
     const pixelsPerAnimation = 4;
 
-    let charlestown_bridgetown;
-    let charlestown_bermuda;
-    let bermuda_charlestown;
-    let bridgetown_charlestown;
+    const towns = new Map();
+    // English
+    towns.set('charlestown', 'Charles Town');
+    towns.set('bridgetown', 'Bridgetown');
+    towns.set('bermuda', 'Bermuda');
+
+    // French
+    towns.set('fortdefrance', 'Fort de France');
+    towns.set('tortuga', 'Tortuga');
+    towns.set('portauprince', 'Port au Prince');
+
+    // Spanish
+    towns.set('havana', 'Havana');
+    towns.set('santiago', 'Santiago');
+    towns.set('sanjuan', 'San Juan');
+
+    // Dutch
+    towns.set('villemstad', 'Villemstad');
+    towns.set('marigo', 'Marigo');
+    towns.set('cartagena', 'Cartagena');
+
+    const routes = {};
+    towns.forEach((value, key) => {
+        towns.forEach((value2, key2) => {
+            routes[`${key}_${key2}`] = null;
+        });
+    });
 
     let traveling = false;
 
     let shipDirection = 'left';
     let shipPosition = { x: 0, y: 0 };
     let routePosition = 0;
-    let routePath;
-    let routePathLength;
+    let routePathLength = 0;
     let shipIcon;
 
     const travel = (from, to) => {
-        traveling = true;
+        if (!towns.has(from) || !towns.has(to)) return;
 
-        if (from === 'charlestown' && to === 'bridgetown') {
-            routePath = charlestown_bridgetown;
-        } else if (from === 'charlestown' && to === 'bermuda') {
-            routePath = charlestown_bermuda;
-        } else if (from === 'bermuda' && to === 'charlestown') {
-            routePath = bermuda_charlestown;
-        } else if (from === 'bridgetown' && to === 'charlestown') {
-            routePath = bridgetown_charlestown;
-        }
+        let routePath = routes[`${from}_${to}`];
+
+        if (!routePath) return;
+
+        traveling = true;
 
         routePathLength = routePath.getTotalLength();
 
@@ -78,28 +96,6 @@
 </style>
 
 <div class="ship-map">
-    <!--
-EN:
-Nevis (Charles Town)
-Barbados (Bridgetown)
-Bermuda
-
-FE:
-Martinique (Fort de France)
-Tortuga
-Hispaniola (Port au Prince)
-
-Dutch:
-Curacao (Villemstad)
-St. Martin (Marigo)
-Cartagena
-
-Spain:
-Havana
-Santiago
-San Juan
--->
-
     <button disabled={traveling} on:click={() => travel('charlestown', 'bridgetown')}>
         Charles Town to Bridgetown
     </button>
@@ -125,24 +121,24 @@ San Juan
             width={shipWidth}
             height={shipHeight} />
         <path
-            bind:this={charlestown_bridgetown}
+            bind:this={routes.charlestown_bridgetown}
             id="charles-town-bridgetown"
             d="m 1004.8856,362.1155 c 0,0 -12.05335,172.60364 29.0602,243.10195 25.7185,44.09996 123.4052,90.70489
             123.4052,90.70489"
             style="fill:none;stroke:none" />
         <path
-            bind:this={charlestown_bermuda}
+            bind:this={routes.charlestown_bermuda}
             id="charles-town-bermuda"
             d="m 1004.8856,362.1155 c 0,0 0,0 3.5307,-96.47393 2.821,-77.08159 126.989,-193.441345 126.989,-193.441345"
             style="fill:none;stroke:none" />
         <path
-            bind:this={bermuda_charlestown}
+            bind:this={routes.bermuda_charlestown}
             id="bermuda-charles-town"
             d="m 1135.4053,72.200225 c 0,0 -103.6062,116.053475 -126.9887,187.959445 -10.516,32.3388 -3.531,101.95583
             -3.531,101.95583"
             style="fill:none;stroke:none" />
         <path
-            bind:this={bridgetown_charlestown}
+            bind:this={routes.bridgetown_charlestown}
             id="bridgedown-charles-town"
             d="m 1157.351,695.92234 c 0,0 -13.5248,-83.56164 -32.5131,-120.62323 -29.3659,-57.31656 -101.4462,-88.76255
             -122.0352,-149.78415 -6.75992,-20.03487 2.0829,-63.39946 2.0829,-63.39946"
