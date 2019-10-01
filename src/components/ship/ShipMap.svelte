@@ -29,9 +29,10 @@
     towns.set('cartagena', 'Cartagena');
 
     const routes = {};
-    towns.forEach((value, key) => {
-        towns.forEach((value2, key2) => {
-            routes[`${key}_${key2}`] = null;
+    towns.forEach((townFromName, townFromId) => {
+        towns.forEach((townToName, townToId) => {
+            if (townFromId === townToId) return;
+            routes[`${townFromId}_${townToId}`] = null;
         });
     });
 
