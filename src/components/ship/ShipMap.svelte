@@ -87,12 +87,6 @@
         max-width: 100%;
         padding-bottom: 2em;
     }
-
-    @media (max-width: 600px) {
-        .map {
-            max-height: 300px;
-        }
-    }
 </style>
 
 <div class="ship-map">
@@ -104,13 +98,7 @@
         {/each}
     {/each}
 
-    <svg
-        class="map"
-        viewBox="0 0 {mapWidth}
-        {mapHeight}"
-        width={mapWidth}
-        height={mapHeight}
-        preserveAspectRatio="none">
+    <svg class="map" viewBox="0 0 {mapWidth} {mapHeight}" width={mapWidth} preserveAspectRatio="none">
         <image xlink:href="/img/map/background.jpg" cx="0" cy="0" />
         <image
             bind:this={shipIcon}
