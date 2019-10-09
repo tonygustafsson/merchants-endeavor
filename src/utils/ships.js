@@ -11,7 +11,8 @@ export const getRandomShip = shipType => {
                 health: 100,
                 crewMembers: 0,
                 cannons: 0,
-                onMission: false
+                onMission: false,
+                town: ''
             };
 
             return ship;

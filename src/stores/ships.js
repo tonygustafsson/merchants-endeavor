@@ -74,6 +74,16 @@ const shipsStore = () => {
                 return newShips;
             });
         },
+        changeTown: (id, town) => {
+            update(ships => {
+                let newShips = cloneDeep(ships);
+
+                let ship = newShips.find(ship => ship.id === id);
+                ship.town = town;
+
+                return newShips;
+            });
+        },
         changeItemsOnboard: (id, item, value) => {
             const approvedItems = ['crewMembers', 'cannons'];
             if (!approvedItems.includes(item)) return;

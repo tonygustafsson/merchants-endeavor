@@ -1,5 +1,8 @@
 <script>
     import { onMount } from 'svelte';
+    import { ships } from '../../stores/ships';
+
+    export let ship;
 
     const mapWidth = 1249;
     const mapHeight = 949;
@@ -73,6 +76,7 @@
                 requestAnimationFrame(animate);
             } else {
                 traveling = false;
+                ships.changeTown(ship.id, to);
                 routePosition = 0;
             }
         };
@@ -90,6 +94,8 @@
 </style>
 
 <div class="ship-map">
+    <p>Current town: {ship.town}</p>
+
     {#each towns as fromTown}
         {#each towns as toTown}
             {#if `${fromTown}_${toTown}` in routePaths}

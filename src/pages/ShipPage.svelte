@@ -19,7 +19,7 @@
     {#if ship}
         <h2>Ship: {ship.name}</h2>
 
-        <ShipMap />
+        <ShipMap {ship} />
 
         <Mission {ship} />
 
