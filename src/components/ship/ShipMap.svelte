@@ -83,6 +83,23 @@
 
         requestAnimationFrame(animate);
     };
+
+    onMount(() => {
+        const matchingInitPath = Object.keys(routePaths).find(routeName => {
+            return routeName.startsWith(ship.town);
+        });
+
+        if (!matchingInitPath) return;
+
+        const initPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        initPath.setAttributeNS(null, 'd', routePaths[matchingInitPath]);
+        const shipPositionPoint = initPath.getPointAtLength(0);
+
+        shipPosition = {
+            x: shipPositionPoint.x - shipWidth / 2,
+            y: shipPositionPoint.y - shipHeight
+        };
+    });
 </script>
 
 <style>
