@@ -6,61 +6,62 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   class="map"
-   viewBox="0 0 914 771"
-   width="914"
-   height="771"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   class="map svelte-1c7s10m"
+   viewBox="0 0 1249 949"
+   width="1249"
    preserveAspectRatio="none"
    version="1.1"
-   id="svg8"><metadata
-   id="metadata14">
-  <rdf:RDF>
-    <cc:Work
-       rdf:about="">
-      <dc:format>image/svg+xml</dc:format>
-      <dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      <dc:title></dc:title>
-    </cc:Work>
-  </rdf:RDF>
-</metadata>
-<defs
-   id="defs12" />
-<image
-   xlink:href="background.jpg"
-   cx="0"
-   cy="0"
-   id="image2" />
-<image
-   xlink:href="ship-right.png"
-   x="100"
-   y="100"
-   width="48"
-   height="48"
-   id="image4" />
-<path
-   id="path6" />
+   id="svg6"
+   sodipodi:docname="map.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1866"
+     inkscape:window-height="1016"
+     id="namedview8"
+     showgrid="false"
+     inkscape:zoom="0.9947313"
+     inkscape:cx="691.98436"
+     inkscape:cy="360.26392"
+     inkscape:window-x="54"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <image
+     sodipodi:absref="/home/tony/Projects/merchants-endeavor/public/img/map/background.jpg"
+     xlink:href="background.jpg"
+     id="image2"
+     cy="0"
+     cx="0" />
+  <image
+     sodipodi:absref="/home/tony/Projects/merchants-endeavor/public/img/map/ship-right.png"
+     xlink:href="ship-right.png"
+     id="image4"
+     height="48"
+     width="48"
+     y="24.200226"
+     x="1111.4053" />
 
-{routePath}
-      d=&quot;m 132.89417,122.67756 c 0,0 423.94256,15.24466 455.98525,94.20205 13.0901,32.25572 -431.53196,49.65739
-      -429.22123,77.68033 1.78224,21.61373 310.16866,34.94889 417.8882,105.46853 125.2475,81.99448
-      -808.33804,1.76305 -281.63575,113.82589&quot;
-      id=&quot;path1&quot;
-      style=&quot;fill:none;stroke:red&quot; /&gt;
-<path
-   id="carhles-town-bridgetown"
-   d="m 1004.8856,362.1155 c 0,0 -12.05335,172.60364 29.0602,243.10195 25.7185,44.09996 123.4052,90.70489 123.4052,90.70489"
-   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-<path
-   id="charles-town-bermuda"
-   d="m 1004.8856,362.1155 c 0,0 0,0 3.5307,-96.47393 2.821,-77.08159 126.989,-193.441345 126.989,-193.441345"
-   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-<path
-   id="bermuda-charles-town"
-   d="m 1135.4053,72.200225 c 0,0 -103.6062,116.053475 -126.9887,187.959445 -10.516,32.3388 -3.531,101.95583 -3.531,101.95583"
-   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-<path
-   id="bridgedown-charles-town"
-   d="m 1157.351,695.92234 c 0,0 -13.5248,-83.56164 -32.5131,-120.62323 -29.3659,-57.31656 -101.4462,-88.76255 -122.0352,-149.78415 -6.75992,-20.03487 2.0829,-63.39946 2.0829,-63.39946"
-   style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
 </svg>
