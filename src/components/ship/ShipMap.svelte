@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import { towns } from '../../constants/game';
 
     const mapWidth = 1249;
     const mapHeight = 949;
@@ -18,20 +19,7 @@
             'm 1157.351,695.92234 c 0,0 -13.5248,-83.56164 -32.5131,-120.62323 -29.3659,-57.31656 -101.4462,-88.76255 -122.0352,-149.78415 -6.75992,-20.03487 2.0829,-63.39946 2.0829,-63.39946'
     };
 
-    const towns = [
-        'charlestown',
-        'bridgetown',
-        'bermuda',
-        'fortdefrance',
-        'tortuga',
-        'portauprince',
-        'havana',
-        'santiago',
-        'sanjuan',
-        'villemstad',
-        'marigo',
-        'cartagena'
-    ];
+    let currentTown = towns[0];
 
     let traveling = false;
 
@@ -90,6 +78,8 @@
 </style>
 
 <div class="ship-map">
+    <p>You are in: {currentTown}</p>
+
     {#each towns as fromTown}
         {#each towns as toTown}
             {#if `${fromTown}_${toTown}` in routePaths}

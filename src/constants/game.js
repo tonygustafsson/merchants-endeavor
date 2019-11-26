@@ -36,6 +36,21 @@ export const nationalities = {
     }
 };
 
+export const towns = [
+    'charlestown',
+    'bridgetown',
+    'bermuda',
+    'fortdefrance',
+    'tortuga',
+    'portauprince',
+    'havana',
+    'santiago',
+    'sanjuan',
+    'villemstad',
+    'marigo',
+    'cartagena'
+];
+
 export const weathers = [
     { name: 'sunny', icon: '🌞' },
     { name: 'mostly sunny', icon: '🌤' },
