@@ -5,6 +5,16 @@
     const dispatch = createEventDispatcher();
 </script>
 
+<div class="modal-background" on:click={() => dispatch('close')} />
+
+<div class="modal">
+    <div class="modal-inset">
+        <slot />
+
+        <a href="close" class="close-button" on:click|preventDefault={() => dispatch('close')}>&times;</a>
+    </div>
+</div>
+
 <style>
     .modal-background {
         position: fixed;
@@ -43,13 +53,3 @@
         text-decoration: none;
     }
 </style>
-
-<div class="modal-background" on:click={() => dispatch('close')} />
-
-<div class="modal">
-    <div class="modal-inset">
-        <slot />
-
-        <a href="close" class="close-button" on:click|preventDefault={() => dispatch('close')}>&times;</a>
-    </div>
-</div>

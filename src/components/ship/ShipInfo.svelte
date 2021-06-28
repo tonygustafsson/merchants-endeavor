@@ -6,12 +6,6 @@
     export let ship;
 </script>
 
-<style>
-    td {
-        filter: grayscale(0.5);
-    }
-</style>
-
 <div class="component-shipinfo">
     <Table>
         <tr>
@@ -36,3 +30,9 @@
         </tr>
     </Table>
 </div>
+
+<style>
+    td {
+        filter: grayscale(0.5);
+    }
+</style>

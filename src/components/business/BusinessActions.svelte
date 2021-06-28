@@ -44,7 +44,8 @@
             label="Business name"
             name="business-name"
             value={business.name}
-            on:change={e => renameBusiness(business, e.target.value)} />
+            on:change={e => renameBusiness(business, e.target.value)}
+        />
         <Button>📛 Change name</Button>
 
         <Button on:click={() => sellBusiness(business)}>💰 Sell the business</Button>

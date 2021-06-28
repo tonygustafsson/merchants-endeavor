@@ -2,6 +2,8 @@
     import { weather } from '../stores/weather.js';
 </script>
 
+<span class="weather-symbol" title={$weather.name}>{$weather.icon}</span>
+
 <style>
     .weather-symbol {
         position: fixed;
@@ -19,5 +21,3 @@
         }
     }
 </style>
-
-<span class="weather-symbol" title={$weather.name}>{$weather.icon}</span>

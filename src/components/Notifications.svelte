@@ -9,6 +9,15 @@
     });
 </script>
 
+{#each entries as entry}
+    <div class="notification" transition:fly={{ y: 100, duration: 200 }}>
+        <p>
+            <span class="icon">✓</span>
+            {entry}
+        </p>
+    </div>
+{/each}
+
 <style>
     .notification {
         position: fixed;
@@ -28,12 +37,3 @@
         vertical-align: middle;
     }
 </style>
-
-{#each entries as entry}
-    <div class="notification" transition:fly={{ y: 100, duration: 200 }}>
-        <p>
-            <span class="icon">✓</span>
-            {entry}
-        </p>
-    </div>
-{/each}

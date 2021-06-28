@@ -2,6 +2,10 @@
     export let dynamicWidth = false;
 </script>
 
+<table>
+    <slot />
+</table>
+
 <style>
     table {
         width: 100%;
@@ -37,7 +41,3 @@
         }
     }
 </style>
-
-<table>
-    <slot />
-</table>

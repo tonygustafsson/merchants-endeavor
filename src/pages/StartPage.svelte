@@ -41,12 +41,6 @@
     $: currentFlag = () => $merchant.nationality && nationalities[$merchant.nationality].flag;
 </script>
 
-<style>
-    form {
-        width: 50%;
-    }
-</style>
-
 <div class="page-start">
     <h2>Welcome</h2>
 
@@ -64,11 +58,13 @@
             <SelectBox
                 name="nationality"
                 label="{currentFlag()} Nationality"
-                on:change={e => changeNationality(e.target.value)}>
+                on:change={e => changeNationality(e.target.value)}
+            >
                 {#each Object.keys(nationalities) as nationality}
                     <option
                         value={nationalities[nationality].name}
-                        selected={$merchant.nationality === nationalities[nationality].name}>
+                        selected={$merchant.nationality === nationalities[nationality].name}
+                    >
                         {ucFirst(nationalities[nationality].name)}
                     </option>
                 {/each}
@@ -86,3 +82,9 @@
         </div>
     </form>
 </div>
+
+<style>
+    form {
+        width: 50%;
+    }
+</style>

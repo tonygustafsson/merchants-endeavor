@@ -50,7 +50,8 @@
             label="Ship name"
             name="ship-name"
             value={ship.name}
-            on:change={e => renameShip(ship, e.target.value)} />
+            on:change={e => renameShip(ship, e.target.value)}
+        />
         <Button>📛 Change name</Button>
 
         <Button on:click={() => sellShip(ship)}>💰 Sell the ship</Button>

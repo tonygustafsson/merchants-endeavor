@@ -29,21 +29,6 @@
     });
 </script>
 
-<style>
-    .white-panel {
-        background: rgba(255, 255, 255, 0.9);
-    }
-    h1 {
-        text-shadow: 0px 0 20px #fff;
-        margin: 0;
-        cursor: pointer;
-    }
-    .footer {
-        color: #fff;
-        text-shadow: 0 0 10px #000;
-    }
-</style>
-
 <div class="app wrapper">
     <Loader />
     <Notifications />
@@ -53,7 +38,8 @@
             on:click={() => {
                 const route = $resolution.mobile ? 'inventory' : 'properties';
                 return game.changeRoute(route);
-            }}>
+            }}
+        >
             Merchant's Endeavor
         </h1>
 
@@ -102,9 +88,24 @@
     {/if}
 
     <footer class="footer">
-        Merchant's Endeavor &copy; 2019
+        Merchant's Endeavor &copy; {new Date().getFullYear()}
         {#if $game.started && $game.route.page !== 'start'}
             <Settings />
         {/if}
     </footer>
 </div>
+
+<style>
+    .white-panel {
+        background: rgba(255, 255, 255, 0.9);
+    }
+    h1 {
+        text-shadow: 0px 0 20px #fff;
+        margin: 0;
+        cursor: pointer;
+    }
+    .footer {
+        color: #fff;
+        text-shadow: 0 0 10px #000;
+    }
+</style>

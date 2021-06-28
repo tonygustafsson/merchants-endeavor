@@ -40,20 +40,6 @@
     };
 </script>
 
-<style>
-    h3 {
-        margin-top: 0;
-    }
-
-    .warning-sign {
-        color: orange;
-        font-size: 160%;
-        font-weight: bold;
-        vertical-align: middle;
-        margin-right: 0.25em;
-    }
-</style>
-
 <div class="component-mission">
     <h3>Mission</h3>
 
@@ -108,3 +94,17 @@
 
     <Button disabled={!readyForMission() || ship.onMission} on:click={sendOnMission}>⛵ Send on mission</Button>
 </div>
+
+<style>
+    h3 {
+        margin-top: 0;
+    }
+
+    .warning-sign {
+        color: orange;
+        font-size: 160%;
+        font-weight: bold;
+        vertical-align: middle;
+        margin-right: 0.25em;
+    }
+</style>

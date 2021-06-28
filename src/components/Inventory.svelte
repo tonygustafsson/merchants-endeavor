@@ -17,20 +17,6 @@
     });
 </script>
 
-<style>
-    tr {
-        cursor: pointer;
-    }
-
-    tr:hover td {
-        text-decoration: underline;
-    }
-
-    td {
-        filter: grayscale(0.5);
-    }
-</style>
-
 <div class="page-stats">
     <h3>{$merchant.name}</h3>
 
@@ -74,3 +60,17 @@
         </tr>
     </Table>
 </div>
+
+<style>
+    tr {
+        cursor: pointer;
+    }
+
+    tr:hover td {
+        text-decoration: underline;
+    }
+
+    td {
+        filter: grayscale(0.5);
+    }
+</style>

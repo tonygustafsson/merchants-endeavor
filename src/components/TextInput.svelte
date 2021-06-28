@@ -4,6 +4,11 @@
     export let value;
 </script>
 
+{#if label && label.length > 0}
+    <label for={name}>{label}</label>
+{/if}
+<input type="text" {name} {value} on:change />
+
 <style>
     label {
         display: block;
@@ -22,8 +27,3 @@
         box-sizing: border-box;
     }
 </style>
-
-{#if label && label.length > 0}
-    <label for={name}>{label}</label>
-{/if}
-<input type="text" {name} {value} on:change />

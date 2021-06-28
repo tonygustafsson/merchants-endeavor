@@ -32,6 +32,22 @@
     };
 </script>
 
+<div class="component-businesscontents">
+    <h3>Rearrange business contents</h3>
+
+    <div class="slider-container">
+        <div>
+            <RangeSlider
+                value={business.staff}
+                max={maxStaffMembers()}
+                on:input={e => changeStaffMembers(e.target.value)}
+                label="👫 Staff members <strong>({business.staff} employed)</strong>"
+            />
+            {$staff.members} more available
+        </div>
+    </div>
+</div>
+
 <style>
     .slider-container {
         width: 50%;
@@ -43,18 +59,3 @@
         margin-bottom: 1.5em;
     }
 </style>
-
-<div class="component-businesscontents">
-    <h3>Rearrange business contents</h3>
-
-    <div class="slider-container">
-        <div>
-            <RangeSlider
-                value={business.staff}
-                max={maxStaffMembers()}
-                on:input={e => changeStaffMembers(e.target.value)}
-                label="👫 Staff members <strong>({business.staff} employed)</strong>" />
-            {$staff.members} more available
-        </div>
-    </div>
-</div>

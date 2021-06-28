@@ -58,7 +58,8 @@
                     <Button
                         on:click={() => repayLoan(loan.id)}
                         disabled={$merchant.doubloons < loan.sum + getLoanInterest(loan.sum, loan.tick)}
-                        variant="small">
+                        variant="small"
+                    >
                         Repay for {loan.sum + getLoanInterest(loan.sum, loan.tick)} dbl
                     </Button>
                 </td>

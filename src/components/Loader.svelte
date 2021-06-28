@@ -9,6 +9,12 @@
     });
 </script>
 
+{#if loading}
+    <div transition:fade={{ duration: 150 }} class="overlay">
+        <p class="loading-text">Loading...</p>
+    </div>
+{/if}
+
 <style>
     .overlay {
         position: absolute;
@@ -32,9 +38,3 @@
         font-size: 500%;
     }
 </style>
-
-{#if loading}
-    <div transition:fade={{ duration: 150 }} class="overlay">
-        <p class="loading-text">Loading...</p>
-    </div>
-{/if}

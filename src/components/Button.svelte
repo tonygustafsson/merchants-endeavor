@@ -4,6 +4,10 @@
     export let variant = '';
 </script>
 
+<button {type} {disabled} class:small={variant === 'small'} on:click>
+    <slot />
+</button>
+
 <style>
     button {
         font-size: inherit;
@@ -47,7 +51,3 @@
         opacity: 0.5;
     }
 </style>
-
-<button {type} {disabled} class:small={variant === 'small'} on:click>
-    <slot />
-</button>

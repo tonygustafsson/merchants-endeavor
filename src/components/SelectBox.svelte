@@ -3,6 +3,13 @@
     export let label;
 </script>
 
+{#if label && label.length > 0}
+    <label for={name}>{label}</label>
+{/if}
+<select {name} on:change>
+    <slot />
+</select>
+
 <style>
     label {
         display: block;
@@ -21,10 +28,3 @@
         box-sizing: border-box;
     }
 </style>
-
-{#if label && label.length > 0}
-    <label for={name}>{label}</label>
-{/if}
-<select {name} on:change>
-    <slot />
-</select>

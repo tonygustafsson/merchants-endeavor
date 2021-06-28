@@ -9,6 +9,10 @@
     };
 </script>
 
+<div class="settings-panel">
+    <Button on:click={forgetEverything}>Forget everything</Button>
+</div>
+
 <style>
     .settings-panel {
         text-align: right;
@@ -22,7 +26,3 @@
         }
     }
 </style>
-
-<div class="settings-panel">
-    <Button on:click={forgetEverything}>Forget everything</Button>
-</div>

@@ -56,6 +56,28 @@
     let showModal = false;
 </script>
 
+<div class="change-goods-component">
+    <div class="slider-container">
+        {#each Object.keys(tempGoods) as item}
+            <div>
+                <RangeSlider
+                    value={tempGoods[item]}
+                    max={tempGoods[item] + 500}
+                    on:input={e => changeGoods(item, e.target.value)}
+                    label="{types[item].icon}
+                    {types[item].name} ({tempGoods[item]}
+                    {types[item].suffix})"
+                />
+            </div>
+        {/each}
+    </div>
+
+    <p class:warning={tempDoubloons < 0}>Doubloons afterwards: {tempDoubloons} dbl</p>
+
+    <Button on:click={makeTransaction} disabled={tempDoubloons < 0}>💰 Make transaction</Button>
+    <Button on:click={resetGoods}>&times; Reset</Button>
+</div>
+
 <style>
     .slider-container {
         padding: 1em 0;
@@ -70,24 +92,3 @@
         font-weight: bold;
     }
 </style>
-
-<div class="change-goods-component">
-    <div class="slider-container">
-        {#each Object.keys(tempGoods) as item}
-            <div>
-                <RangeSlider
-                    value={tempGoods[item]}
-                    max={tempGoods[item] + 500}
-                    on:input={e => changeGoods(item, e.target.value)}
-                    label="{types[item].icon}
-                    {types[item].name} ({tempGoods[item]}
-                    {types[item].suffix})" />
-            </div>
-        {/each}
-    </div>
-
-    <p class:warning={tempDoubloons < 0}>Doubloons afterwards: {tempDoubloons} dbl</p>
-
-    <Button on:click={makeTransaction} disabled={tempDoubloons < 0}>💰 Make transaction</Button>
-    <Button on:click={resetGoods}>&times; Reset</Button>
-</div>

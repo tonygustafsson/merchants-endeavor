@@ -57,6 +57,32 @@
     };
 </script>
 
+<div class="component-shipcontents">
+    <h3>Rearrange ship contents</h3>
+
+    <div class="slider-container">
+        <div>
+            <RangeSlider
+                value={ship.crewMembers}
+                max={maxCrewMembers()}
+                on:input={e => changeCrewMembersOnboard(e.target.value)}
+                label="👫 Crew members onboard <strong>({ship.crewMembers} onboard)</strong>"
+            />
+            {$staff.members} more available
+        </div>
+
+        <div>
+            <RangeSlider
+                value={ship.cannons}
+                max={maxCannons()}
+                on:input={e => changeCannons(e.target.value)}
+                label="💣 Cannons <strong>({ship.cannons} onboard)</strong>"
+            />
+            {$goods.cannons} more available
+        </div>
+    </div>
+</div>
+
 <style>
     .slider-container {
         width: 50%;
@@ -68,27 +94,3 @@
         margin-bottom: 1.5em;
     }
 </style>
-
-<div class="component-shipcontents">
-    <h3>Rearrange ship contents</h3>
-
-    <div class="slider-container">
-        <div>
-            <RangeSlider
-                value={ship.crewMembers}
-                max={maxCrewMembers()}
-                on:input={e => changeCrewMembersOnboard(e.target.value)}
-                label="👫 Crew members onboard <strong>({ship.crewMembers} onboard)</strong>" />
-            {$staff.members} more available
-        </div>
-
-        <div>
-            <RangeSlider
-                value={ship.cannons}
-                max={maxCannons()}
-                on:input={e => changeCannons(e.target.value)}
-                label="💣 Cannons <strong>({ship.cannons} onboard)</strong>" />
-            {$goods.cannons} more available
-        </div>
-    </div>
-</div>

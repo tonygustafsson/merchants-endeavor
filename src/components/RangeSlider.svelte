@@ -6,6 +6,13 @@
     export let label;
 </script>
 
+{#if label && label.length > 0}
+    <label for={name}>
+        {@html label}
+    </label>
+{/if}
+<input on:input type="range" {name} {value} {min} {max} />
+
 <style>
     input[type='range'] {
         -webkit-appearance: none;
@@ -100,10 +107,3 @@
         margin-bottom: 0.2em;
     }
 </style>
-
-{#if label && label.length > 0}
-    <label for={name}>
-        {@html label}
-    </label>
-{/if}
-<input on:input type="range" {name} {value} {min} {max} />

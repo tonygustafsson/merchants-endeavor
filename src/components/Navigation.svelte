@@ -10,31 +10,6 @@
     });
 </script>
 
-<style>
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        font-size: 100%;
-        font-family: 'Redressed', cursive;
-    }
-    li {
-        display: inline;
-        margin-right: 0.5em;
-    }
-    li.active a {
-        text-decoration: underline;
-    }
-    @media (min-width: 1000px) {
-        ul {
-            font-size: 170%;
-        }
-        li {
-            margin-right: 1em;
-        }
-    }
-</style>
-
 <nav>
     <ul>
         {#if $resolution.mobile}
@@ -60,3 +35,28 @@
         </li>
     </ul>
 </nav>
+
+<style>
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 100%;
+        font-family: 'Redressed', cursive;
+    }
+    li {
+        display: inline;
+        margin-right: 0.5em;
+    }
+    li.active a {
+        text-decoration: underline;
+    }
+    @media (min-width: 1000px) {
+        ul {
+            font-size: 170%;
+        }
+        li {
+            margin-right: 1em;
+        }
+    }
+</style>
