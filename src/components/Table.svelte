@@ -1,5 +1,5 @@
 <script>
-    export let dynamicWidth = false;
+    export const dynamicWidth = false;
 </script>
 
 <table>
