@@ -21,21 +21,21 @@ const goodsStore = () => {
 
 	return {
 		subscribe,
-		updateAll: (data) => {
+		updateAll: data => {
 			set(data);
 		},
 		add: (item, quantity) => {
-			update((goods) => {
+			update(goods => {
 				return { ...goods, [item]: goods[item] + quantity };
 			});
 		},
 		remove: (item, quantity) => {
-			update((goods) => {
+			update(goods => {
 				return { ...goods, [item]: goods[item] - quantity };
 			});
 		},
 		buy: (item, quantity) => {
-			update((goods) => {
+			update(goods => {
 				if (Object.hasOwnProperty.call(types, item)) {
 					const price = types[item].price;
 
@@ -52,7 +52,7 @@ const goodsStore = () => {
 			});
 		},
 		sell: (item, quantity) => {
-			update((goods) => {
+			update(goods => {
 				if (quantity > goods[item]) {
 					return goods;
 				}
@@ -71,4 +71,4 @@ const goodsStore = () => {
 
 export const goods = goodsStore();
 
-syncState('goods', goods, initValue).then((value) => goods.updateAll(value));
+syncState('goods', goods, initValue).then(value => goods.updateAll(value));
