@@ -1,5 +1,6 @@
-import { writable } from 'svelte/store';
+import { Writable, writable } from 'svelte/store';
 import { mobileMaxWidth } from '../constants/resolution';
+import type { Resolution } from '../types/resolution';
 
 const isMobile = screenWidth => screenWidth < mobileMaxWidth;
 
@@ -8,7 +9,7 @@ const initValue = {
 };
 
 const resolutionStore = () => {
-	const { subscribe, update } = writable(initValue);
+	const { subscribe, update }: Writable<Resolution> = writable(initValue);
 
 	return {
 		subscribe,
@@ -21,7 +22,8 @@ const resolutionStore = () => {
 export const resolution = resolutionStore();
 
 if (typeof window !== 'undefined') {
-	window.addEventListener('resize', (e: any) => {
-		resolution.changeMobile(isMobile(e.target.innerWidth));
+	window.addEventListener('resize', (e: CustomEvent<Window>) => {
+		const target = e.target as Window;
+		resolution.changeMobile(isMobile(target.innerWidth));
 	});
 }

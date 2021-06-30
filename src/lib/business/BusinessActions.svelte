@@ -8,6 +8,7 @@
 	import TextInput from '$lib/TextInput.svelte';
 	import { goto } from '$app/navigation';
 	import { routes } from '../../constants/game';
+	import type { Business } from '../../types/business';
 
 	export let business;
 
@@ -25,9 +26,10 @@
 		goto(routes.properties);
 	};
 
-	const renameBusiness = (e: any) => {
-		const business = e.target.getAttribute('data-business');
-		const newName = e.target.value;
+	const renameBusiness = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		const business: Business = JSON.parse(target.getAttribute('data-business'));
+		const newName = target.value;
 
 		businesses.setName(business.id, newName);
 		log.add(`You renamed your ${business.type} from ${business.name} to ${newName}.`);

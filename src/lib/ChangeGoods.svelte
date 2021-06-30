@@ -35,9 +35,10 @@
 		tempDoubloons = $merchant.doubloons - totalCost;
 	};
 
-	const changeGoods = (e: any) => {
-		const quantity = e.target.value;
-		const item = e.target.closest('div').getAttribute('data-item');
+	const changeGoods = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		const quantity = target.value;
+		const item = target.closest('div').getAttribute('data-item');
 
 		// Change the item quantity
 		const newTempGoods = cloneDeep(tempGoods);

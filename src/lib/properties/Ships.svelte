@@ -27,8 +27,9 @@
 		});
 	};
 
-	const gotoShip = (e: any) => {
-		const id = e.target.closest('tr').getAttribute('data-ship-id');
+	const gotoShip = (e: MouseEvent) => {
+		const target = e.target as HTMLInputElement;
+		const id = target.closest('tr').getAttribute('data-ship-id');
 		goto(`${routes.ship}/${id}`);
 	};
 </script>

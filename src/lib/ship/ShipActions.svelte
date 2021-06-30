@@ -31,9 +31,10 @@
 		goto(routes.properties);
 	};
 
-	const renameShip = (e: any) => {
-		ships.setName(ship.id, e.target.value);
-		log.add(`You renamed your ${ship.type} from ${ship.name} to ${e.target.value}.`);
+	const renameShip = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		ships.setName(ship.id, target.value);
+		log.add(`You renamed your ${ship.type} from ${ship.name} to ${target.value}.`);
 	};
 
 	const repairShip = ship => {

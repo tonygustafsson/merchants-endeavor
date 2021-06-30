@@ -16,8 +16,9 @@
 		return business.staff + $staff.members;
 	};
 
-	const changeStaffMembers = (e: any) => {
-		const value = parseInt(e.target.value, 10);
+	const changeStaffMembers = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		const value = parseInt(target.value, 10);
 
 		if (value > business.staff) {
 			// Add more staff to business

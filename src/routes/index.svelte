@@ -18,24 +18,28 @@
 		}
 	});
 
-	const changeName = (e: any) => {
-		merchant.changeName(e.target.value);
+	const changeName = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		merchant.changeName(target.value);
 	};
 
-	const changeGender = (e: any) => {
-		merchant.changeGender(e.target.value);
+	const changeGender = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		merchant.changeGender(target.value);
 	};
 
-	const changeNationality = (e: any) => {
-		const nationality = nationalities[e.target.value];
+	const changeNationality = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		const nationality = nationalities[target.value];
 		const town = nationality.towns[0];
 
-		merchant.changeNationality(e.target.value);
+		merchant.changeNationality(target.value);
 		merchant.changeTown(town);
 	};
 
-	const changeTown = (e: any) => {
-		merchant.changeTown(e.target.value);
+	const changeTown = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		merchant.changeTown(target.value);
 	};
 
 	const startPlaying = () => {

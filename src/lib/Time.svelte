@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { ticker } from '../stores/ticker';
 	import { tickerSpeed } from '../stores/tickerSpeed';
 	import { time } from '../stores/time';
 </script>

@@ -27,8 +27,9 @@
 		return ship.cannons + $goods.cannons;
 	};
 
-	const changeCannons = (e: any) => {
-		const value = parseInt(e.target.value, 10);
+	const changeCannons = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		const value = parseInt(target.value, 10);
 
 		if (value > ship.cannons) {
 			// Add more cannons to ship
@@ -41,8 +42,9 @@
 		ships.changeItemsOnboard(ship.id, 'cannons', value);
 	};
 
-	const changeCrewMembersOnboard = (e: any) => {
-		const value = parseInt(e.target.value, 10);
+	const changeCrewMembersOnboard = (e: CustomEvent<HTMLInputElement>) => {
+		const target = e.target as HTMLInputElement;
+		const value = parseInt(target.value, 10);
 
 		if (value > ship.crewMembers) {
 			// Add more crew members to ship

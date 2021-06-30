@@ -1,10 +1,11 @@
-import { writable } from 'svelte/store';
+import { Writable, writable } from 'svelte/store';
 import { time } from './time';
 import { notifications } from './notifications';
 import { syncState } from '../utils/stateSync';
 import { maxItems } from '../constants/logs';
+import type { Logs } from '../types/log';
 
-const initValue = [];
+const initValue: Logs = [];
 
 let currentTime;
 let currentRealTime;
@@ -15,7 +16,7 @@ time.subscribe(value => {
 });
 
 const logStore = () => {
-	const { subscribe, set, update } = writable(initValue);
+	const { subscribe, set, update }: Writable<Logs> = writable(initValue);
 
 	return {
 		subscribe,

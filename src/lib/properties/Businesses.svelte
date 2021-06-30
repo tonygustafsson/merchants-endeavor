@@ -16,7 +16,10 @@
 
 	let showBuyModal = false;
 
-	export const getRandomBusiness = (businessType, merchantName = 'Merchant'): Promise<Business> => {
+	export const getRandomBusiness = (
+		businessType: string,
+		merchantName = 'Merchant'
+	): Promise<Business> => {
 		return getRandomLineFromFile(`../lists/businessNames${ucFirst(businessType)}.json`).then(
 			businessName => {
 				merchantName = merchantName.split(' ')[0];
@@ -37,7 +40,7 @@
 		);
 	};
 
-	const buyBusiness = businessType => {
+	const buyBusiness = (businessType: string) => {
 		game.setLoading(true);
 
 		getRandomBusiness(businessType, $merchant.name).then(newBusiness => {
@@ -52,8 +55,9 @@
 		});
 	};
 
-	const gotoBusiness = (e: any) => {
-		const id = e.target.closest('tr').getAttribute('data-business-id');
+	const gotoBusiness = (e: MouseEvent) => {
+		const target = e.target as HTMLTableRowElement;
+		const id = target.closest('tr').getAttribute('data-business-id');
 		goto(`${routes.business}/${id}`);
 	};
 </script>

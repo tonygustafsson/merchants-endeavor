@@ -1,15 +1,9 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { notifications } from '../stores/notifications';
-
-	let entries;
-
-	notifications.subscribe(value => {
-		entries = value;
-	});
 </script>
 
-{#each entries as entry}
+{#each $notifications as entry}
 	<div class="notification" transition:fly={{ y: 100, duration: 200 }}>
 		<p>
 			<span class="icon">✓</span>

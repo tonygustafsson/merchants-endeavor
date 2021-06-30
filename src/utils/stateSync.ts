@@ -69,13 +69,13 @@ export const syncState = (
 	defaultValue: any,
 	defaultValueAdder?: () => void
 ): Promise<Promise<any>> => {
-	return new Promise((resolve, _) => {
+	return new Promise(resolve => {
 		getStateFromDb(tableName)
 			.then(stateValue => {
 				// Got state from localForage
 				return mixDefaultValueWithState(defaultValue, stateValue);
 			})
-			.catch(_ => {
+			.catch(() => {
 				// No state saved, calculate new state
 				return calcDefaultValues(defaultValueAdder, defaultValue);
 			})
@@ -90,7 +90,7 @@ export const syncState = (
 	});
 };
 
-export const clearDatabase = () => {
+export const clearDatabase = (): Promise<void> => {
 	return new Promise((resolve, reject) => {
 		localforage
 			.clear()

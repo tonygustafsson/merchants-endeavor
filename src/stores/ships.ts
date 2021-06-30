@@ -192,7 +192,7 @@ syncState('ships', ships, initValue, () => {
 
 let checkMissionsCounter = 0;
 
-ticker.subscribe(_ => {
+ticker.subscribe(() => {
 	checkMissionsCounter++;
 
 	if (checkMissionsCounter >= missionTickCheck) {

@@ -1,10 +1,11 @@
-import { writable } from 'svelte/store';
+import { Writable, writable } from 'svelte/store';
 import { duration } from '../constants/notifications';
+import type { Notifications } from '../types/notification';
 
-const initValue = [];
+const initValue: Notifications = [];
 
 const notificationsStore = () => {
-	const { subscribe, update, set } = writable(initValue);
+	const { subscribe, update, set }: Writable<Notifications> = writable(initValue);
 
 	return {
 		subscribe,
