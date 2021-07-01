@@ -5,7 +5,7 @@ export type Ship = {
 	health: number;
 	crewMembers: number;
 	cannons: number;
-	onMission: boolean;
+	onMission: number | boolean;
 };
 
 export type Ships = Ship[];
