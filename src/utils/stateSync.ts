@@ -1,6 +1,6 @@
 import type { Writable, Readable } from 'svelte/store';
 import localforage from 'localforage';
-import cloneDeep from 'lodash-ts/cloneDeep';
+import cloneDeep from 'lodash.clonedeep';
 
 localforage.config({
 	name: `Merchant's Endeavor`,

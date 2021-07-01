@@ -2,7 +2,7 @@ import { Writable, writable, get } from 'svelte/store';
 import { syncState } from '../utils/stateSync';
 import { getRandomMerchant } from '../utils/merchant';
 import { ticker } from './ticker';
-import cloneDeep from 'lodash-ts/cloneDeep';
+import cloneDeep from 'lodash.clonedeep';
 import { getRandomId } from '../utils/string';
 import type { Merchant } from '../types/merchant';
 

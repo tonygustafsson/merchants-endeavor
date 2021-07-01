@@ -1,5 +1,5 @@
 import { Writable, writable, derived } from 'svelte/store';
-import cloneDeep from 'lodash-ts/cloneDeep';
+import cloneDeep from 'lodash.clonedeep';
 import { ticker } from './ticker';
 import { log } from './log';
 import { syncState } from '../utils/stateSync';

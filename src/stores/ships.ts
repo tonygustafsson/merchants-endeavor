@@ -1,5 +1,5 @@
 import { Writable, writable, derived, get } from 'svelte/store';
-import cloneDeep from 'lodash-ts/cloneDeep';
+import cloneDeep from 'lodash.clonedeep';
 import { ticker } from './ticker';
 import { goods } from './goods';
 import { merchant } from './merchant';

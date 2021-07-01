@@ -5,7 +5,7 @@
 	import Button from '$lib/Button.svelte';
 	import { types } from '../constants/goods';
 	import RangeSlider from '$lib/RangeSlider.svelte';
-	import cloneDeep from 'lodash-ts/cloneDeep';
+	import cloneDeep from 'lodash.clonedeep';
 
 	$: tempGoods = cloneDeep($goods);
 	$: tempDoubloons = $merchant.doubloons;
