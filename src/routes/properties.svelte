@@ -15,6 +15,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Properties - Merchant's Endeavor</title>
+</svelte:head>
+
 <div class="app-properties">
 	<h2>Properties</h2>
 

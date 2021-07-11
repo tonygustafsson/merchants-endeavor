@@ -47,6 +47,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Staff - Merchant's Endeavor</title>
+</svelte:head>
+
 <div class="page-staff">
 	<h2>Staff</h2>
 

@@ -59,6 +59,10 @@
 	$: currentFlag = () => $merchant.nationality && nationalities[$merchant.nationality].flag;
 </script>
 
+<svelte:head>
+	<title>Start - Merchant's Endeavor</title>
+</svelte:head>
+
 <div class="page-start">
 	<h2>Welcome</h2>
 

@@ -20,6 +20,10 @@
 	$: showChangeGoods = false;
 </script>
 
+<svelte:head>
+	<title>Goods - Merchant's Endeavor</title>
+</svelte:head>
+
 <div class="app-goods">
 	<h2>Goods</h2>
 

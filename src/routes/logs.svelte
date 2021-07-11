@@ -14,6 +14,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Logs - Merchant's Endeavor</title>
+</svelte:head>
+
 <div class="logs-page">
 	<h2>Logs</h2>
 

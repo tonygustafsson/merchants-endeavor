@@ -14,6 +14,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Inventory - Merchant's Endeavor</title>
+</svelte:head>
+
 <Time />
 
 <Inventory />
