@@ -11,10 +11,13 @@
 	import { goto } from '$app/navigation';
 	import { routes } from '../constants/game';
 	import { onMount } from 'svelte';
+	import { getUrl } from '../utils/url';
 
 	onMount(() => {
 		if ($game.started) {
-			goto($resolution.mobile ? routes.inventory : routes.properties);
+			const url = $resolution.mobile ? routes.inventory : routes.properties;
+
+			goto(getUrl(url));
 		}
 	});
 
@@ -46,7 +49,7 @@
 		game.startPlaying();
 
 		const route = $resolution.mobile ? routes.inventory : routes.properties;
-		goto(route);
+		goto(getUrl(route));
 
 		log.add(`You just woke as a ${$merchant.nationality} merchant named ${$merchant.name}.`);
 	};

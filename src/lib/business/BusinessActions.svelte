@@ -9,6 +9,7 @@
 	import { goto } from '$app/navigation';
 	import { routes } from '../../constants/game';
 	import type { Business } from '../../types/business';
+	import { getUrl } from '../../utils/url';
 
 	export let business;
 
@@ -23,13 +24,14 @@
 		log.add(`You sold your ${business.type} ${business.name} for ${worth} dbl.`);
 
 		// Go back to Property page
-		goto(routes.properties);
+		goto(getUrl(routes.properties));
 	};
 
-	const renameBusiness = (e: CustomEvent<HTMLInputElement>) => {
-		const target = e.target as HTMLInputElement;
-		const business: Business = JSON.parse(target.getAttribute('data-business'));
-		const newName = target.value;
+	const renameBusiness = (e: Event) => {
+		const target = e.target as HTMLFormElement;
+
+		const business: Business = JSON.parse(target.dataset.business);
+		const newName = target['business-name'].value;
 
 		businesses.setName(business.id, newName);
 		log.add(`You renamed your ${business.type} from ${business.name} to ${newName}.`);
@@ -48,14 +50,10 @@
 	<h3>Actions</h3>
 
 	<div>
-		<TextInput
-			label="Business name"
-			name="business-name"
-			data-business={business}
-			value={business.name}
-			on:change={renameBusiness}
-		/>
-		<Button>📛 Change name</Button>
+		<form on:submit|preventDefault={renameBusiness} data-business={JSON.stringify(business)}>
+			<TextInput label="Business name" name="business-name" value={business.name} />
+			<Button type="submit">📛 Change name</Button>
+		</form>
 
 		<Button on:click={() => sellBusiness(business)}>💰 Sell the business</Button>
 		<Button disabled={business.profit <= 0} on:click={() => takeProfit()}>💰 Take profit</Button>

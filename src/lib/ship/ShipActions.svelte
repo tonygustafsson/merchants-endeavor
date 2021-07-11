@@ -9,6 +9,7 @@
 	import TextInput from '$lib/TextInput.svelte';
 	import { goto } from '$app/navigation';
 	import { routes } from '../../constants/game';
+	import { getUrl } from '../../utils/url';
 
 	export let ship;
 
@@ -28,7 +29,7 @@
 		log.add(`You sold your ${ship.type} ${ship.name} for ${worth} dbl.`);
 
 		// Go back to Property page
-		goto(routes.properties);
+		goto(getUrl(routes.properties));
 	};
 
 	const renameShip = (e: CustomEvent<HTMLInputElement>) => {

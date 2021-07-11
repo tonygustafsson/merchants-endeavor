@@ -13,6 +13,7 @@
 	import type { Business } from '../../types/business';
 	import { goto } from '$app/navigation';
 	import { routes } from '../../constants/game';
+	import { getUrl } from '../../utils/url';
 
 	let showBuyModal = false;
 
@@ -58,7 +59,7 @@
 	const gotoBusiness = (e: MouseEvent) => {
 		const target = e.target as HTMLTableRowElement;
 		const id = target.closest('tr').getAttribute('data-business-id');
-		goto(`${routes.business}/${id}`);
+		goto(`${getUrl(routes.business)}/${id}`);
 	};
 </script>
 

@@ -2,26 +2,27 @@
 	import { resolution } from '../stores/resolution';
 	import { routes } from '../constants/game';
 	import { page } from '$app/stores';
+	import { getUrl } from '../utils/url';
 </script>
 
 <nav>
 	<ul>
 		{#if $resolution.mobile}
 			<li class:active={$page.path === routes.inventory}>
-				<a href={`${routes.inventory}`}> Inventory</a>
+				<a href={getUrl(routes.inventory)}> Inventory</a>
 			</li>
 		{/if}
 		<li class:active={$page.path === routes.properties || $page.path === routes.ship}>
-			<a href={`${routes.properties}`}> Properties</a>
+			<a href={getUrl(routes.properties)}> Properties</a>
 		</li>
 		<li class:active={$page.path === routes.staff}>
-			<a href={`${routes.staff}`}>Staff</a>
+			<a href={getUrl(routes.staff)}>Staff</a>
 		</li>
 		<li class:active={$page.path === routes.goods}>
-			<a href={`${routes.goods}`}>Goods</a>
+			<a href={getUrl(routes.goods)}>Goods</a>
 		</li>
 		<li class:active={$page.path === routes.logs}>
-			<a href={`${routes.logs}`}>Logs</a>
+			<a href={getUrl(routes.logs)}>Logs</a>
 		</li>
 	</ul>
 </nav>

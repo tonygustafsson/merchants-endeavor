@@ -11,6 +11,7 @@
 	import Navigation from '$lib/Navigation.svelte';
 	import Loader from '$lib/Loader.svelte';
 	import { page } from '$app/stores';
+	import { getUrl } from '../utils/url';
 
 	import '../app.css';
 </script>
@@ -23,7 +24,7 @@
 		<h1
 			on:click={() => {
 				const route = $resolution.mobile ? routes.inventory : routes.properties;
-				goto(route);
+				goto(getUrl(route));
 			}}
 		>
 			Merchant's Endeavor

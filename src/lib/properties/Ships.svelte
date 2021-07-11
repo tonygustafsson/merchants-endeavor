@@ -11,6 +11,7 @@
 	import { ucFirst } from '../../utils/string';
 	import { goto } from '$app/navigation';
 	import { routes } from '../../constants/game';
+	import { getUrl } from '../../utils/url';
 
 	let showBuyModal = false;
 
@@ -30,7 +31,7 @@
 	const gotoShip = (e: MouseEvent) => {
 		const target = e.target as HTMLInputElement;
 		const id = target.closest('tr').getAttribute('data-ship-id');
-		goto(`${routes.ship}/${id}`);
+		goto(`${getUrl(routes.ship)}/${id}`);
 	};
 </script>
 
@@ -50,7 +51,7 @@
 
 			{#each $ships as ship}
 				<tr style="cursor: pointer" on:click={gotoShip} data-ship-id={ship.id}>
-					<td><a href={`${routes.ship}/${ship.id}`}>⛵ {ship.name}</a></td>
+					<td><a href={`${getUrl(routes.ship)}/${ship.id}`}>⛵ {ship.name}</a></td>
 					<td>{ucFirst(ship.type)}</td>
 					<td>{ship.health}%</td>
 					<td>{ship.crewMembers}</td>

@@ -9,6 +9,7 @@
 	import Table from '$lib/Table.svelte';
 	import { ucFirst } from '../utils/string';
 	import { routes } from '../constants/game';
+	import { getUrl } from '../utils/url';
 
 	let noOfShips = 0;
 
@@ -35,32 +36,32 @@
 			<th>Value</th>
 		</tr>
 		<tr>
-			<td><a href={routes.goods}>💰 Doubloons</a></td>
-			<td><a href={routes.goods}>{$merchant.doubloons} dbl</a></td>
+			<td><a href={getUrl(routes.goods)}>💰 Doubloons</a></td>
+			<td><a href={getUrl(routes.goods)}>{$merchant.doubloons} dbl</a></td>
 		</tr>
 		<tr>
-			<td><a href={routes.properties}>⛵ Ships</a></td>
-			<td><a href={routes.properties}>{noOfShips} ships</a></td>
+			<td><a href={getUrl(routes.properties)}>⛵ Ships</a></td>
+			<td><a href={getUrl(routes.properties)}>{noOfShips} ships</a></td>
 		</tr>
 		<tr>
-			<td><a href={routes.goods}>💣 Cannons</a></td>
-			<td><a href={routes.goods}>{$shipTotals.cannons + $goods.cannons} pcs</a></td>
+			<td><a href={getUrl(routes.goods)}>💣 Cannons</a></td>
+			<td><a href={getUrl(routes.goods)}>{$shipTotals.cannons + $goods.cannons} pcs</a></td>
 		</tr>
 		<tr>
-			<td><a href={routes.staff}>👫 Staff</a></td>
+			<td><a href={getUrl(routes.staff)}>👫 Staff</a></td>
 			<td>
-				<a href={routes.staff}>
+				<a href={getUrl(routes.staff)}>
 					{$shipTotals.crewMembers + $businessTotals.staff + $staff.members} members
 				</a>
 			</td>
 		</tr>
 		<tr>
-			<td><a href={routes.goods}>🍲 Food</a></td>
-			<td><a href={routes.goods}>{$goods.food} cartons</a></td>
+			<td><a href={getUrl(routes.goods)}>🍲 Food</a></td>
+			<td><a href={getUrl(routes.goods)}>{$goods.food} cartons</a></td>
 		</tr>
 		<tr>
-			<td><a href={routes.goods}>🥛 Water</a></td>
-			<td><a href={routes.goods}>{$goods.water} barrels</a></td>
+			<td><a href={getUrl(routes.goods)}>🥛 Water</a></td>
+			<td><a href={getUrl(routes.goods)}>{$goods.water} barrels</a></td>
 		</tr>
 	</Table>
 </div>

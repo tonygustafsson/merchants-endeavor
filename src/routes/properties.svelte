@@ -6,10 +6,11 @@
 	import { goto } from '$app/navigation';
 	import { game } from '../stores/game';
 	import { routes } from '../constants/game';
+	import { getUrl } from '../utils/url';
 
 	onMount(() => {
 		if (!$game.started) {
-			goto(routes.root);
+			goto(getUrl(routes.root));
 		}
 	});
 </script>

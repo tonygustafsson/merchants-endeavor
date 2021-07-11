@@ -9,10 +9,11 @@
 	import { goto } from '$app/navigation';
 	import { routes } from '../../constants/game';
 	import { page } from '$app/stores';
+	import { getUrl } from '../../utils/url';
 
 	onMount(() => {
 		if (!$game.started) {
-			goto(routes.root);
+			goto(getUrl(routes.root));
 		}
 	});
 
@@ -21,7 +22,7 @@
 
 <div class="app-ship">
 	<p>
-		<a href="/properties">&lt; Back to Properties</a>
+		<a href={getUrl(routes.properties)}>&lt; Back to Properties</a>
 	</p>
 
 	{#if ship}
