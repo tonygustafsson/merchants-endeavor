@@ -185,9 +185,7 @@ export const shipTotals = derived(ships, $ships => {
 });
 
 syncState('ships', ships, initValue, () => {
-	return getRandomShip('brig').then(newShip => {
-		return [newShip];
-	});
+	return getRandomShip('brig');
 }).then(value => ships.updateAll(value));
 
 let checkMissionsCounter = 0;
