@@ -1,38 +1,69 @@
-# create-svelte
+# Merchant's Endeavor
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+This is a very simple game with some potential for the future. It's built on [SvelteKit](https://kit.svelte.dev/) and is using LocalForage as a database.
 
-## Creating a project
+## Time and weather
 
-If you're seeing this, you've probably already done this step. Congrats!
+The time is flowing every second in the game, but you can pause it or make the time go faster. It's a relaxed game so you don't have to do things quickly, but some things takes time. Like hiring new staff or sending a ship out on a mission. The time starts at Janary 1st 1660.
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+There are also a weather system, which changes, um, nothing yet. But it might rain on you. It might not.
 
-# create a new project in my-app
-npm init svelte@next my-app
-```
+## Starting out
 
-> Note: the `@next` is temporary
+When starting out in the game you will be able to select your name, gender, nationality and home town.
 
-## Developing
+![Start](/static/img/readme/start.png 'Starting out')
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Properties
 
-```bash
-npm run dev
+### Ships
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+You can own one or many ships. They can be of types:
 
-## Building
+- Brig
+- Merchantman
+- Galleon
+- Frigate
 
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
+They have all different properties, like maximum load, maximum crew members and such.
 
-```bash
-npm run build
-```
+You can control how many crew members and cannons each ship has, and when you feel good about it, you send it out on a mission. When it comes back it will hopefully bring back some doubloons and goods. It might have been damaged on the seas and in need of a repair though.
 
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+### Businesses
+
+You can also own businesses and make money as a passive income. The amount of money you will earn depends on the number of staff members and business type. There are:
+
+- Merchants
+- Blacksmiths
+- Taverns
+- Brothels
+
+For each business you own, you can controll the number of staff members.
+
+### Loans
+
+You can take out loans, but they needs to be payed back with interest.
+
+![Properties](/static/img/readme/properties.png 'Properties')
+
+## Staff
+
+Your staff can either be set to work in your businesses or as crew members of any of your ships. These properties cannot work without staff.
+
+The staff needs to be taken care of though - they need their health and a good mood, without it they might leave.
+
+You can hire new staff or fire them. You can also pay to restore their mood and health.
+
+![Staff](/static/img/readme/staff.png 'Staff')
+
+## Goods
+
+You can carry Cannons, food, water, spices, porcelain, tobacco and rum. They are all worth different amounts, and you can sell or buy them freely. You might also get some after your ships missions.
+
+![Goods](/static/img/readme/goods.png 'Goods')
+
+## Logs
+
+All events in the game are saved in your log book for you to keep track of. Both the real time and the game time.
+
+![Logs](/static/img/readme/logs.png 'Logs')
