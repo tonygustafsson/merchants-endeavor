@@ -31,7 +31,7 @@
 			"$constants/*": ["src/constants/*"],
 			"$routes/*": ["src/routes/*"],
 			"$stores/*": ["src/stores/*"],
-			"$types/*": ["src/types/*"],
+			"$types/*": ["src/types/*"]
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]

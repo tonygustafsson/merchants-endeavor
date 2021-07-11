@@ -9,7 +9,7 @@
 	import Button from '$lib/Button.svelte';
 	import { types } from '../../constants/businesses';
 	import { getRandomId, ucFirst } from '../../utils/string';
-	import { getRandomLineFromFile } from '../../utils/fileReader';
+	import businessNames from '../../lists/businessNames';
 	import type { Business } from '../../types/business';
 	import { goto } from '$app/navigation';
 	import { routes } from '../../constants/game';
@@ -17,43 +17,37 @@
 
 	let showBuyModal = false;
 
-	export const getRandomBusiness = (
-		businessType: string,
-		merchantName = 'Merchant'
-	): Promise<Business> => {
-		return getRandomLineFromFile(`../lists/businessNames${ucFirst(businessType)}.json`).then(
-			businessName => {
-				merchantName = merchantName.split(' ')[0];
-				businessName = businessName.replace('{0}', merchantName);
-				let currentTick = $ticker;
+	export const getRandomBusiness = (businessType: string, merchantName = 'Merchant'): Business => {
+		const businessName =
+			businessNames[businessType][Math.floor(Math.random() * businessNames[businessType].length)];
+		merchantName = merchantName.split(' ')[0];
+		const personalizedBusinessName = businessName.replace('{0}', merchantName);
+		let currentTick = $ticker;
 
-				const business: Business = {
-					id: getRandomId(32),
-					created: currentTick,
-					name: businessName,
-					type: businessType,
-					profit: 0,
-					staff: 0
-				};
+		const business: Business = {
+			id: getRandomId(32),
+			created: currentTick,
+			name: personalizedBusinessName,
+			type: businessType,
+			profit: 0,
+			staff: 0
+		};
 
-				return business;
-			}
-		);
+		return business;
 	};
 
 	const buyBusiness = (businessType: string) => {
 		game.setLoading(true);
 
-		getRandomBusiness(businessType, $merchant.name).then(newBusiness => {
-			const price = types[businessType].price;
+		const newBusiness = getRandomBusiness(businessType, $merchant.name);
+		const price = types[businessType].price;
 
-			businesses.add(newBusiness);
-			merchant.subtractDoubloons(price);
-			log.add(
-				`You bought a new ${newBusiness.type} business named ${newBusiness.name} for ${price} dbl.`
-			);
-			game.setLoading(false);
-		});
+		businesses.add(newBusiness);
+		merchant.subtractDoubloons(price);
+		log.add(
+			`You bought a new ${newBusiness.type} business named ${newBusiness.name} for ${price} dbl.`
+		);
+		game.setLoading(false);
 	};
 
 	const gotoBusiness = (e: MouseEvent) => {

@@ -18,14 +18,13 @@
 	const buyShip = shipType => {
 		game.setLoading(true);
 
-		getRandomShip(shipType).then(newShip => {
-			const price = types[shipType].price;
+		const newShip = getRandomShip(shipType);
+		const price = types[shipType].price;
 
-			ships.addShip(newShip);
-			merchant.subtractDoubloons(price);
-			log.add(`You bought a new ${newShip.type} named ${newShip.name} for ${price} dbl.`);
-			game.setLoading(false);
-		});
+		ships.addShip(newShip);
+		merchant.subtractDoubloons(price);
+		log.add(`You bought a new ${newShip.type} named ${newShip.name} for ${price} dbl.`);
+		game.setLoading(false);
 	};
 
 	const gotoShip = (e: MouseEvent) => {
