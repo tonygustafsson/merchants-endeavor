@@ -15,8 +15,7 @@ const config = {
 			ssr: {
 				external: ['@xstate/svelte']
 			}
-		},
-		ssr: false
+		}
 	}
 };
 

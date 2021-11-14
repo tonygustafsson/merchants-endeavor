@@ -67,3 +67,7 @@ You can carry Cannons, food, water, spices, porcelain, tobacco and rum. They are
 All events in the game are saved in your log book for you to keep track of. Both the real time and the game time.
 
 ![Logs](/static/img/readme/logs.png 'Logs')
+
+## Demo
+
+[https://merchants-endeavor.vercel.app/](https://merchants-endeavor.vercel.app/)
