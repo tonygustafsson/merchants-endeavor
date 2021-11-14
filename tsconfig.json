@@ -18,8 +18,6 @@
 		"sourceMap": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"skipDefaultLibCheck": true,
-		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
 		"baseUrl": ".",
 		"allowJs": true,
