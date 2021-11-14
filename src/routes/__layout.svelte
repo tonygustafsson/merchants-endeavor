@@ -38,7 +38,7 @@
 		{/if}
 	</header>
 
-	{#if $game.started && $page.path !== routes.root}
+	{#if $game.started && $page?.path !== routes.root}
 		<div class="nav">
 			<Navigation />
 		</div>
@@ -58,7 +58,7 @@
 
 	<footer class="footer">
 		Merchant's Endeavor &copy; {new Date().getFullYear()}
-		{#if $game.started && $page.path !== routes.root}
+		{#if $game.started && $page?.path !== routes.root}
 			<Settings />
 		{/if}
 	</footer>

@@ -8,20 +8,20 @@
 <nav>
 	<ul>
 		{#if $resolution.mobile}
-			<li class:active={$page.path === routes.inventory}>
+			<li class:active={$page?.path === routes.inventory}>
 				<a href={getUrl(routes.inventory)}> Inventory</a>
 			</li>
 		{/if}
-		<li class:active={$page.path === routes.properties || $page.path === routes.ship}>
+		<li class:active={$page?.path === routes.properties || $page.path === routes.ship}>
 			<a href={getUrl(routes.properties)}> Properties</a>
 		</li>
-		<li class:active={$page.path === routes.staff}>
+		<li class:active={$page?.path === routes.staff}>
 			<a href={getUrl(routes.staff)}>Staff</a>
 		</li>
-		<li class:active={$page.path === routes.goods}>
+		<li class:active={$page?.path === routes.goods}>
 			<a href={getUrl(routes.goods)}>Goods</a>
 		</li>
-		<li class:active={$page.path === routes.logs}>
+		<li class:active={$page?.path === routes.logs}>
 			<a href={getUrl(routes.logs)}>Logs</a>
 		</li>
 	</ul>

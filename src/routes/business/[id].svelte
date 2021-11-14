@@ -10,7 +10,7 @@
 	import { page } from '$app/stores';
 	import { getUrl } from '../../utils/url';
 
-	$: business = $businesses.find(s => s.id === $page.params.id);
+	$: business = $businesses.find(s => s.id === $page?.params.id);
 
 	onMount(() => {
 		if (!$game.started) {
