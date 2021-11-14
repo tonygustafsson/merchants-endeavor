@@ -1,8 +1,5 @@
 import preprocess from 'svelte-preprocess';
-import adapter from '@sveltejs/adapter-static';
-import process from 'process';
-
-const dev = process.env.NODE_ENV === 'development';
+import vercel from '@sveltejs/adapter-vercel';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -13,13 +10,11 @@ const config = {
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
-			fallback: 'index.html'
-		}),
-		paths: {
-			base: dev ? '' : '/projects/merchants-endeavor'
+		adapter: vercel(),
+		vite: {
+			ssr: {
+				external: ['@xstate/svelte']
+			}
 		},
 		ssr: false
 	}

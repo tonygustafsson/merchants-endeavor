@@ -30,7 +30,7 @@
 			Merchant's Endeavor
 		</h1>
 
-		{#if $game.started && $page.path !== routes.root}
+		{#if $game.started && $page && $page.path !== routes.root}
 			{#if !$resolution.mobile}
 				<Time />
 			{/if}
